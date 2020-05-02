@@ -1,0 +1,31 @@
+
+=com.jcraft.jorbis.VorbisFile$SeekableInputStream#getLength()J]
+QC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/VorbisFile.java¹
+ ¹
+("1*Ö
+1]
+QC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/VorbisFile.javaº
+ º
+(Ç
+Ä
+]
+QC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/VorbisFile.javaº
+ º
+(
+%0java.io.RandomAccessFile"__id*=*;2
+0com.jcraft.jorbis.VorbisFile$SeekableInputStream"
+raf¾»
+]
+QC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/VorbisFile.javaº
+ º
+(
+
+%1long""java.io.RandomAccessFile#length()J* 
+
+%0java.io.RandomAccessFile2length()"g
+]
+QC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/VorbisFile.javaº
+ º
+(
+""B42
+0com.jcraft.jorbis.VorbisFile$SeekableInputStream

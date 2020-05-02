@@ -26,7 +26,7 @@
 package com.jcraft.jorbis;
 
 // psychoacoustic setup
-class PsyInfo{ 
+class PsyInfo {
   int    athp;
   int    decayp;
   int    smoothp;

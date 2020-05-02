@@ -1,0 +1,106 @@
+
+%com.jcraft.jorbis.CodeBook#best([FI)I[
+OC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/CodeBook.javaÅ Å(
+"33*À
+6[
+OC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/CodeBook.java∫ ∫(‡
+›
+[
+OC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/CodeBook.java∫ ∫(/
+%6float")com.jcraft.jorbis.CodeBook#dist(I[FI[FI)F*"
+com.jcraft.jorbis.CodeBook*
+""*
+""*
+""*
+""*
+""*
+7
+1*£
+7[
+OC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/CodeBook.javaπ π(µ
+≤
+[
+OC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/CodeBook.javaπ π(&
+%5 com.jcraft.jorbis.StaticCodeBook"__id*%*#
+com.jcraft.jorbis.CodeBook"
+c*	
+6
+7
+1*»
+10[
+OC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/CodeBook.java∞ ∞("e
+[
+OC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/CodeBook.java∞ ∞(
+""*ó
+
+33[
+OC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/CodeBook.javaÇ Ç(µ
+≤
+[
+OC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/CodeBook.javaÇ Ç(&
+%0 com.jcraft.jorbis.StaticCodeBook"__id*%*#
+com.jcraft.jorbis.CodeBook"
+c—
+Œ
+[
+OC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/CodeBook.javaÇ Ç(+-
+%1'com.jcraft.jorbis.EncodeAuxNearestMatch"__id*:*8
+&
+%0 com.jcraft.jorbis.StaticCodeBook"
+nearest_tree∆
+√
+[
+OC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/CodeBook.javaÇ Ç(,-
+nt'com.jcraft.jorbis.EncodeAuxNearestMatch"__id*/
+-
+%1'com.jcraft.jorbis.EncodeAuxNearestMatchµ
+≤
+[
+OC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/CodeBook.javaÉ É(&
+%2 com.jcraft.jorbis.StaticCodeBook"__id*%*#
+com.jcraft.jorbis.CodeBook"
+cœ
+Ã
+[
+OC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/CodeBook.javaÉ É(),
+%3&com.jcraft.jorbis.EncodeAuxThreshMatch"__id*9*7
+&
+%2 com.jcraft.jorbis.StaticCodeBook"
+thresh_treeƒ
+¡
+[
+OC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/CodeBook.javaÉ É(*,
+tt&com.jcraft.jorbis.EncodeAuxThreshMatch"__id*.
+,
+%3&com.jcraft.jorbis.EncodeAuxThreshMatch*
+7
+10
+23
+1*»
+22[
+OC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/CodeBook.javaõ õ("e
+[
+OC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/CodeBook.javaõ õ(
+""*©
+23[
+OC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/CodeBook.javaó	 ó(
+µ
+≤
+[
+OC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/CodeBook.javaó	 ó(
+&
+%4 com.jcraft.jorbis.StaticCodeBook"__id*%*#
+com.jcraft.jorbis.CodeBook"
+c*
+7
+10
+22
+1*«
+1[
+OC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/CodeBook.java¬ ¬("e
+[
+OC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/CodeBook.java¬ ¬(
+"":
+"":
+""B
+com.jcraft.jorbis.CodeBook

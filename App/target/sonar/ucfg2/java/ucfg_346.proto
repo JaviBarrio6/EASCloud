@@ -1,0 +1,70 @@
+
+com.jcraft.jroar.Ice#isAlive()ZU
+IC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jroar/Ice.java¶
+ ¶("3*ß
+2S
+IC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jroar/Ice.java¸ ¸(€
+~
+S
+IC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jroar/Ice.java¸ ¸(
+
+%2java.io.PrintStream"__id*
+""£
+ 
+U
+IC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jroar/Ice.java¸( ¸(B
+
+%3long"%java.lang.System#currentTimeMillis()J*"
+java.lang.System¢
+Ÿ
+U
+IC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jroar/Ice.java¸ ¸(B
+%4java.lang.String"__concat*
+drop[1]:  current=*
+
+
+%3long£
+ 
+U
+IC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jroar/Ice.java¸ ¸(L
+%5java.lang.String"__concat*
+
+%4java.lang.String*	
+, last=ž
+›
+U
+IC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jroar/Ice.java¸ ¸(U
+%6java.lang.String"__concat*
+
+%5java.lang.String*
+""êç
+S
+IC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jroar/Ice.java¸ ¸(V
+
+%7void"0java.io.PrintStream#println(Ljava/lang/String;)V*
+
+%2java.io.PrintStream*
+
+%6java.lang.String2println(Ljava/lang/String;)*
+1*ü
+3U
+IC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jroar/Ice.java· ·(£
+ 
+U
+IC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jroar/Ice.java· ·("
+
+%0long"%java.lang.System#currentTimeMillis()J*"
+java.lang.Systemr
+p
+U
+IC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jroar/Ice.java·- ·(4	
+%1int"__id*
+""*
+2
+1*»
+1U
+IC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jroar/Ice.java½ ½("_
+U
+IC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jroar/Ice.java½ ½(
+""B
+com.jcraft.jroar.Ice

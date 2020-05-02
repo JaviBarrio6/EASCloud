@@ -1,0 +1,56 @@
+
+1com.jcraft.jorbis.StaticCodeBook#float32_pack(F)Ja
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/StaticCodeBook.javaÅ Å("1*¼
+1a
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/StaticCodeBook.javaÍ Í(¨
+¥
+a
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/StaticCodeBook.javaÍ Í(%
+%0double"java.lang.Math#log(D)D*"
+java.lang.Math*
+""¦
+£
+a
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/StaticCodeBook.javaÍ& Í(1
+%1double"java.lang.Math#log(D)D*"
+java.lang.Math*2ª
+§
+a
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/StaticCodeBook.javaÍ Í(2
+%2double"java.lang.Math#floor(D)D*"
+java.lang.Math*
+""~
+|
+a
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/StaticCodeBook.javaÎ& Î(-	
+%3int"__id*
+""±
+®
+a
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/StaticCodeBook.javaÎ Î(5
+%4double"java.lang.Math#pow(DD)D*"
+java.lang.Math*
+""*
+""±
+®
+a
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/StaticCodeBook.javaÎ Î(6
+%5double"java.lang.Math#rint(D)D*"
+java.lang.Math*
+
+%4double~
+|
+a
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/StaticCodeBook.javaÏ Ï(	
+%6int"__id*
+""~
+|
+a
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/StaticCodeBook.javaÏ Ï(#	
+%7int"__id*
+"""k
+a
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/StaticCodeBook.javaÐ Ð(
+"":
+""B$""
+ com.jcraft.jorbis.StaticCodeBook

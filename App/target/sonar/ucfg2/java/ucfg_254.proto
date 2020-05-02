@@ -1,0 +1,165 @@
+
+Acom.jcraft.jroar.Pls#getURL(Ljava/lang/String;)Ljava/lang/String;S
+IC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jroar/Pls.java@ @("29*Ë
+25S
+IC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jroar/Pls.javaE E(0û
+õ
+S
+IC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jroar/Pls.javaE E(0
+urlcjava.net.URLConnection"__id*
+
+%3java.net.URLConnectionÂ‚
+S
+IC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jroar/Pls.javaF F(%
+%4java.io.InputStream"<java.net.URLConnection#getInputStream()Ljava/io/InputStream;* 
+
+urlcjava.net.URLConnection2getInputStream()*
+22*˜
+14S
+IC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jroar/Pls.javaP
+ P( í
+è
+S
+IC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jroar/Pls.javaP
+ P( 
+linejava.lang.String"__id*
+
+%7java.lang.String*
+3
+11*ƒ
+26S
+IC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jroar/Pls.javaD D(â
+Ü
+S
+IC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jroar/Pls.javaD D(
+urljava.net.URL"__id*
+
+%1java.net.URL÷”
+S
+IC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jroar/Pls.javaE E(/
+%3java.net.URLConnection"5java.net.URL#openConnection()Ljava/net/URLConnection;*
+
+urljava.net.URL2openConnection()*
+25*ñ
+27S
+IC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jroar/Pls.javaD D(yw
+S
+IC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jroar/Pls.javaD D(
+%1java.net.URL"java.net.URLπ
+∂
+S
+IC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jroar/Pls.javaD D(
+%2"(java.net.URL#<init>(Ljava/lang/String;)V*
+
+%1java.net.URL*
+
+plsjava.lang.String*
+26*÷
+16S
+IC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jroar/Pls.javaP P(Ù
+Ò
+S
+IC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jroar/Pls.javaP P( 
+%7java.lang.String"Fcom.jcraft.jroar.Pls#readline(Ljava/io/InputStream;)Ljava/lang/String;*"
+com.jcraft.jroar.Pls* 
+
+pstreamjava.io.InputStream*
+14*‘
+29S
+IC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jroar/Pls.javaA A(Ü
+É
+S
+IC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jroar/Pls.javaA A(
+pstreamjava.io.InputStream"__id*
+""·ﬁ
+S
+IC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jroar/Pls.javaB B( 
+%0boolean"0java.lang.String#startsWith(Ljava/lang/String;)Z*
+
+plsjava.lang.String*	
+http://2startsWith(Ljava/lang/String;)*
+27
+19
+20*„
+19S
+IC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jroar/Pls.javaN N(
+}
+S
+IC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jroar/Pls.javaN N(
+linejava.lang.String"__id*
+""*
+3
+16*À
+1S
+IC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jroar/Pls.java] ]("q
+S
+IC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jroar/Pls.java] ](
+
+linejava.lang.String*é
+3S
+IC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jroar/Pls.java\ \(Æ´
+S
+IC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jroar/Pls.java\ \(
+%11void"java.io.InputStream#close()V* 
+
+pstreamjava.io.InputStream2close()*
+1*“
+5S
+IC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jroar/Pls.javaX X(‹Ÿ
+S
+IC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jroar/Pls.javaX X(!
+%10java.lang.String"0java.lang.String#substring(II)Ljava/lang/String;*
+
+linejava.lang.String*2*
+""2substring(II)ì
+ê
+S
+IC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jroar/Pls.javaX X(!
+linejava.lang.String"__id*
+
+%10java.lang.String*
+3*∏
+20S
+IC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jroar/Pls.javaM M(!"]
+S
+IC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jroar/Pls.javaM M("
+""*å
+10S
+IC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jroar/Pls.javaS S(≠™
+S
+IC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jroar/Pls.javaS S("
+%9byte[]"java.lang.String#getBytes()[B*
+
+linejava.lang.String2
+getBytes()|
+z
+S
+IC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jroar/Pls.javaS S(#
+foobyte[]"__id*
+
+%9byte[]*
+5* 
+11S
+IC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jroar/Pls.javaR	 R(·ﬁ
+S
+IC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jroar/Pls.javaR	 R("
+%8boolean"0java.lang.String#startsWith(Ljava/lang/String;)Z*
+
+linejava.lang.String*
+
+File1=2startsWith(Ljava/lang/String;)*
+3
+16
+10*Å
+22S
+IC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jroar/Pls.javaF F(%õ
+ò
+S
+IC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jroar/Pls.javaF F(%
+pstreamjava.io.InputStream"__id*
+
+%4java.io.InputStream*
+19
+20:
+plsjava.lang.StringB"
+com.jcraft.jroar.Pls

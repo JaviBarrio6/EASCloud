@@ -1,0 +1,36 @@
+
++com.jcraft.jorbis.Lpc#lpc_from_curve([F[F)FT
+JC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/Lpc.javag g("4*∆
+4T
+JC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/Lpc.javas s(°
+û
+T
+JC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/Lpc.javav v(
+%0com.jcraft.jorbis.Drft"__id*"* 
+com.jcraft.jorbis.Lpc"
+fft¡æ
+T
+JC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/Lpc.javav v(
+
+%1void"$com.jcraft.jorbis.Drft#backward([F)V*
+
+%0com.jcraft.jorbis.Drft*
+""2backward([F)*
+1*ë
+1V
+JC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/Lpc.javaÅ Å(—
+Œ
+V
+JC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/Lpc.javaÅ Å(&
+%2float",com.jcraft.jorbis.Lpc#lpc_from_data([F[FII)F*"
+com.jcraft.jorbis.Lpc*
+""*
+""*
+""*
+"""`
+V
+JC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/Lpc.javaÅ Å((
+"":
+"":
+""B
+com.jcraft.jorbis.Lpc

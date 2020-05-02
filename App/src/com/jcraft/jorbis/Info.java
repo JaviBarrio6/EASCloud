@@ -96,7 +96,7 @@ public class Info{
 
   StaticCodeBook[] book_param=null;
 
-  PsyInfo[] psy_param=new PsyInfo[64]; // encode only
+  PsyInfo[] psy_param = new PsyInfo[64]; // encode only
   
   // for block long/sort tuning; encode only
   int envelopesa;

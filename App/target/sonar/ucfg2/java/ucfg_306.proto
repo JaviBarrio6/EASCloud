@@ -1,0 +1,48 @@
+
+)com.jcraft.jorbis.VorbisFile#time_tell()F]
+QC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/VorbisFile.java¤ ¤("6"1*Â
+4]
+QC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/VorbisFile.java± ±(
+ÕÒ
+]
+QC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/VorbisFile.java² ²(
+%2float"+com.jcraft.jorbis.VorbisFile#time_total(I)F* 
+com.jcraft.jorbis.VorbisFile*
+""2time_total(I)*
+4
+1*—
+6]
+QC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/VorbisFile.java¬ ¬(ÒÏ
+]
+QC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/VorbisFile.java¬ ¬(
+
+%0long"*com.jcraft.jorbis.VorbisFile#pcm_total(I)J* 
+com.jcraft.jorbis.VorbisFile*
+""2pcm_total(I)ÕÒ
+]
+QC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/VorbisFile.java­ ­(
+%1float"+com.jcraft.jorbis.VorbisFile#time_total(I)F* 
+com.jcraft.jorbis.VorbisFile*
+""2time_total(I)*
+4
+1*¹
+1]
+QC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/VorbisFile.java· ·(²
+¯
+]
+QC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/VorbisFile.java·; ·(=
+%3com.jcraft.jorbis.Info[]"__id*(*&
+com.jcraft.jorbis.VorbisFile"
+vi¶
+³
+]
+QC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/VorbisFile.java·; ·(C
+%4com.jcraft.jorbis.Info"
+__arrayGet* 
+
+%3com.jcraft.jorbis.Info[]*
+"""g
+]
+QC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/VorbisFile.java· ·(J
+""B 
+com.jcraft.jorbis.VorbisFile
