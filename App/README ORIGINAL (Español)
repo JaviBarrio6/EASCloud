@@ -1,14 +1,14 @@
-                                                    JRoar, un servidor de transmisión JavaTM puro dedicado a Ogg
-                                                                        por JCraft, Inc.
+                                       JRoar, un servidor de transmisión JavaTM puro dedicado a Ogg
+                                                               por JCraft, Inc.
 
-                                                                http://www.jcraft.com/jroar/
+                                                       http://www.jcraft.com/jroar/
 
 Ultima Modificación: Jueves Noviembre 28 14:12:44 UTC 2002
 
 
 Descripción
 ===========
-    JRoar es un servidor de streaming para Ogg (http://xiph.org/ogg/) puramente Java.
+    JRoar es un servidor de streaming para Ogg (http://xiph.org/ogg/) en Java puro.
 JRoar lanza transmisiones en vivo de Ogg a jugadores de Ogg Vorbis como IceCast2
 (http://www.icecast.org/) hace y emite transmisiones en vivo de Ogg a IceCast2
 y JRoar (pero JRoar no admite codificación / re-codificación).
@@ -36,8 +36,8 @@ Características
 
 ¿Por qué JRoar esta pirateado?
 ====================
-    En primer lugar, JRoar no compite con IceCast2, Ices, etc.
-y no tiene intenciones de reemplazarlos con JRoar. No hace falta
+    En primer lugar, JRoar no debe ser un competidor para IceCast2, Ices, etc.
+y no hay intenciones de reemplazarlos con JRoar. No hace falta
 decir, que JRoar tiene muchas desventajas, por ejemplo, JRoar no puede soportar
 codificación / re-codificación y no se ejecutará más rápido que ellos, porque es
 en Java puro. Sin embargo, se implementa fácilmente y le permitirá compartir Ogg

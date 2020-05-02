@@ -11,15 +11,15 @@
 - [Evolución](#Evolución)
 - [Ejecución](#Ejecución)
 - [Programas Utilizados](#Programas-Utilizados)
-  
-      
+
+
 ## Introducción
 
 Nos enfrentamos a una práctica de Mantenimiento y Evolución de un software de streaming de audio, este basado en el formato multimedia Ogg, concretamente en la parte de audio, Vorbis. El código original al que nos enfrentamos es un desarrollo de JCraft, liberado bajo licencia GPL.
 
 JRoar se inspira en la existencia de Icecast, que no es más que una evolución 'libre' del protocolo Shoutcast. Para el entendimiento y desarrollo de la practica se puede revisar la documentación de [Icecast 2](http://icecast.org/).
 
-En primer lugar deberemos adaptar el código para su funcionamiento correcto en Java 11, con Intel J Idea, una vez la aplacicación este operativa el objetivo del mantenimiento es eliminar todas aquellas partes que se consideren accesorias, como por ejemplo las que se encargan del protocolo PeerCast y JOrbisPlayer, ambos obsoletos y sin funcionalidad. 
+En primer lugar deberemos adaptar el código para su funcionamiento correcto en Java 11, con Intel J Idea, una vez la aplacicación este operativa el objetivo del mantenimiento es eliminar todas aquellas partes que se consideren accesorias, como por ejemplo las que se encargan del protocolo PeerCast y JOrbisPlayer, ambos obsoletos y sin funcionalidad.
 
 En primer lugar realizaremos diagramas UML de la aplicación original con el fin de comprender su arquitecura y funcionamiento.
 
@@ -29,7 +29,7 @@ Además, nos apoyaremos en la herramienta de análisis SonarQube, para analizar 
 
 #### Diagramas Originales
 
-En un primer momento hemos realizado varios diagramas UML para entender el funcionamiento y relaciones existentes entre las clases de Java. 
+En un primer momento hemos realizado varios diagramas UML para entender el funcionamiento y relaciones existentes entre las clases de Java.
 Los diagramas se dividen en 6, el primero es un diagrama muy general de la aplicación, este no nos va a aclarar la arquitectura, pero tampoco está de más echarle un ojo.
 
 <p align="center">
@@ -70,6 +70,13 @@ Para acabar hemos hecho un diagrama del paquete Misc que incluyen unas cuantas c
 
 #### Actualizar Código Desfasado:
 #### Eliminación de código inutil:
+En un primer vistazo, se ha decicido eliminar tanto las clases VorbisFile, AllocChain,ChainingExample y DecodeExample, como el archivo VorbisFile.java.new.
+Hemos decidido eliminar estas clases, debido a que no tenían dependencia ninguna entre otras clases.
+
+01/05/20
+De la clase Floor1 en la carpeta Jorbis, se han eliminado las clases EchstateFloor1 y Lsfit_acc ya que no estaban instanciadas en ninguna otra parte del codigo del proyecto y no se utilizaban.
+Tambien se han eliminado los comentarios innecesarios que contenia el código y se ha tabulado correctamente para que seha mas legible.
+
 #### Análisis:
 
 ## Evolución
@@ -79,9 +86,9 @@ Para acabar hemos hecho un diagrama del paquete Misc que incluyen unas cuantas c
 * Esta fase de divide en dos subfases:
 
     - Propuesta de las modificaciones y extensiones, esperando su aprobación:
-    
+
     - Desarrollo de dichas modificaciones:
-    
+
 ## Ejecución
 
 En primer lugar debe descargar a través de GitHub nuestra evolución del software en cuestión, en este momento el repositorio es privado, por lo que no se podría descargar.
