@@ -1,33 +1,50 @@
 
-\com.jcraft.jroar.Debug#wrapln(Ljava/lang/StringBuffer;Ljava/lang/String;Ljava/lang/String;)VU
-KC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jroar/Debug.javaS S("1*Í
-1U
-KC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jroar/Debug.javaT T(´
-±
-U
-KC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jroar/Debug.javaT T(
-
-%0void"Zcom.jcraft.jroar.Debug#wrap(Ljava/lang/StringBuffer;Ljava/lang/String;Ljava/lang/String;)V*
-com.jcraft.jroar.Debug*
-
-sbjava.lang.StringBuffer*
+>misc.RadioStudio#ogg2pls(Ljava/lang/String;)Ljava/lang/String;O
+EC:/Users/user/Desktop/EasCloud/EASCloud/App/src/misc/RadioStudio.java9 9("3*Â
+2O
+EC:/Users/user/Desktop/EasCloud/EASCloud/App/src/misc/RadioStudio.java:% :(("l
+O
+EC:/Users/user/Desktop/EasCloud/EASCloud/App/src/misc/RadioStudio.java: :()
 
-tagjava.lang.String*
+oggjava.lang.String*µ
+3O
+EC:/Users/user/Desktop/EasCloud/EASCloud/App/src/misc/RadioStudio.java: :(ÖÓ
+O
+EC:/Users/user/Desktop/EasCloud/EASCloud/App/src/misc/RadioStudio.java: :(
+%0boolean".java.lang.String#endsWith(Ljava/lang/String;)Z*
 
-foojava.lang.StringØ
-Õ
-U
-KC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jroar/Debug.javaU U(
-
+oggjava.lang.String*
+.ogg2endsWith(Ljava/lang/String;)*
+2
+1*‹
+1O
+EC:/Users/user/Desktop/EasCloud/EASCloud/App/src/misc/RadioStudio.java; ;(¨¥
+O
+EC:/Users/user/Desktop/EasCloud/EASCloud/App/src/misc/RadioStudio.java; ;(
+%1byte[]"java.lang.String#getBytes()[B*
+
+oggjava.lang.String2
+getBytes()x
+v
+O
+EC:/Users/user/Desktop/EasCloud/EASCloud/App/src/misc/RadioStudio.java; ;(
+foobyte[]"__id*
+
+%1byte[]}{
+O
+EC:/Users/user/Desktop/EasCloud/EASCloud/App/src/misc/RadioStudio.java= =(
+%2java.lang.String"java.lang.String£
+ 
+O
+EC:/Users/user/Desktop/EasCloud/EASCloud/App/src/misc/RadioStudio.java= =(
+%3"java.lang.String#<init>([B)V*
+
+%2java.lang.String*
 
-%1void"4com.jcraft.jroar.Debug#ln(Ljava/lang/StringBuffer;)V*
-com.jcraft.jroar.Debug*
-
-sbjava.lang.StringBuffer"_
-U
-KC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jroar/Debug.javaV V(
-"":
-sbjava.lang.StringBuffer:
-tagjava.lang.String:
-foojava.lang.StringB
-com.jcraft.jroar.Debug
+foobyte[]"k
+O
+EC:/Users/user/Desktop/EasCloud/EASCloud/App/src/misc/RadioStudio.java= =(
+
+%2java.lang.String:
+oggjava.lang.StringB
+misc.RadioStudio
