@@ -81,16 +81,14 @@ class Lookup{
 	1.032795558989f,1.024295039463f,1.016001016002f,1.007905261358f,
 	1.000000000000f,
   };
-  /* interpolated 1./sqrt(p) where .5 <= p < 1. */
+
   static float invsqlook(float a){
-// System.out.println(a);
     double d=a*(2.f*(float)INVSQ_LOOKUP_SZ)-(float)INVSQ_LOOKUP_SZ;
     int i=(int)d;
     return INVSQ_LOOKUP[i]+ ((float)(d-i))*(INVSQ_LOOKUP[i+1]-INVSQ_LOOKUP[i]);
   }
 
   static final int INVSQ2EXP_LOOKUP_MIN=-32;
-  static final int INVSQ2EXP_LOOKUP_MAX=32;
   static final float[] INVSQ2EXP_LOOKUP={
 	         65536.f,    46340.95001f,         32768.f,    23170.47501f,
 	         16384.f,     11585.2375f,          8192.f,    5792.618751f,
@@ -110,13 +108,12 @@ class Lookup{
 	6.103515625e-05f,4.315837288e-05f,3.051757812e-05f,2.157918644e-05f,
 	1.525878906e-05f,
   };
-  /* interpolated 1./sqrt(p) where .5 <= p < 1. */
+
   static float invsq2explook(int a){
-    return INVSQ2EXP_LOOKUP[a-INVSQ2EXP_LOOKUP_MIN];
+  	return INVSQ2EXP_LOOKUP[a-INVSQ2EXP_LOOKUP_MIN];
   }
 
   static final int FROMdB_LOOKUP_SZ=35;
-  static final int FROMdB2_LOOKUP_SZ=32;
   static final int FROMdB_SHIFT=5;
   static final int FROMdB2_SHIFT=3;
   static final int FROMdB2_MASK=31;
@@ -141,7 +138,7 @@ class Lookup{
 	   0.7028699885f,   0.6928273125f,   0.6829281272f,   0.6731703824f,
 	   0.6635520573f,   0.6540711597f,   0.6447257262f,   0.6355138211f,
   };
-  /* interpolated lookup based fromdB function, domain -140dB to 0dB only */
+
   static float fromdBlook(float a){
     int i=(int)(a*((float)(-(1<<FROMdB2_SHIFT))));
     return (i<0)?1.f:
