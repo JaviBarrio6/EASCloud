@@ -25,8 +25,6 @@
 
 package com.jcraft.jorbis;
 
-import com.jcraft.jogg.*;
-
 class Residue1 extends Residue0{
   int forward(Block vb,Object vl, float[][] in, int ch){
     System.err.println("Residue0.forward: not implemented");
@@ -34,7 +32,6 @@ class Residue1 extends Residue0{
   }
 
   int inverse(Block vb, Object vl, float[][] in, int[] nonzero, int ch){
-//System.err.println("Residue0.inverse");
     int used=0;
     for(int i=0; i<ch; i++){
       if(nonzero[i]!=0){

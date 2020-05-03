@@ -355,8 +355,7 @@ class LookMapping0{
   Object[] time_look;
   Object[] floor_look;
   Object[] floor_state;
-  Object[] residue_look; 
-  PsyLook[] psy_look;
+  Object[] residue_look;
 
   FuncTime[] time_func; 
   FuncFloor[] floor_func; 
