@@ -122,10 +122,10 @@ System.out.println("accept: "+accept);
         }
         catch(Exception e){}
         drop();
-        mountpoint=null;
+
         try { if(mysocket!=null)mysocket.close(); } 
         catch(Exception e){}
-        //mysocket=null;
+
         return;
       }
       try { 
@@ -141,10 +141,10 @@ System.out.println("accept: "+accept);
 
     if(JRoar.icepasswd!=null && !accept){
       drop();
-      mountpoint=null;
+
       try { if(mysocket!=null)mysocket.close(); } 
       catch(Exception e){}
-      //mysocket=null;
+
       return;
     }
 

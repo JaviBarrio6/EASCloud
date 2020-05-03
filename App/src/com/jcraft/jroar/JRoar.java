@@ -193,7 +193,6 @@ public class JRoar extends Applet implements Runnable{
       }
       else if(arg[i].equals("-page") && arg.length>i+2){
         try{
-          Class classObject=Class.forName(arg[i+2]);
           Page.register(arg[i+1], arg[i+2]);
         }
         catch(Exception e){
@@ -233,35 +232,6 @@ public class JRoar extends Applet implements Runnable{
         System.exit(-1);
       }
     }
-
-
-    // Live Ogg stream at 'http://192.168.1.2:8000/example1.ogg' 
-    // is mouted at /test1.ogg
-    /*
-    Proxy proxy=new Proxy("/foo1.ogg", 
-    	                    "http://192.168.1.2:8888/example1.ogg");
-    */
-
-    /*
-    // Ogg Vorbis files included in foo will be streamed at /test2.ogg
-    String[] foo={
-      "/tmp/foo.ogg",
-      "/tmp/bar.ogg"
-    };
-    PlayFile p=new PlayFile("/foo2.ogg", foo);
-    p.kick();
-    */  
- 
-    /*
-    // A stream mounted at /foo1.ogg will be broadcasted UDP port 8000
-    UDPBroadcast u=new UDPBroadcast("/foo1.ogg", "192.168.0.255", 8000, "/udp.ogg");
-    */
-
-    // A stream mounted at /test2.ogg is transfered to IceCast2/JRoar at
-    // 192.168.0.3:8000 with mountpoint /example2.ogg.
-    /*
-    ShoutClient sc=new ShoutClient("/foo2.ogg", "192.168.0.3", 8000, "/example2.ogg", "hackme");
-    */
 
     HttpServer	httpServer=new HttpServer();
     httpServer.start();
@@ -361,7 +331,7 @@ System.out.println("playFile ("+line+")");
               try{
                 c=(Client)(source.listeners.elementAt(i));
                 if(c.ready && System.currentTimeMillis()-c.lasttime>1000){
-//System.out.println("drop: "+c);
+
                   ((HttpClient)c).ms.close();
 	        }
 	      }
@@ -382,11 +352,6 @@ System.out.println("WatchDog: "+e);
   static void addMountPointListener(MountPointListener foo){
     synchronized(mplisteners){
       mplisteners.addElement(foo);
-    }
-  }
-  static void removeMountPointListener(MountPointListener foo){
-    synchronized(mplisteners){
-      mplisteners.removeElement(foo);
     }
   }
 }

@@ -81,8 +81,6 @@ touched="done";
     super.close();
   }
 
-  public boolean isRunning(){ return (ms!=null);}
-
   public String toString(){
     return super.toString()+",hederIsSent="+headerIsSent+",touched="+touched+",lasttime="+lasttime+",ready="+ready+(ms!=null ? ",from="+ms.socket.getInetAddress() : ",ms=null")+"<br>";
   }

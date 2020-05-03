@@ -45,5 +45,4 @@ abstract class Client{
       clients.removeElement(this);
     }
   }
-  abstract boolean isRunning();
 }

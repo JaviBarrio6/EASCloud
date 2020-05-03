@@ -27,8 +27,6 @@ import java.io.*;
 public abstract class Page{
   static Hashtable map = new Hashtable();
 
-  static void register(){}
-
   static void register(String src, Object dst){
     synchronized(map){
       map.put(src, dst);
@@ -92,7 +90,7 @@ public abstract class Page{
     mysocket.close();
   }
 
-  static void ok(MySocket mysocket, String location) throws IOException{
+  static void ok(MySocket mysocket) throws IOException{
     mysocket.println("HTTP/1.0 200 OK");
     mysocket.println("Last-Modified: Thu, 04 Oct 2001 14:09:23 GMT");
     mysocket.println("Connection: close");
@@ -119,7 +117,6 @@ public abstract class Page{
     String key, value;
 
     while(true){
-      key=value=null; 
 
       foo=arg.indexOf('=');
       if(foo==-1)break;

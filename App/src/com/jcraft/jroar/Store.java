@@ -118,9 +118,4 @@ class Store extends Page{
     }
   }
 
-    /*
-  public String toString(){
-    return super.toString()+" me="+me+", bitStream="+bitStream;
-  }
-    */
 }

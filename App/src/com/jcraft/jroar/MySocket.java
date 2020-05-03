@@ -83,12 +83,7 @@ public class MySocket {
   public void print(byte[] s) throws IOException{
     os.write(s);
   }
-  public void p(char c) throws IOException{
-    os.write(c);
-  }
-  public void print(char c) throws IOException{
-    os.write(c);
-  }
+
   public void p(int c) throws IOException{
     os.write(Integer.toString(c).getBytes());
   }

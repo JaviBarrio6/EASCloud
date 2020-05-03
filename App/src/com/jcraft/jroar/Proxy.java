@@ -145,7 +145,7 @@ HttpServer.source_connections++;
 
     init_ogg();
 
-    int serialno=-1;
+    int serialno = -1;
 
     ByteArrayOutputStream _header=new ByteArrayOutputStream();
     byte[] header=null;
@@ -253,8 +253,7 @@ HttpServer.source_connections++;
         retry--;
         if(retry>0){
           System.out.println("Connection to "+_source+" is dropped. Retry("+retry+")");
-          header=null;
-          serialno=-1;
+
           init_ogg();
           try { if(bitStream!=null)bitStream.close(); } 
           catch(Exception e) { System.out.println(e); }
@@ -302,7 +301,7 @@ HttpServer.source_connections++;
       catch(Exception e) { }
       bitStream=null;
       me=null;
-//    drop();
+
     }
     drop_clients();
   }

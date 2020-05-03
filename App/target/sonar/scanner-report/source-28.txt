@@ -32,7 +32,7 @@ class HomePage extends Page{
     register("/", HomePage.class.getName());
     register("/index.html", HomePage.class.getName());
   }
-  private static final int REFRESH=60;
+
   private static int count=0;
 
   public void kick(MySocket s, Hashtable vars, Vector httpheader) throws IOException{
@@ -42,7 +42,6 @@ class HomePage extends Page{
     s.pn( "" ) ;
     s.pn("<!DOCTYPE HTML PUBLIC \"-//IETF//DTD HTML 2.0//EN\">");
     s.pn("<HTML><HEAD>");
-//  s.pn("<META HTTP-EQUIV=\"refresh\" content=\""+REFRESH+";URL=/\">");
     s.p("<TITLE>JRoar "); s.p(JRoar.version); s.p(" at "); 
                           s.p(HttpServer.myURL); s.pn("/</TITLE>");
     s.pn("</HEAD><BODY>");
@@ -93,21 +92,6 @@ class HomePage extends Page{
       }
       s.pn("</tr>");
 
-      /*
-      dumpComment(s, source.current_comment);
-      */
-
-      /*
-      String comment=getComment(source.current_comment);
-      if(comment!=null){
-        s.pn("<tr>");
-        s.pn("<td>&nbsp;</td>");
-        s.pn("<td>&nbsp;</td>");
-        s.p("<td>"); s.p(comment); s.pn("</td>");
-        s.pn("</tr>");
-      }
-      */
-
       Object[] proxies=source.getProxies();
       if(proxies!=null){
         for(int i=0; i<proxies.length; i++){
@@ -143,14 +127,7 @@ class HomePage extends Page{
     s.close();
 
   }
-  /*
-  private String ogg2pls(String ogg){
-    if(!ogg.endsWith(".ogg") && !ogg.endsWith(".spx")) return ogg;
-    byte[] foo=ogg.getBytes();
-    foo[foo.length-1]='s';foo[foo.length-2]='l';foo[foo.length-3]='p';
-    return new String(foo);
-  }
-  */
+
   private String ogg2m3u(String ogg){
     if(!ogg.endsWith(".ogg") && !ogg.endsWith(".spx")) return ogg;
     byte[] foo=ogg.getBytes();
@@ -166,28 +143,4 @@ class HomePage extends Page{
     }
     return null;
   }
-/*
-  // hmm...
-  private String getComment(Comment c){
-    if(c.comments==0)return null;
-    StringBuffer sb=new StringBuffer();
-    for(int i=0; i<c.comments; i++){
-      sb.append(new String(c.user_comments[i], 0, c.user_comments[i].length-1));
-      if(i+1<c.comments) sb.append("<br>");
-    }
-    return sb.toString();
-  }
-  private void dumpComment(MySocket s, Comment c) throws IOException{
-    if(c.comments==0)return;
-    s.pn("<tr>");
-    s.pn("<td>&nbsp;</td>"); s.pn("<td>&nbsp;</td>");
-    s.p("<td>");
-    for(int i=0; i<c.comments; i++){
-      s.p(new String(c.user_comments[i], 0, c.user_comments[i].length-1));
-      if(i+1<c.comments) s.p("<br>");
-    }
-    s.pn("</td>");
-    s.pn("</tr>");
-  }
-*/
 }

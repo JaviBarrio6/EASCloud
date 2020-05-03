@@ -42,15 +42,10 @@ class PlayFile extends Source implements Runnable{
   private String file=null;
   private String[] files=null;
 
-  PlayFile(String mountpoint, String[] files){
-    super(mountpoint);
-HttpServer.source_connections++;
-    this.source="playlist";
-    this.files=files;
-  }
+
   PlayFile(String mountpoint, String file){
     super(mountpoint);
-HttpServer.source_connections++;
+    HttpServer.source_connections++;
     this.source="playlist";
     if(file.startsWith("http://") && 
        file.endsWith(".m3u")){
@@ -64,7 +59,7 @@ HttpServer.source_connections++;
       }
       else{
         drop();
-HttpServer.source_connections--;
+    HttpServer.source_connections--;
       }
     }
     else if(JRoar.running_as_applet){
@@ -135,18 +130,6 @@ System.out.println("playFile ("+s+")");
   public void kick(){
 
     if(me!=null){
-	/*
-      int size=listeners.size();
-      Client c=null;
-        c=(Client)(listeners.elementAt(1));
-System.out.println(c);
-        if(System.currentTimeMillis()-c.lasttime>1000){
-          try{
-            ((HttpClient)c).ms.close();
-	  }
-          catch(Exception e){}
-	}
-	*/
       return;
     }
     me=new Thread(this);
@@ -154,7 +137,7 @@ System.out.println(c);
   }
 
 static String status="status0";
-//static String file="??";
+
 
   public void run(){
     Vector http_header=new Vector();

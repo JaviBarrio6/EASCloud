@@ -54,7 +54,6 @@ class HttpServer extends Thread{
     connections=0;
     try{ serverSocket=new ServerSocket(port); }
     catch(IOException e){
-      //System.out.println("ServerSocket error"+e );
       System.exit(1);
     }
     try{
@@ -62,10 +61,9 @@ class HttpServer extends Thread{
         myURL="http://"+InetAddress.getLocalHost().getHostAddress()+":"+port;
       else
         myURL="http://"+myaddress+":"+port;
-      //System.out.println("myURL: "+myURL);
     }
     catch(Exception e){
-      System.out.println(e );
+      System.out.println(e);
     }
   }
 
@@ -104,32 +102,6 @@ class Dispatch{
   Dispatch(Socket s) throws IOException{
     super();
     mySocket=new MySocket(s);
-  }
-
-  private void Response(String file) throws IOException{
-    FileInputStream	fileInputStream=null;
-    BufferedInputStream	bufferedInputStream=null;
-    DataInputStream	dataInputStream=null;
-
-    try {
-      fileInputStream=new FileInputStream(file);
-      bufferedInputStream=new BufferedInputStream(fileInputStream);
-      dataInputStream=new DataInputStream(bufferedInputStream);
-    }
-    catch(IOException e){return;}
-
-    try {
-      int c;
-      while(true){
-        c=dataInputStream.readByte();
-	mySocket.print((char)c);
-      }
-    }
-    catch(IOException e){ }
-
-    try{ dataInputStream.close(); } catch(IOException e){ }
-    mySocket.flush();
-    mySocket.close( ) ;
   }
 
   private Vector getHttpHeader(MySocket ms) throws IOException{
@@ -281,7 +253,7 @@ System.out.println(" "+foo);
     Page.unknown(mySocket, _file);
   }
 
-  private void procHEAD(String string, Vector httpheader) throws IOException{
+  private void procHEAD(String string) throws IOException{
 
     String file;
 
@@ -315,7 +287,7 @@ System.out.println(" "+foo);
     }
 
     if(exist){
-      Page.ok(mySocket,file);
+      Page.ok(mySocket);
     }
     else{
       Page.unknown(mySocket, file);
@@ -390,7 +362,7 @@ System.out.println(mySocket.socket.getInetAddress()+": "+foo+" "+(new java.util.
       }
 
       if(bar.equalsIgnoreCase("HEAD")){
-        procHEAD(foo, v);
+        procHEAD(foo);
         return;
       }
 

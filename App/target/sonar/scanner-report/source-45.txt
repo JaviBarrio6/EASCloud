@@ -138,8 +138,7 @@ class Source{
       }
       os.pagein(page);
       os.packetout(op);
-      int type=op.packet_base[op.packet];
-      //System.out.println("type: "+type);
+
       byte[] foo=op.packet_base;
       int base=op.packet+1;
 
@@ -251,23 +250,6 @@ class Source{
         oy.wrote(bytes);
       }
 
-    /*
-      {
-        byte[][] ptr=vc.user_comments;
-        StringBuffer sb=null;
-        if(acontext!=null) sb=new StringBuffer();
-
-        for(int j=0; j<ptr.length;j++){
-          if(ptr[j]==null) break;
-          System.err.println("Comment: "+new String(ptr[j],0,ptr[j].length-1));
-          if(sb!=null)sb.append(" "+new String(ptr[j], 0, ptr[j].length-1));
-        } 
-        System.err.println("Bitstream is "+vi.channels+" channel, "+vi.rate+"Hz");
-        System.err.println("Encoded by: "+new String(vc.vendor, 0, vc.vendor.length-1)+"\n");
-        if(sb!=null)acontext.showStatus(sb.toString());
-      }
-    */
-
       return true;
     }
 
@@ -292,45 +274,10 @@ class Source{
       return false;
     }
 
-  //System.out.println(new String(buffer, 36, 20)); // speex_version
-  //System.out.print("header version: ");
-  //System.out.print(Integer.toHexString(buffer[56])+", ");
-  //System.out.print(Integer.toHexString(buffer[57])+", ");
-  //System.out.print(Integer.toHexString(buffer[58])+", ");
-  //System.out.println(Integer.toHexString(buffer[59])+", ");
-
-  //System.out.print("header size: "+((buffer[63]<<24)|
-  //                                  (buffer[62]<<16)|
-  //                                  (buffer[61]<<8)|
-  //                                  (buffer[60]))+"  ");
-  //System.out.print(Integer.toHexString(buffer[60])+", ");
-  //System.out.print(Integer.toHexString(buffer[61])+", ");
-  //System.out.print(Integer.toHexString(buffer[62])+", ");
-  //System.out.println(Integer.toHexString(buffer[63])+", ");
-
-  //System.out.print("rate: "+((buffer[67]<<24)|
-  //                                  (buffer[66]<<16)|
-  //                                  (buffer[65]<<8)|
-  //                                  (buffer[64]))+"  ");
-  //System.out.print(Integer.toHexString(buffer[64])+", ");
-  //System.out.print(Integer.toHexString(buffer[65])+", ");
-  //System.out.print(Integer.toHexString(buffer[66])+", ");
-  //System.out.println(Integer.toHexString(buffer[67])+", ");
-
     vi.rate=(((buffer[base+39]<<24)&0xff000000)|
 	     ((buffer[base+38]<<16)&0xff0000)|
 	     ((buffer[base+37]<<8)&0xff00)|
 	     ((buffer[base+36])&0xff));
-
-  //System.out.println("vi.rate: "+vi.rate);
-
-  //System.out.print("buffer: ");
-  //for(int i=0; i<header.length; i++){
-  ////System.out.print(Integer.toHexString(header[i])+", ");
-  //System.out.print(new Character((char)(header[i])));
-  //}
-  //System.out.println("");
-
 
     if(vi.rate!=0){
       return true;

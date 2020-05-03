@@ -28,8 +28,6 @@ import java.util.*;
 
 class Pls extends Page{
   String pls=null;
-  static void register(){
-  }
 
   Pls(String pls){
     super();
