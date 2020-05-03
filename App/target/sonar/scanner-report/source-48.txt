@@ -25,320 +25,241 @@ import java.io.*;
 import java.net.*;
 import java.util.*;
 
-import com.jcraft.jogg.*;
+class UDPBroadcast extends Client{
+  boolean headerIsSent=false;
+  MySocket mysocket=null;
 
-class Ice extends Source{
-  private static final int BUFSIZE=4096*2;
+  String srcmpoint=null;
+  String dstmpoint=null;
+  String baddress=null;
+  int port=0;
+  String passwd=null;
+  byte[] header=null;
 
-  private static final int TIMEOUT=3000; // 3 seconds
+  UDPIO io=null;
+  UDPSource udp_mpoint=null;
 
-  private InputStream bitStream=null;
-  private MySocket mysocket=null;
+  UDPBroadcast(String srcmpoint, String baddress, int port, String dstmpoint){
+    super();
 
-  private SyncState oy;
-  private com.jcraft.jogg.Page og;
-  
-  private byte[] buffer=null;
-  private int bytes=0;
-
-  private Thread me=null;
-
-  private long lasttime=0;
-
-  Vector http_header=new Vector();
-
-  private static final String _icepasswd="ice-password: ";
-  private static final String _ice="ice-";
-  Ice(String mountpoint, MySocket mysocket, Vector headerfromice){
-    this(mountpoint, mysocket, headerfromice, "ICE/1.0");
-  }
-  Ice(String mountpoint, MySocket mysocket, Vector headerfromice, String protocol){
-    super(mountpoint);
-
-    this.mysocket=mysocket;
-    this.bitStream=mysocket.getInputStream();
-    this.source="ice at "+mysocket.socket.getInetAddress();
-
-    boolean accept=false;
-    String foo=null;
-    int size=headerfromice.size();
-
-    if(protocol==null || protocol.startsWith("ICE")){
-      for(int i=0; i<size;){
-        foo=(String)headerfromice.elementAt(i);
-//System.out.println("fromIce: "+foo);
-        if(foo.startsWith(_ice)){
- 	  if(foo.startsWith(_icepasswd)){
-            String icepasswd=foo.substring(_icepasswd.length());
-            if(JRoar.icepasswd!=null && JRoar.icepasswd.equals(icepasswd)){
-              accept=true;
-	    }
-          }
-          headerfromice.removeElement(foo);
-          size--;
-          continue;
-        }
-        i++;
-      }	
+    try{
+      io=new UDPIO(baddress, port);
     }
-    else if(protocol.startsWith("HTTP")){
-      String _auth="Authorization: Basic ";
-      for(int i=0; i<size;){
-        foo=(String)headerfromice.elementAt(i);
-System.out.println("fromIce: "+foo);
-        if(foo.startsWith(_auth)){
-          String icepasswd=foo.substring(_auth.length());
-          byte[] code=null;
-//        try{ code=(new sun.misc.BASE64Decoder()).decodeBuffer(icepasswd); }
-//        catch(Exception ee){ }
-	  try{
-            byte[] bar=icepasswd.getBytes();	      
-	    if(bar.length>0){
-              code=fromBase64(bar, 0, bar.length);
-	    }
-	  }
-          catch(Exception ee){ }
-System.out.println("code: "+new String(code));
-          if(JRoar.icepasswd!=null && 
-	     code!=null &&
-             (java.util.Arrays.equals(code, ("source:"+JRoar.icepasswd).getBytes())||
-              java.util.Arrays.equals(code, ("relay:"+JRoar.icepasswd).getBytes()))
-	     ){
-            accept=true;
-	  }
-          headerfromice.removeElement(foo);
-          size--;
-          continue;
-        }
-        i++;
-      }	
-System.out.println("accept: "+accept);
-      if(JRoar.icepasswd!=null && !accept){
-        try { 
-          mysocket.println("HTTP/1.0 401 Authentication Required");
-          mysocket.println("www-authenticate: Basic realm=\"jroar\"");
-          mysocket.println("");
-   	  mysocket.flush();
-        }
-        catch(Exception e){}
-        drop();
-        mountpoint=null;
-        try { if(mysocket!=null)mysocket.close(); } 
-        catch(Exception e){}
-        //mysocket=null;
-        return;
-      }
-      try { 
-        mysocket.println("HTTP/1.0 200 OK");
-        mysocket.println("");
-        mysocket.flush();
-      }
-      catch(Exception e){}
-    }
-    else {
-      System.out.println("unkown protocol: "+protocol);
+    catch(Exception e){
+      close();
     }
 
-    if(JRoar.icepasswd!=null && !accept){
-      drop();
-      mountpoint=null;
-      try { if(mysocket!=null)mysocket.close(); } 
-      catch(Exception e){}
-      //mysocket=null;
-      return;
-    }
+    this.srcmpoint=srcmpoint;
+    this.dstmpoint=dstmpoint;
+    this.baddress=baddress;
+    this.port=port;
 
-    http_header.addElement("HTTP/1.0 200 OK");
-    http_header.addElement("Content-Type: application/x-ogg");
+    Source source=Source.getSource(srcmpoint);
+    source.addListener(this);
+    if(source instanceof Proxy)
+      ((Proxy)source).kick();
+
+    udp_mpoint=new UDPSource(this, dstmpoint);
   }
 
-  void init_ogg(){
-    oy=new SyncState();
-    og=new com.jcraft.jogg.Page();
-    buffer=null;
-    bytes=0;
-    oy.init();
-  }
-
-  public void kick(){
-    if(mountpoint==null) return;
-    if(me!=null) return;
-    me=Thread.currentThread();
-    run();
-  }
-
-  public void run(){
+  public void write(Vector http_header, byte[] header,
+		    byte[] foo, int foostart, int foolength,
+		    byte[] bar, int barstart, int barlength) throws IOException{
     lasttime=System.currentTimeMillis();
+    ready=true;
+    this.header=header;
+    io.write(foo, foostart, foolength);
+    io.write(bar, barstart, barlength);
+    io.flush();
+    ready=false;
+  }
 
-    init_ogg();
-
-    int serialno=-1;
-
-    ByteArrayOutputStream _header=new ByteArrayOutputStream();
-    byte[] header=null;
-
-    while(me!=null){
-      boolean eos=false;
-      while(!eos){
-        if(me==null)break;
-        int index=oy.buffer(BUFSIZE);
-        buffer=oy.data;
-        try{ bytes=bitStream.read(buffer, index, BUFSIZE); }
-        catch(Exception e){
-//        System.err.println(e);
-          if(me==null)break;
-          bytes=-1;
-        }
-
-        if(bytes==-1)break;
-        if(bytes==0)break;
-
-        try{Thread.sleep(1);}  // sleep for green thread.
-        catch(Exception e){}
-
-        lasttime=System.currentTimeMillis();
-
-        oy.wrote(bytes);
-
-        while(!eos){
-          if(me==null)break;
-
-	  int result=oy.pageout(og);
-
-	  if(result==0)break; // need more data
-	  if(result==-1){ // missing or corrupt data at this page position
-//	    System.err.println("Corrupt or missing data in bitstream; continuing...");
-	  }
-	  else{
-  	    if(serialno!=og.serialno()){
-              header=null;
-              serialno=og.serialno();
-	    }
-          
-            if((og.granulepos()==0)
-               || (og.granulepos()==-1)          // hack for Speex
-              ){ 
-
-              _header.write(og.header_base, og.header, og.header_len);
-              _header.write(og.body_base, og.body, og.body_len);
-	    }
-            else{
-              if(header==null){
-                header=_header.toByteArray();
-                _header.reset();
-                parseHeader(header);
-	      }
-	    }
-
-//          synchronized(listeners){   // In some case, c.write will block.
-  	      int size=listeners.size();
-
-              Client c=null;
-              for(int i=0; i<size;){
-                try{
-	          c=(Client)(listeners.elementAt(i));
-                  c.write(http_header, header,
-  			  og.header_base, og.header, og.header_len,
-			  og.body_base, og.body, og.body_len);
-		}
-		catch(Exception e){
-                  c.close();
-                  removeListener(c);
-                  size--;
-                  continue;
-                }
-                i++;
-	      }
-//          }
-	    if(og.eos()!=0)eos=true;
-	  }
-        }
-      }
-      if(bytes==-1) break;
-    }
-
-    oy.clear();
-//    try { if(bitStream!=null)bitStream.close(); } 
-//    catch(Exception e){}
-//    bitStream=null;
-    try { if(mysocket!=null)mysocket.close(); } 
+  public void close(){
+    try{io.close();}
     catch(Exception e){}
-    mysocket=null;
-    me=null;
-    drop();
+    io=null;
+    super.close();
   }
+  public boolean isRunning(){ return (io!=null);}
 
-  void stop(){
-    if(me!=null){
-      if(oy!=null) oy.clear();
-      try { if(mysocket!=null)mysocket.close(); } 
-      catch(Exception e){}
-      mysocket=null;
-      me=null;
-    }
-    drop();
-  }
 
-  void drop_clients(){
-    Client c=null;
-    synchronized(listeners){
-      int size=listeners.size();
-      for(int i=0; i<size;i++){
-        c=(Client)(listeners.elementAt(i));
-        try{ c.close();}
-        catch(Exception e){}
+  class UDPIO{
+    InetAddress address;
+    DatagramSocket socket = null;
+    DatagramPacket sndpacket;
+    DatagramPacket recpacket;
+    byte[] buf = new byte[1024];
+    String host;
+    int port;
+    byte[] inbuffer=new byte[1024];
+    byte[] outbuffer=new byte[1024];
+    int instart=0, inend=0, outindex=0;
+
+    UDPIO(String host, int port){
+      this.host=host;
+      this.port=port;
+      try{
+	address = InetAddress.getByName(host);
+	socket = new DatagramSocket();
       }
-      listeners.removeAllElements();
+      catch(Exception e){System.err.println(e);}
+      recpacket = new DatagramPacket(buf, 1024);
+      sndpacket=new DatagramPacket(outbuffer, 0, address, port);
+    }
+
+    void setTimeout(int i){
+      try{socket.setSoTimeout(i);}
+      catch(Exception e){System.out.println(e);}
+    }
+    /*
+    int getByte() throws java.io.IOException{
+      if((inend-instart)<1){ read(1); }
+      return inbuffer[instart++]&0xff;
+    }
+    void getByte(byte[] array) throws java.io.IOException{
+      getByte(array, 0, array.length);
+    }
+    void getByte(byte[] array, int begin, int length) throws java.io.IOException{
+      int i=0;
+      while(true){
+	if((i=(inend-instart))<length){
+	  if(i!=0){
+	    System.arraycopy(inbuffer, instart, array, begin, i);
+	    begin+=i;
+	    length-=i;
+	    instart+=i;
+	  }
+	  read(length);
+	  continue;
+	}
+	System.arraycopy(inbuffer, instart, array, begin, length);
+	instart+=length;
+	break;
+      }
+    }
+    int getShort() throws java.io.IOException{
+      if((inend-instart)<2){ read(2); }
+      int s=0;
+      s=inbuffer[instart++]&0xff;
+      s = ((s<<8)&0xffff) | (inbuffer[instart++]&0xff);
+      return s;
+    }
+    int getInt() throws java.io.IOException{
+      if((inend-instart)<4){ read(4); }
+      int i=0;
+      i=inbuffer[instart++]&0xff;
+      i = ((i<<8)&0xffff) | (inbuffer[instart++]&0xff);
+      i = ((i<<8)&0xffffff) | (inbuffer[instart++]&0xff);
+      i = (i<<8) | (inbuffer[instart++]&0xff);
+      return i;
+    }
+    void getPad(int n) throws java.io.IOException{
+      int i;
+      while (n > 0){
+	if((i=inend-instart)<n){
+	  n-=i;
+	  instart+=i;
+	  read(n);
+	  continue;
+	}
+	instart+=n;
+	break;
+      }
+    }
+    void read(int n) throws java.io.IOException{
+      if (n>inbuffer.length){
+	n=inbuffer.length;
+      }
+      instart=inend=0;
+      int i;
+      while(true){
+	recpacket = new DatagramPacket(buf, 1024);
+	socket.receive(recpacket);
+	i=recpacket.getLength();
+	System.arraycopy(recpacket.getData(), 0, inbuffer, inend, i);
+	// i=in.read(inbuffer, inend, inbuffer.length-inend);
+	if(i==-1){
+	  throw new java.io.IOException();
+	}
+	inend+=i;
+	if(n<=inend)break;
+      }
+    }
+    void putByte(byte val) throws java.io.IOException{
+      if((outbuffer.length-outindex)<1){ flush(); }
+      outbuffer[outindex++]=val;
+    }
+    void putByte(int val) throws java.io.IOException{
+      putByte((byte)val);
+    }
+    void putByte(byte[] array) throws java.io.IOException{
+      putByte(array, 0, array.length);
+    }
+    */
+    void write(byte[] array, int begin, int length) throws java.io.IOException{
+      if(length<=0) return;
+      int i=0;
+      while(true){
+	if((i=(outbuffer.length-outindex))<length){
+	  if(i!=0){
+	    System.arraycopy(array, begin, outbuffer, outindex, i);
+	    begin+=i;
+	    length-=i;
+	    outindex+=i;
+	  }
+	  flush();
+	  continue;
+	}
+	System.arraycopy(array, begin, outbuffer, outindex, length);
+	outindex+=length;
+	break;
+      }
+    }
+      /*
+    void putShort(int val) throws java.io.IOException{
+      if((outbuffer.length-outindex)<2){
+	flush();
+      }
+      outbuffer[outindex++]=(byte)((val >> 8)&0xff);
+      outbuffer[outindex++]=(byte)(val&0xff);
+    }
+    void putInt(int val) throws java.io.IOException{
+      if((outbuffer.length-outindex)<4){
+	flush();
+      }
+      outbuffer[outindex++]=(byte)((val >> 24) & 0xff);
+      outbuffer[outindex++]=(byte)((val >> 16) & 0xff);
+      outbuffer[outindex++]=(byte)((val >> 8) & 0xff);
+      outbuffer[outindex++]=(byte)((val) & 0xff);
+    }
+    void putPad(int n) throws java.io.IOException{
+      int i;
+      while(true){
+	if((i=(outbuffer.length-outindex))<n){
+	  if(i!=0){
+	    outindex+=i;
+	    n-=i;
+	  }
+	  flush();
+	  continue;
+	}
+	outindex+=n;
+	break;
+      }
+    }
+      */
+    synchronized void flush() throws java.io.IOException{
+      if(outindex==0)return;
+      // out.write(outbuffer, 0, outindex);
+      //packet=new DatagramPacket(outbuffer, outindex, address, port);
+      //socket.send(packet);
+      sndpacket.setLength(outindex);
+      socket.send(sndpacket);
+      outindex=0;
+    }
+    void close() throws java.io.IOException{
+      socket.close();
     }
   }
 
-  void drop(){
-    drop_clients();
-    super.drop();
-  }
-
-  void addListener(Client c){
-    super.addListener(c);
-    if((System.currentTimeMillis()-lasttime)>TIMEOUT){
-System.out.println("drop[0]:  current="+System.currentTimeMillis()+", last="+lasttime);
-	/*
-      stop();
-	*/
-    }
-  }
- 
-  boolean isAlive(){
-    if((System.currentTimeMillis()-lasttime)>TIMEOUT){
-System.out.println("drop[1]:  current="+System.currentTimeMillis()+", last="+lasttime);
-	/*
-      return false;
-	*/
-    }
-    return true;
-  }
-
-  private static final byte[] b64 ="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=".getBytes();
-  private static byte val(byte foo){
-    if(foo == '=') return 0;
-    for(int j=0; j<b64.length; j++){
-      if(foo==b64[j]) return (byte)j;
-    }
-    return 0;
-  }
-  private static byte[] fromBase64(byte[] buf, int start, int length){
-    byte[] foo=new byte[length];
-    int j=0;
-    int l=length;
-    for(int i=start;i<start+length;i+=4){
-      foo[j]=(byte)((val(buf[i])<<2)|((val(buf[i+1])&0x30)>>>4));
-      if(buf[i+2]==(byte)'='){ j++; break;}
-      foo[j+1]=(byte)(((val(buf[i+1])&0x0f)<<4)|((val(buf[i+2])&0x3c)>>>2));
-      if(buf[i+3]==(byte)'='){ j+=2; break;}
-      foo[j+2]=(byte)(((val(buf[i+2])&0x03)<<6)|(val(buf[i+3])&0x3f));
-      j+=3;
-    }
-    byte[] bar=new byte[j];
-    System.arraycopy(foo, 0, bar, 0, j);
-    return bar;
-  }
 }

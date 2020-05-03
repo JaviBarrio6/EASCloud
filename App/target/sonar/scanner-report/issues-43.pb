@@ -1,19 +1,10 @@
-J
-javaS3740/Provide the parametrized type for this generic. 200 j
-javaS1128QRemove this unnecessary import: java.lang classes are always implicitly imported. 2 t
-javaS115ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'. 2II #t
-javaS115ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'. 2XX z
-javaS1149_Replace the synchronized class "StringBuffer" by an unsynchronized one such as "StringBuilder". 2JJ #z
-javaS1149_Replace the synchronized class "StringBuffer" by an unsynchronized one such as "StringBuilder". 2OO !z
-javaS1149_Replace the synchronized class "StringBuffer" by an unsynchronized one such as "StringBuilder". 2SS #z
-javaS1149_Replace the synchronized class "StringBuffer" by an unsynchronized one such as "StringBuilder". 2YY G
-javaS1264,Replace this "for" loop with a "while" loop. 211 `
-javaS1124EReorder the modifiers to comply with the Java Language Specification. 2II 6
-javaS3626Remove this redundant jump. 2QQ 6
-javaS3626Remove this redundant jump. 2VV 6
-javaS3626Remove this redundant jump. 2[[ T
-javaS125<This block of commented-out lines of code should be removed. 2,, <T
-javaS125<This block of commented-out lines of code should be removed. 266 T
-javaS125<This block of commented-out lines of code should be removed. 288 AF
-javaS1144+Remove this unused private "indent" method. 2JJ F
-javaS1144+Remove this unused private "wrapln" method. 2SS 
+k
+javaS117QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'. 2%% k
+javaS117QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'. 2?? j
+javaS1128QRemove this unnecessary import: java.lang classes are always implicitly imported. 2 Q
+javaS18546Remove this useless assignment to local variable "sc". 2GK S
+javaS1069Replace this use of System.out or System.err by a logger. 2(( S
+javaS1069Replace this use of System.out or System.err by a logger. 2)) C
+javaS108)Either remove or fill this block of code. 2CC S
+javaS1069Replace this use of System.out or System.err by a logger. 2EE B
+javaS1481'Remove this unused "sc" local variable. 2GG 

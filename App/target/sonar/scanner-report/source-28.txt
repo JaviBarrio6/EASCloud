@@ -1,254 +1,193 @@
-/* JOrbis
- * Copyright (C) 2000 ymnk, JCraft,Inc.
- *  
- * Written by: 2000 ymnk<ymnk@jcraft.com>
- *   
- * Many thanks to 
- *   Monty <monty@xiph.org> and 
- *   The XIPHOPHORUS Company http://www.xiph.org/ .
- * JOrbis has been based on their awesome works, Vorbis codec.
- *   
- * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU Library General Public License
- * as published by the Free Software Foundation; either version 2 of
- * the License, or (at your option) any later version.
-   
+/* -*-mode:java; c-basic-offset:2; -*- */
+/* JRoar -- pure Java streaming server for Ogg 
+ *
+ * Copyright (C) 2001,2002 ymnk, JCraft,Inc.
+ *
+ * Written by: 2001,2002 ymnk<ymnk@jcraft.com>
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Library General Public License for more details.
- * 
- * You should have received a copy of the GNU Library General Public
- * License along with this program; if not, write to the Free Software
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-package com.jcraft.jorbis;
+package com.jcraft.jroar;
+import java.lang.*;
+import java.io.*;
+import java.net.*;
+import java.util.*;
 
-class Lpc{
-  // en/decode lookups
-  Drft fft=new Drft();;
+class HomePage extends Page{
 
-  int ln;
-  int m;
+  static void register(){
+    register("/", HomePage.class.getName());
+    register("/index.html", HomePage.class.getName());
+  }
+  private static final int REFRESH=60;
+  private static int count=0;
 
-  // Autocorrelation LPC coeff generation algorithm invented by
-  // N. Levinson in 1947, modified by J. Durbin in 1959.
+  public void kick(MySocket s, Hashtable vars, Vector httpheader) throws IOException{
+    count++;
+    s.pn( "HTTP/1.0 200 OK" );
+    s.pn( "Content-Type: text/html" );
+    s.pn( "" ) ;
+    s.pn("<!DOCTYPE HTML PUBLIC \"-//IETF//DTD HTML 2.0//EN\">");
+    s.pn("<HTML><HEAD>");
+//  s.pn("<META HTTP-EQUIV=\"refresh\" content=\""+REFRESH+";URL=/\">");
+    s.p("<TITLE>JRoar "); s.p(JRoar.version); s.p(" at "); 
+                          s.p(HttpServer.myURL); s.pn("/</TITLE>");
+    s.pn("</HEAD><BODY>");
+    s.p( "<h1>JRoar "); s.p(JRoar.version); s.p(" at ");
+                        s.p(HttpServer.myURL); s.pn("/</h1>");
 
-  // Input : n elements of time doamin data
-  // Output: m lpc coefficients, excitation energy
-
-  static float lpc_from_data(float[] data, float[] lpc,int n,int m){
-    float[] aut=new float[m+1];
-    float error;
-    int i,j;
-
-    // autocorrelation, p+1 lag coefficients
-
-    j=m+1;
-    while(j--!=0){
-      float d=0;
-      for(i=j;i<n;i++)d+=data[i]*data[i-j];
-      aut[j]=d;
+    Enumeration keys=Source.sources.keys();
+    if(keys.hasMoreElements()){ 
+      //s.pn("Mount points.<br>"); 
     }
-  
-    // Generate lpc coefficients from autocorr values
+    else{ s.pn("There is no mount point.<br>"); }
 
-    error=aut[0];
-    /*
-    if(error==0){
-      for(int k=0; k<m; k++) lpc[k]=0.0f;
-      return 0;
-    }
-    */
-  
-    for(i=0;i<m;i++){
-      float r=-aut[i+1];
+    s.pn("<table cellpadding=3 cellspacing=0 border=0>");
+    for(; keys.hasMoreElements();){
+      String mountpoint=((String)(keys.nextElement()));
+      Source source=Source.getSource(mountpoint); if(source==null) continue;
+      String source_name=source.source;
 
-      if(error==0){
-        for(int k=0; k<m; k++) lpc[k]=0.0f;
-        return 0;
+      s.pn("<tr>");
+
+      s.pn("<td align=left nowrap>");
+      s.p("<a href="); s.p(ogg2m3u(mountpoint)); s.p(">"); s.p(mountpoint);
+      if(source instanceof UDPSource){
+         UDPSource foo=(UDPSource)source;
+         s.p("(UDP:"); s.p(foo.b.port); s.p(")");
+      }
+      s.p("</a>");
+      s.p("&nbsp;"); s.p("("); s.p(source.getListeners()); s.p(",");
+                               s.p(source.getConnections()); s.p(")");
+      s.pn("</td>");
+
+      s.pn("<td nowrap> &lt;--- </td>");
+
+      if(source instanceof Proxy){
+        s.pn("<td align=left>");
+        s.p("<a href="); s.p(source_name); s.p(">");
+        s.p(source_name); s.p("</a>");
+        s.pn("</td>");
+      }
+      else if(source instanceof UDPSource){
+        UDPSource foo=(UDPSource)source;
+        s.pn("<td align=left>");
+        s.p(foo.b.srcmpoint);
+        s.pn("</td>");
+      }
+      else{
+        s.p("<td align=left>"); s.p(source_name); s.pn("</td>");
+      }
+      s.pn("</tr>");
+
+      /*
+      dumpComment(s, source.current_comment);
+      */
+
+      /*
+      String comment=getComment(source.current_comment);
+      if(comment!=null){
+        s.pn("<tr>");
+        s.pn("<td>&nbsp;</td>");
+        s.pn("<td>&nbsp;</td>");
+        s.p("<td>"); s.p(comment); s.pn("</td>");
+        s.pn("</tr>");
+      }
+      */
+
+      Object[] proxies=source.getProxies();
+      if(proxies!=null){
+        for(int i=0; i<proxies.length; i++){
+          String foo=(String)(proxies[i]);
+          s.pn("<tr>");
+          s.pn("<td>&nbsp;</td>");
+          s.pn("<td nowrap>---&gt</td>");
+          String host=getHost(foo);
+          if(host==null){
+            s.p("<td><a href="); s.p(ogg2m3u(foo)); s.p(">"); s.p(foo);
+            s.pn("</a></td>");
+	  }
+          else{
+            s.p("<td><a href="); s.p(ogg2m3u(foo)); s.p(">"); s.p(foo.substring(host.length()-1)); s.p("</a>&nbsp;at&nbsp;");
+            s.p("<a href="); s.p(host); s.p(">"); s.p(host); s.pn("</a></td>");
+	  }
+          s.pn("</tr>");
+	}
       }
 
-      // Sum up this iteration's reflection coefficient; note that in
-      // Vorbis we don't save it.  If anyone wants to recycle this code
-      // and needs reflection coefficients, save the results of 'r' from
-      // each iteration.
-
-      for(j=0;j<i;j++)r-=lpc[j]*aut[i-j];
-      r/=error; 
-
-      // Update LPC coefficients and total error
-    
-      lpc[i]=r;
-      for(j=0;j<i/2;j++){
-	float tmp=lpc[j];
-	lpc[j]+=r*lpc[i-1-j];
-	lpc[i-1-j]+=r*tmp;
-      }
-      if(i%2!=0)lpc[j]+=lpc[j]*r;
-    
-      error*=1.0-r*r;
     }
-  
-    // we need the error value to know how big an impulse to hit the
-    // filter with later
-  
-    return error;
+    s.pn("</table>");
+
+    s.pn("<hr width=80%>");
+
+    s.pn("<table width=100%>");
+    s.pn("<tr><td align=\"right\"><a href=\"/ctrl.html\">Control</a></td></tr>");
+    s.p("<tr><td align=\"right\"><small><i>"); s.p(count); s.pn("</i></small></td></tr>");
+    s.pn("</table>");
+
+    s.pn("</BODY></HTML>");
+    s.flush();
+    s.close();
+
   }
-
-  // Input : n element envelope spectral curve
-  // Output: m lpc coefficients, excitation energy
-
-  float lpc_from_curve(float[] curve, float[] lpc){
-    int n=ln;
-    float[] work=new float[n+n];
-    float fscale=(float)(.5/n);
-    int i,j;
-  
-    // input is a real curve. make it complex-real
-    // This mixes phase, but the LPC generation doesn't care.
-    for(i=0;i<n;i++){
-      work[i*2]=curve[i]*fscale;
-      work[i*2+1]=0;
+  /*
+  private String ogg2pls(String ogg){
+    if(!ogg.endsWith(".ogg") && !ogg.endsWith(".spx")) return ogg;
+    byte[] foo=ogg.getBytes();
+    foo[foo.length-1]='s';foo[foo.length-2]='l';foo[foo.length-3]='p';
+    return new String(foo);
+  }
+  */
+  private String ogg2m3u(String ogg){
+    if(!ogg.endsWith(".ogg") && !ogg.endsWith(".spx")) return ogg;
+    byte[] foo=ogg.getBytes();
+    foo[foo.length-1]='u';foo[foo.length-2]='3';foo[foo.length-3]='m';
+    return new String(foo);
+  }
+  private static final String _http="http://";
+  private String getHost(String url){
+    if(!url.startsWith(_http)) return null;
+    int foo=url.substring(_http.length()).indexOf('/');
+    if(foo!=-1){
+      return url.substring(0, _http.length()+foo+1);
     }
-    work[n*2-1]=curve[n-1]*fscale;
-  
-    n*=2;
-    fft.backward(work);
-  
-    // The autocorrelation will not be circular.  Shift, else we lose
-    // most of the power in the edges.
-  
-    for(i=0,j=n/2;i<n/2;){
-      float temp=work[i];
-      work[i++]=work[j];
-      work[j++]=temp;
-    }
-  
-    return(lpc_from_data(work,lpc,n,m));
+    return null;
   }
-
-  void init(int mapped, int m){
-    //memset(l,0,sizeof(lpc_lookup));
-
-    ln=mapped;
-    this.m=m;
-
-    // we cheat decoding the LPC spectrum via FFTs
-    fft.init(mapped*2);
-  }
-
-  void clear(){
-    fft.clear();
-  }
-
-  static float FAST_HYPOT(float a, float b){
-    return (float)Math.sqrt((a)*(a) + (b)*(b));
-  }
-
-  // One can do this the long way by generating the transfer function in
-  // the time domain and taking the forward FFT of the result.  The
-  // results from direct calculation are cleaner and faster. 
-  //
-  // This version does a linear curve generation and then later
-  // interpolates the log curve from the linear curve.
-
-  void lpc_to_curve(float[] curve, float[] lpc, float amp){
-
-    //memset(curve,0,sizeof(float)*l->ln*2);
-    for(int i=0; i<ln*2; i++)curve[i]=0.0f;
-
-    if(amp==0)return;
-
-    for(int i=0;i<m;i++){
-      curve[i*2+1]=lpc[i]/(4*amp);
-      curve[i*2+2]=-lpc[i]/(4*amp);
-    }
-
-    fft.backward(curve); // reappropriated ;-)
-
-    {
-      int l2=ln*2;
-      float unit=(float)(1./amp);
-      curve[0]=(float)(1./(curve[0]*2+unit));
-      for(int i=1;i<ln;i++){
-	float real=(curve[i]+curve[l2-i]);
-	float imag=(curve[i]-curve[l2-i]);
-
-	float a = real + unit;
-	curve[i] = (float)(1.0 / FAST_HYPOT(a, imag));
-      }
-    }
-  }  
-
 /*
-  // subtract or add an lpc filter to data.  Vorbis doesn't actually use this.
-
-  static void lpc_residue(float[] coeff, float[] prime,int m,
-			  float[] data, int n){
-
-    // in: coeff[0...m-1] LPC coefficients 
-    //     prime[0...m-1] initial values 
-    //     data[0...n-1] data samples 
-    // out: data[0...n-1] residuals from LPC prediction
-
-    float[] work=new float[m+n];
-    float y;
-
-    if(prime==null){
-      for(int i=0;i<m;i++){
-	work[i]=0;
-      }
+  // hmm...
+  private String getComment(Comment c){
+    if(c.comments==0)return null;
+    StringBuffer sb=new StringBuffer();
+    for(int i=0; i<c.comments; i++){
+      sb.append(new String(c.user_comments[i], 0, c.user_comments[i].length-1));
+      if(i+1<c.comments) sb.append("<br>");
     }
-    else{
-      for(int i=0;i<m;i++){
-	work[i]=prime[i];
-      }
-    }
-
-    for(int i=0;i<n;i++){
-      y=0;
-      for(int j=0;j<m;j++){
-	y-=work[i+j]*coeff[m-j-1];
-      }
-      work[i+m]=data[i];
-      data[i]-=y;
-    }
+    return sb.toString();
   }
-
-  static void lpc_predict(float[] coeff, float[] prime,int m,
-			  float[] data, int n){
-
-    // in: coeff[0...m-1] LPC coefficients 
-    //     prime[0...m-1] initial values (allocated size of n+m-1)
-    //     data[0...n-1] residuals from LPC prediction   
-    // out: data[0...n-1] data samples
-
-    int o,p;
-    float y;
-    float[] work=new float[m+n];
-
-    if(prime==null){
-      for(int i=0;i<m;i++){
-	work[i]=0.f;
-      }
+  private void dumpComment(MySocket s, Comment c) throws IOException{
+    if(c.comments==0)return;
+    s.pn("<tr>");
+    s.pn("<td>&nbsp;</td>"); s.pn("<td>&nbsp;</td>");
+    s.p("<td>");
+    for(int i=0; i<c.comments; i++){
+      s.p(new String(c.user_comments[i], 0, c.user_comments[i].length-1));
+      if(i+1<c.comments) s.p("<br>");
     }
-    else{
-      for(int i=0;i<m;i++){
-	work[i]=prime[i];
-      }
-    }
-
-    for(int i=0;i<n;i++){
-      y=data[i];
-      o=i;
-      p=m;
-      for(int j=0;j<m;j++){
-	y-=work[o++]*coeff[--p];
-      }
-      data[i]=work[o]=y;
-    }
+    s.pn("</td>");
+    s.pn("</tr>");
   }
 */
 }

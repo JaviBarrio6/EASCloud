@@ -1,17 +1,22 @@
 
-+com.jcraft.jorbis.StaticCodeBook#ldexp(FI)Fa
-UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/StaticCodeBook.javaÞ Þ("1*…
-1a
-UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/StaticCodeBook.javaß ß(¯
-¬
-a
-UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/StaticCodeBook.javaß ß(%
-%0double"java.lang.Math#pow(DD)D*"
-java.lang.Math*2*
-"""k
-a
-UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/StaticCodeBook.javaß ß('
-"":
-"":
-""B$""
- com.jcraft.jorbis.StaticCodeBook
+4com.jcraft.jroar.Debug#ln(Ljava/lang/StringBuffer;)VU
+KC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jroar/Debug.javaY Y("1*Ø
+1U
+KC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jroar/Debug.javaZ Z(
+}
+U
+KC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jroar/Debug.javaZ Z(
+%0java.lang.String"__id*
+""™–
+U
+KC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jroar/Debug.javaZ Z(
+%1java.lang.StringBuffer"Ijava.lang.StringBuffer#append(Ljava/lang/String;)Ljava/lang/StringBuffer;*
+
+sbjava.lang.StringBuffer*
+
+%0java.lang.String2append(Ljava/lang/String;)"_
+U
+KC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jroar/Debug.java[ [(
+"":
+sbjava.lang.StringBufferB
+com.jcraft.jroar.Debug

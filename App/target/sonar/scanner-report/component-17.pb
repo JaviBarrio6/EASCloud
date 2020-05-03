@@ -1,1 +1,1 @@
- 2javaX"hr/src/com/jcraft/jorbis/EncodeAuxThreshMatch.java
+ 2javaXÍhrsrc/com/jcraft/jorbis/Info.java

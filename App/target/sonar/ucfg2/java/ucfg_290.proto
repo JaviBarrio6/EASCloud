@@ -1,30 +1,0 @@
-
-:com.jcraft.jorbis.VorbisFile#ftell(Ljava/io/InputStream;)J]
-QC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/VorbisFile.java‚ ‚("4"1*Ë
-3]
-QC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/VorbisFile.java† †("g
-]
-QC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/VorbisFile.java† †(
-""*—
-4]
-QC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/VorbisFile.java…3 …(6¿
-¼
-]
-QC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/VorbisFile.java… …(77
-sis0com.jcraft.jorbis.VorbisFile$SeekableInputStream"__id*
-
-fisjava.io.InputStreamëè
-]
-QC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/VorbisFile.java† †(
-
-%0long"8com.jcraft.jorbis.VorbisFile$SeekableInputStream#tell()J*9
-7
-sis0com.jcraft.jorbis.VorbisFile$SeekableInputStream2tell()*
-3*Ë
-1]
-QC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/VorbisFile.java‹ ‹("g
-]
-QC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/VorbisFile.java‹ ‹(
-"":
-fisjava.io.InputStreamB "
-com.jcraft.jorbis.VorbisFile

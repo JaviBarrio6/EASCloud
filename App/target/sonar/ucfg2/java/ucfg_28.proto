@@ -1,53 +1,25 @@
 
-Kcom.jcraft.jorbis.CodeBook#init_decode(Lcom/jcraft/jorbis/StaticCodeBook;)I[
-OC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/CodeBook.javaˇ ˇ("3*Ñ
-2[
-OC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/CodeBook.javaâ â(∫∑
-[
-OC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/CodeBook.javaâ â(
+%com.jcraft.jroar.MySocket#readByte()IX
+NC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jroar/MySocket.java= =("3*¡
+2X
+NC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jroar/MySocket.java>	 >(*"b
+X
+NC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jroar/MySocket.java>+ >(:
+""*Ÿ
+3X
+NC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jroar/MySocket.java> >(∂
+≥
+X
+NC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jroar/MySocket.java> >(
+%0java.io.DataInputStream"__id*2*0
+com.jcraft.jroar.MySocket"
+dataInputStreamª∏
+X
+NC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jroar/MySocket.java> >()
 
-%3void"#com.jcraft.jorbis.CodeBook#clear()V*
-com.jcraft.jorbis.CodeBook2clear()"e
-[
-OC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/CodeBook.javaä ä(
-""*˘
-3[
-OC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/CodeBook.javaÅ Å(¥
-±
-[
-OC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/CodeBook.javaÅ Å(#
-com.jcraft.jorbis.CodeBook"
-c"__id*'
-%
-s com.jcraft.jorbis.StaticCodeBook◊‘
-[
-OC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/CodeBook.javaÑ Ñ(
-%0float[]"/com.jcraft.jorbis.StaticCodeBook#unquantize()[F*'
-%
-s com.jcraft.jorbis.StaticCodeBook2unquantize()ÉÄ
-[
-OC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/CodeBook.javaÜ Ü("!
-%1com.jcraft.jorbis.DecodeAux"Jcom.jcraft.jorbis.CodeBook#make_decode_tree()Lcom/jcraft/jorbis/DecodeAux;*
-com.jcraft.jorbis.CodeBook2make_decode_tree()∫
-∑
-[
-OC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/CodeBook.javaÜ Ü("-
-com.jcraft.jorbis.CodeBook"
-decode_tree"__id*#
-!
-%1com.jcraft.jorbis.DecodeAux∫
-∑
-[
-OC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/CodeBook.javaá á(!
-%2com.jcraft.jorbis.DecodeAux"__id*/*-
-com.jcraft.jorbis.CodeBook"
-decode_tree*
-2
-1*«
-1[
-OC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/CodeBook.javaå å("e
-[
-OC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/CodeBook.javaå å(
-"":%
-s com.jcraft.jorbis.StaticCodeBookB
-com.jcraft.jorbis.CodeBook
+%1byte"#java.io.DataInputStream#readByte()B*
+
+%0java.io.DataInputStream2
+readByte()*
+2B
+com.jcraft.jroar.MySocket

@@ -27,11 +27,8 @@ package com.jcraft.jorbis;
 
 import com.jcraft.jogg.*;
 
-// the comments are not part of vorbis_info so that vorbis_info can be
-// static storage
 public class Comment{
-  // unlimited user comment fields.  libvorbis writes 'libvorbis'
-  // whatever vendor is set to in encode
+
   public byte[][] user_comments;
   public int[] comment_lengths; 
   public int comments;
@@ -43,13 +40,9 @@ public class Comment{
     vendor=null;
   }
 
-
-
-
   int unpack(Buffer opb){
     int vendorlen=opb.read(32);
     if(vendorlen<0){
-      //goto err_out;
       clear();
       return(-1);
     }
@@ -57,7 +50,6 @@ public class Comment{
     opb.read(vendor,vendorlen);
     comments=opb.read(32);
     if(comments<0){
-      //goto err_out;
       clear();
       return(-1);
     }
@@ -85,7 +77,6 @@ public class Comment{
 
   }
 
- 
   void clear(){
     for(int i=0;i<comments;i++)
       user_comments[i]=null;

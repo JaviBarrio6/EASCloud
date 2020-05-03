@@ -1,1 +1,1 @@
- 2javaX”hr"src/com/jcraft/jogg/SyncState.java
+ 2javaXShrsrc/com/jcraft/jogg/Packet.java

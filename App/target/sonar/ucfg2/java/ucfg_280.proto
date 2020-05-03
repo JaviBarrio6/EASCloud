@@ -1,167 +1,0 @@
-
-<com.jcraft.jorbis.VorbisFile#bisect_forward_serialno(JJJII)I]
-QC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/VorbisFile.javaÉ É("20*È
-2]
-QC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/VorbisFile.javaî î(&{
-y
-]
-QC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/VorbisFile.javaî î(&
-
-%15int"__id*
-"""g
-]
-QC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/VorbisFile.javaî î('
-""*Å
-3]
-QC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/VorbisFile.javaí
- í(!¼¹
-]
-QC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/VorbisFile.javaí5 í(D
-
-%12int" com.jcraft.jogg.Page#serialno()I*
-
-pagecom.jcraft.jogg.Page2
-serialno()œ™
-]
-QC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/VorbisFile.javaí
- í(J
-
-%13int"<com.jcraft.jorbis.VorbisFile#bisect_forward_serialno(JJJII)I* 
-com.jcraft.jorbis.VorbisFile*
-""*
-""*
-""*
-
-
-%12int*
-""2bisect_forward_serialno(JJJII){
-y
-]
-QC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/VorbisFile.javaî î(
-
-%14int"__id*
-""*
-2
-1*È
-14]
-QC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/VorbisFile.javaÚ Ú('z
-x
-]
-QC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/VorbisFile.javaÚ Ú('	
-%6int"__id*
-"""g
-]
-QC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/VorbisFile.javaÚ Ú((
-""*¹
-15]
-QC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/VorbisFile.javaØ Ø(Æ
-Ã
-]
-QC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/VorbisFile.javaØ Ø(
-
-%3void",com.jcraft.jorbis.VorbisFile#seek_helper(J)V* 
-com.jcraft.jorbis.VorbisFile*
-""ý
-ú
-]
-QC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/VorbisFile.javaÙ
- Ù(!	
-%4int"Dcom.jcraft.jorbis.VorbisFile#get_next_page(Lcom/jcraft/jogg/Page;J)I* 
-com.jcraft.jorbis.VorbisFile*
-
-pagecom.jcraft.jogg.Page*
-""z
-x
-]
-QC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/VorbisFile.javaÚ Ú(	
-%5int"__id*
-""*
-14
-18
-8
-12*È
-7]
-QC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/VorbisFile.javaå å(%{
-y
-]
-QC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/VorbisFile.javaå å(%
-
-%11int"__id*
-"""g
-]
-QC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/VorbisFile.javaå å(&
-""*å
-18]
-QC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/VorbisFile.javaÐ Ð(z
-x
-]
-QC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/VorbisFile.javaÑ Ñ('	
-%2int"__id*
-""*
-15*³
-8]
-QC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/VorbisFile.javaã ã(Æ
-Ã
-]
-QC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/VorbisFile.javaã ã(
-
-%8void",com.jcraft.jorbis.VorbisFile#seek_helper(J)V* 
-com.jcraft.jorbis.VorbisFile*
-""ý
-ú
-]
-QC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/VorbisFile.javaä ä(	
-%9int"Dcom.jcraft.jorbis.VorbisFile#get_next_page(Lcom/jcraft/jogg/Page;J)I* 
-com.jcraft.jorbis.VorbisFile*
-
-pagecom.jcraft.jogg.Page*
-""{
-y
-]
-QC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/VorbisFile.javaå å(
-
-%10int"__id*
-""*	
-3
-7
-1*Ó
-20]
-QC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/VorbisFile.javaÊ Ê(”‘
-]
-QC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/VorbisFile.javaÌ Ì(
-%0com.jcraft.jogg.Page"com.jcraft.jogg.Page¦
-£
-]
-QC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/VorbisFile.javaÌ Ì(
-%1"com.jcraft.jogg.Page#<init>()V*
-
-%0com.jcraft.jogg.Page¤
-¡
-]
-QC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/VorbisFile.javaÌ Ì(
-pagecom.jcraft.jogg.Page"__id*
-
-%0com.jcraft.jogg.Page*
-18
-8*Ë
-1]
-QC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/VorbisFile.javað ð("g
-]
-QC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/VorbisFile.javañ ñ(
-""*ª
-12]
-QC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/VorbisFile.javaÛ Û(»¸
-]
-QC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/VorbisFile.javaÛ Û(!	
-%7int" com.jcraft.jogg.Page#serialno()I*
-
-pagecom.jcraft.jogg.Page2
-serialno()*
-18
-8:
-"":
-"":
-"":
-"":
-""B 
-com.jcraft.jorbis.VorbisFile

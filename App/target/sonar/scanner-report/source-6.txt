@@ -1,3 +1,4 @@
+/* -*-mode:java; c-basic-offset:2; -*- */
 /* JOrbis
  * Copyright (C) 2000 ymnk, JCraft,Inc.
  *  
@@ -25,633 +26,516 @@
 
 package com.jcraft.jogg;
 
-public class StreamState{
-  byte[] body_data;    /* bytes from packet bodies */
-  int body_storage;    /* storage elements allocated */
-  int body_fill;       /* elements stored; fill mark */
-private  int body_returned;   /* elements of fill returned */
+public class Buffer{
+  private static final int BUFFER_INCREMENT=256;
 
+  private static final int[] mask={
+    0x00000000,0x00000001,0x00000003,0x00000007,0x0000000f,
+    0x0000001f,0x0000003f,0x0000007f,0x000000ff,0x000001ff,
+    0x000003ff,0x000007ff,0x00000fff,0x00001fff,0x00003fff,
+    0x00007fff,0x0000ffff,0x0001ffff,0x0003ffff,0x0007ffff,
+    0x000fffff,0x001fffff,0x003fffff,0x007fffff,0x00ffffff,
+    0x01ffffff,0x03ffffff,0x07ffffff,0x0fffffff,0x1fffffff,
+    0x3fffffff,0x7fffffff,0xffffffff
+  };
 
-  int[] lacing_vals;    /* The values that will go to the segment table */
-  long[] granule_vals;  /* pcm_pos values for headers. Not compact
-			   this way, but it is simple coupled to the
-			   lacing fifo */
-  int lacing_storage;
-  int lacing_fill;
-  int lacing_packet;
-  int lacing_returned;
+  int ptr=0;
+  byte[] buffer=null;
+  int endbit=0;
+  int endbyte=0;
+  int storage=0;
 
-  byte[] header=new byte[282];      /* working space for header encode */
-  int header_fill;
-
-  public int e_o_s;   /* set when we have buffered the last packet in the
-			 logical bitstream */
-  int b_o_s;          /* set after we've written the initial page
-			 of a logical bitstream */
-  int serialno;
-  int pageno;
-  long packetno;      /* sequence number for decode; the framing
-                         knows where there's a hole in the data,
-                         but we need coupling so that the codec
-                         (which is in a seperate abstraction
-                         layer) also knows about the gap */
-  long granulepos;
-
-  public StreamState(){
-    init();
+  public void writeinit(){
+    buffer=new byte[BUFFER_INCREMENT]; 
+    ptr=0;
+    buffer[0]=(byte)'\0';
+    storage=BUFFER_INCREMENT;
   }
 
-  StreamState(int serialno){
-    this();
-    init(serialno);
-  }
-  void init(){
-    body_storage=16*1024;
-    body_data=new byte[body_storage];
-    lacing_storage=1024;
-    lacing_vals=new int[lacing_storage];
-    granule_vals=new long[lacing_storage];
-  }
-  public void init(int serialno){
-    if(body_data==null){ init(); }
-    else{
-      for(int i=0; i<body_data.length; i++) body_data[i]=0;
-      for(int i=0; i<lacing_vals.length; i++) lacing_vals[i]=0;
-      for(int i=0; i<granule_vals.length; i++) granule_vals[i]=0;
-    }
-    this.serialno=serialno;
-  }
-  public void clear(){
-    body_data=null;
-    lacing_vals=null;
-    granule_vals=null;
-    //memset(os,0,sizeof(ogg_stream_state));    
-  }
-  void destroy(){
-    clear();
-  }
-  void body_expand(int needed){
-    if(body_storage<=body_fill+needed){
-      body_storage+=(needed+1024);
-      byte[] foo=new byte[body_storage];
-      System.arraycopy(body_data, 0, foo, 0, body_data.length);
-      body_data=foo;
-//System.out.println("expand: body_fill="+body_fill+", body_storage="+body_data.length);
-    }
-  }
-  void lacing_expand(int needed){
-    if(lacing_storage<=lacing_fill+needed){
-      lacing_storage+=(needed+32);
-      int[] foo=new int[lacing_storage];
-      System.arraycopy(lacing_vals, 0, foo, 0, lacing_vals.length);
-      lacing_vals=foo;
-
-      long[] bar=new long[lacing_storage];
-      System.arraycopy(granule_vals, 0, bar, 0, granule_vals.length);
-      granule_vals=bar;
+  public void write(byte[] s){
+    for(int i=0; i<s.length; i++){
+      if(s[i]==0)break;
+      write(s[i],8);
     }
   }
 
-  /* submit data to the internal buffer of the framing engine */
-  public int packetin(Packet op){
-    int lacing_val=op.bytes/255+1;
-
-    if(body_returned!=0){
-      /* advance packet data according to the body_returned pointer. We
-         had to keep it around to return a pointer into the buffer last
-         call */
-    
-      body_fill-=body_returned;
-      if(body_fill!=0){
-//        memmove(os->body_data,os->body_data+os->body_returned,
-//  	        os->body_fill*sizeof(char));
-        System.arraycopy(body_data, body_returned, body_data, 0, body_fill);
-      }
-      body_returned=0;
+  public void read(byte[] s, int bytes){
+    int i=0;
+    while(bytes--!=0){
+      s[i++]=(byte)(read(8));
     }
-
-    /* make sure we have the buffer storage */
-    body_expand(op.bytes);
-    lacing_expand(lacing_val);
-
-  /* Copy in the submitted packet.  Yes, the copy is a waste; this is
-     the liability of overly clean abstraction for the time being.  It
-     will actually be fairly easy to eliminate the extra copy in the
-     future */
-
-    System.arraycopy(op.packet_base, op.packet, body_data, body_fill, op.bytes);
-    body_fill+=op.bytes;
-//System.out.println("add: "+body_fill);
-
-  /* Store lacing vals for this packet */
-    int j;
-    for(j=0;j<lacing_val-1;j++){
-      lacing_vals[lacing_fill+j]=255;
-      granule_vals[lacing_fill+j]=granulepos;
-    }
-    lacing_vals[lacing_fill+j]=(op.bytes)%255;
-    granulepos=granule_vals[lacing_fill+j]=op.granulepos;
-
-  /* flag the first segment as the beginning of the packet */
-    lacing_vals[lacing_fill]|= 0x100;
-
-    lacing_fill+=lacing_val;
-
-  /* for the sake of completeness */
-    packetno++;
-
-    if(op.e_o_s!=0)e_o_s=1;
-    return(0);
   }
 
-  public int packetout(Packet op){
-
-  /* The last part of decode. We have the stream broken into packet
-     segments.  Now we need to group them into packets (or return the
-     out of sync markers) */
-
-    int ptr=lacing_returned;
-
-    if(lacing_packet<=ptr){
-      return(0);
-    }
-
-    if((lacing_vals[ptr]&0x400)!=0){
-    /* We lost sync here; let the app know */
-      lacing_returned++;
-
-    /* we need to tell the codec there's a gap; it might need to
-       handle previous packet dependencies. */
-      packetno++;
-      return(-1);
-    }
-
-  /* Gather the whole packet. We'll have no holes or a partial packet */
-    {
-      int size=lacing_vals[ptr]&0xff;
-      int bytes=0;
-
-      op.packet_base=body_data;
-      op.packet=body_returned;
-      op.e_o_s=lacing_vals[ptr]&0x200; /* last packet of the stream? */
-      op.b_o_s=lacing_vals[ptr]&0x100; /* first packet of the stream? */
-      bytes+=size;
-
-      while(size==255){
-	int val=lacing_vals[++ptr];
-	size=val&0xff;
-	if((val&0x200)!=0)op.e_o_s=0x200;
-	bytes+=size;
-      }
-
-      op.packetno=packetno;
-      op.granulepos=granule_vals[ptr];
-      op.bytes=bytes;
-
-//System.out.println(this+" # body_returned="+body_returned);
-      body_returned+=bytes;
-//System.out.println(this+"## body_returned="+body_returned);
-
-      lacing_returned=ptr+1;
-    }
-    packetno++;
-    return(1);
+  void reset(){
+    ptr=0;
+    buffer[0]=(byte)'\0';
+    endbit=endbyte=0;
   }
 
+  public void writeclear(){
+    buffer=null;
+  }
 
-  // add the incoming page to the stream state; we decompose the page
-  // into packet segments here as well.
+  public void readinit(byte[] buf, int bytes){
+    readinit(buf, 0, bytes);
+  }
 
-  public int pagein(Page og){
-    byte[] header_base=og.header_base;
-    int header=og.header;
-    byte[] body_base=og.body_base;
-    int body=og.body;
-    int bodysize=og.body_len;
-    int segptr=0;
+  public void readinit(byte[] buf, int start, int bytes){
+//System.err.println("readinit: start="+start+", bytes="+bytes);
+//for(int i=0;i<bytes; i++){
+//System.err.println(i+": "+Integer.toHexString(buf[i+start]));
+//}
+    ptr=start;
+    buffer=buf;
+    endbit=endbyte=0;
+    storage=bytes;
+  }
 
-    int version=og.version();
-    int continued=og.continued();
-    int bos=og.bos();
-    int eos=og.eos();
-    long granulepos=og.granulepos();
-    int _serialno=og.serialno();
-    int _pageno=og.pageno();
-    int segments=header_base[header+26]&0xff;
-
-    // clean up 'returned data'
-    {
-      int lr=lacing_returned;
-      int br=body_returned;
-
-      // body data
-
-//System.out.println("br="+br+", body_fill="+body_fill);
-
-      if(br!=0){
-        body_fill-=br;
-        if(body_fill!=0){
-	  System.arraycopy(body_data, br, body_data, 0, body_fill);
-	}
-	body_returned=0;
-      }
-
-//System.out.println("?? br="+br+", body_fill="+body_fill+" body_returned="+body_returned);
-
-      if(lr!=0){
-        // segment table
-	if((lacing_fill-lr)!=0){
-	  System.arraycopy(lacing_vals, lr, lacing_vals, 0, lacing_fill-lr);
-	  System.arraycopy(granule_vals, lr, granule_vals, 0, lacing_fill-lr);
-	}
-	lacing_fill-=lr;
-	lacing_packet-=lr;
-	lacing_returned=0;
-      }
+  public void write(int value, int bits){
+//System.err.println("write: "+Integer.toHexString(value)+", bits="+bits+" ptr="+ptr+", storage="+storage+", endbyte="+endbyte);
+    if(endbyte+4>=storage){
+      byte[] foo=new byte[storage+BUFFER_INCREMENT];
+      System.arraycopy(buffer, 0, foo, 0, storage);
+      buffer=foo;
+      storage+=BUFFER_INCREMENT;
     }
 
-    // check the serial number
-    if(_serialno!=serialno)return(-1);
-    if(version>0)return(-1);
+    value&=mask[bits];
+    bits+=endbit;
+    buffer[ptr]|=(byte)(value<<endbit);
 
-    lacing_expand(segments+1);
-
-    // are we in sequence?
-    if(_pageno!=pageno){
-      int i;
-
-      // unroll previous partial packet (if any)
-      for(i=lacing_packet;i<lacing_fill;i++){
-	body_fill-=lacing_vals[i]&0xff;
-//System.out.println("??");
-      }
-      lacing_fill=lacing_packet;
-
-      // make a note of dropped data in segment table
-      if(pageno!=-1){
-	lacing_vals[lacing_fill++]=0x400;
-	lacing_packet++;
-      }
-
-      // are we a 'continued packet' page?  If so, we'll need to skip
-      // some segments
-      if(continued!=0){
-	bos=0;
-	for(;segptr<segments;segptr++){
-	  int val=(header_base[header+27+segptr]&0xff);
-	  body+=val;
-	  bodysize-=val;
-	  if(val<255){
-	    segptr++;
-	    break;
+    if(bits>=8){
+      buffer[ptr+1]=(byte)(value>>>(8-endbit));
+      if(bits>=16){
+        buffer[ptr+2]=(byte)(value>>>(16-endbit));  
+        if(bits>=24){
+	  buffer[ptr+3]=(byte)(value>>>(24-endbit));  
+          if(bits>=32){
+	    if(endbit>0)
+	      buffer[ptr+4]=(byte)(value>>>(32-endbit));
+	    else
+	      buffer[ptr+4]=0;
 	  }
-	}
-      }
-    }
-
-//System.out.println("bodysize="+bodysize);
-
-    if(bodysize!=0){
-      body_expand(bodysize);
-      System.arraycopy(body_base, body, body_data, body_fill, bodysize);
-      body_fill+=bodysize;
-    }
-
-//System.out.println("bodyfill="+body_fill);
-
-    {
-      int saved=-1;
-      while(segptr<segments){
-	int val=(header_base[header+27+segptr]&0xff);
-	lacing_vals[lacing_fill]=val;
-	granule_vals[lacing_fill]=-1;
-      
-	if(bos!=0){
-	  lacing_vals[lacing_fill]|=0x100;
-	  bos=0;
-	}
-      
-	if(val<255)saved=lacing_fill;
-      
-	lacing_fill++;
-	segptr++;
-      
-	if(val<255)lacing_packet=lacing_fill;
-      }
-  
-    /* set the granulepos on the last pcmval of the last full packet */
-      if(saved!=-1){
-	granule_vals[saved]=granulepos;
-      }
-    }
-
-    if(eos!=0){
-      e_o_s=1;
-      if(lacing_fill>0)
-	lacing_vals[lacing_fill-1]|=0x200;
-    }
-
-    pageno=_pageno+1;
-    return(0);
-  }
-
-
-/* This will flush remaining packets into a page (returning nonzero),
-   even if there is not enough data to trigger a flush normally
-   (undersized page). If there are no packets or partial packets to
-   flush, ogg_stream_flush returns 0.  Note that ogg_stream_flush will
-   try to flush a normal sized page like ogg_stream_pageout; a call to
-   ogg_stream_flush does not gurantee that all packets have flushed.
-   Only a return value of 0 from ogg_stream_flush indicates all packet
-   data is flushed into pages.
-
-   ogg_stream_page will flush the last page in a stream even if it's
-   undersized; you almost certainly want to use ogg_stream_pageout
-   (and *not* ogg_stream_flush) unless you need to flush an undersized
-   page in the middle of a stream for some reason. */
-
-  public int flush(Page og){
-
-//System.out.println(this+" ---body_returned: "+body_returned);
-
-    int i;
-    int vals=0;
-    int maxvals=(lacing_fill>255?255:lacing_fill);
-    int bytes=0;
-    int acc=0;
-    long granule_pos=granule_vals[0];
-
-    if(maxvals==0)return(0);
-  
-    /* construct a page */
-    /* decide how many segments to include */
-  
-    /* If this is the initial header case, the first page must only include
-       the initial header packet */
-    if(b_o_s==0){  /* 'initial header page' case */
-      granule_pos=0;
-      for(vals=0;vals<maxvals;vals++){
-        if((lacing_vals[vals]&0x0ff)<255){
-	  vals++;
-	  break;
         }
       }
     }
-    else{
-      for(vals=0;vals<maxvals;vals++){
-        if(acc>4096)break;
-        acc+=(lacing_vals[vals]&0x0ff);
-        granule_pos=granule_vals[vals];
+
+    endbyte+=bits/8;
+    ptr+=bits/8;
+    endbit=bits&7;
+  }
+
+  public int look(int bits){
+    int ret;
+    int m=mask[bits];
+
+    bits+=endbit;
+
+//System.err.println("look ptr:"+ptr+", bits="+bits+", endbit="+endbit+", storage="+storage);
+
+    if(endbyte+4>=storage){
+      if(endbyte+(bits-1)/8>=storage)return(-1);
+    }
+  
+    ret=((buffer[ptr])&0xff)>>>endbit;
+//  ret=((byte)(buffer[ptr]))>>>endbit;
+    if(bits>8){
+    ret|=((buffer[ptr+1])&0xff)<<(8-endbit);
+//      ret|=((byte)(buffer[ptr+1]))<<(8-endbit);
+      if(bits>16){
+      ret|=((buffer[ptr+2])&0xff)<<(16-endbit);
+//        ret|=((byte)(buffer[ptr+2]))<<(16-endbit);
+        if(bits>24){
+	  ret|=((buffer[ptr+3])&0xff)<<(24-endbit);
+//System.err.print("ret="+Integer.toHexString(ret)+", ((byte)(buffer[ptr+3]))="+Integer.toHexString(((buffer[ptr+3])&0xff)));
+//	  ret|=((byte)(buffer[ptr+3]))<<(24-endbit);
+//System.err.println(" ->ret="+Integer.toHexString(ret));
+ 	  if(bits>32 && endbit!=0){
+	    ret|=((buffer[ptr+4])&0xff)<<(32-endbit);
+//	    ret|=((byte)(buffer[ptr+4]))<<(32-endbit);
+	  }
+        }
+      }
+    }
+    return(m&ret);
+  }
+
+  public int look1(){
+    if(endbyte>=storage)return(-1);
+    return((buffer[ptr]>>endbit)&1);
+  }
+
+  public void adv(int bits){
+    bits+=endbit;
+    ptr+=bits/8;
+    endbyte+=bits/8;
+    endbit=bits&7;
+  }
+
+  public void adv1(){
+    ++endbit;
+    if(endbit>7){
+      endbit=0;
+      ptr++;
+      endbyte++;
+    }
+  }
+
+  public int read(int bits){
+//System.err.println(this+" read: bits="+bits+", storage="+storage+", endbyte="+endbyte);
+//System.err.println(this+" read: bits="+bits+", storage="+storage+", endbyte="+endbyte+
+//                        ", ptr="+ptr+", endbit="+endbit+", buf[ptr]="+buffer[ptr]);
+
+    int ret;
+    int m=mask[bits];
+
+    bits+=endbit;
+
+    if(endbyte+4>=storage){
+      ret=-1;
+      if(endbyte+(bits-1)/8>=storage){
+        ptr+=bits/8;
+        endbyte+=bits/8;
+        endbit=bits&7;
+        return(ret);
       }
     }
 
-    /* construct the header in temp storage */
-    System.arraycopy("OggS".getBytes(), 0, header, 0, 4);
-  
-    /* stream structure version */
-    header[4]=0x00;
-
-    /* continued packet flag? */
-    header[5]=0x00;
-    if((lacing_vals[0]&0x100)==0)header[5]|=0x01;
-    /* first page flag? */
-    if(b_o_s==0) header[5]|=0x02;
-    /* last page flag? */
-    if(e_o_s!=0 && lacing_fill==vals) header[5]|=0x04;
-    b_o_s=1;
-
-    /* 64 bits of PCM position */
-    for(i=6;i<14;i++){
-      header[i]=(byte)granule_pos;
-      granule_pos>>>=8;
+/*  
+    ret=(byte)(buffer[ptr]>>>endbit);
+    if(bits>8){
+      ret|=(buffer[ptr+1]<<(8-endbit));  
+      if(bits>16){
+        ret|=(buffer[ptr+2]<<(16-endbit));  
+        if(bits>24){
+	  ret|=(buffer[ptr+3]<<(24-endbit));  
+  	  if(bits>32 && endbit>0){
+  	    ret|=(buffer[ptr+4]<<(32-endbit));
+  	  }
+        }
+      }
     }
-
-    /* 32 bits of stream serial number */
-    {
-      int _serialno=serialno;
-      for(i=14;i<18;i++){
-        header[i]=(byte)_serialno;
-        _serialno>>>=8;
+*/
+    ret=((buffer[ptr])&0xff)>>>endbit;
+    if(bits>8){
+    ret|=((buffer[ptr+1])&0xff)<<(8-endbit);
+//      ret|=((byte)(buffer[ptr+1]))<<(8-endbit);
+      if(bits>16){
+      ret|=((buffer[ptr+2])&0xff)<<(16-endbit);
+//        ret|=((byte)(buffer[ptr+2]))<<(16-endbit);
+        if(bits>24){
+	  ret|=((buffer[ptr+3])&0xff)<<(24-endbit);
+//	  ret|=((byte)(buffer[ptr+3]))<<(24-endbit);
+ 	  if(bits>32 && endbit!=0){
+	    ret|=((buffer[ptr+4])&0xff)<<(32-endbit);
+//	    ret|=((byte)(buffer[ptr+4]))<<(32-endbit);
+	  }
+        }
       }
     }
 
-    /* 32 bits of page counter (we have both counter and page header
-       because this val can roll over) */
-    if(pageno==-1)pageno=0;       /* because someone called
-				     stream_reset; this would be a
-				     strange thing to do in an
-				     encode stream, but it has
-				     plausible uses */
-    {
-      int _pageno=pageno++;
-      for(i=18;i<22;i++){
-        header[i]=(byte)_pageno;
-        _pageno>>>=8;
+    ret&=m;
+
+    ptr+=bits/8;
+//    ptr=bits/8;
+    endbyte+=bits/8;
+//    endbyte=bits/8;
+    endbit=bits&7;
+    return(ret);
+  }
+
+  public int readB(int bits){
+    //System.err.println(this+" read: bits="+bits+", storage="+storage+", endbyte="+endbyte+
+    //                        ", ptr="+ptr+", endbit="+endbit+", buf[ptr]="+buffer[ptr]);
+    int ret;
+    int m=32-bits;
+
+    bits+=endbit;
+
+    if(endbyte+4>=storage){
+      /* not the main path */
+      ret=-1;
+      if(endbyte*8+bits>storage*8) {
+	ptr+=bits/8;
+	endbyte+=bits/8;
+	endbit=bits&7;
+	return(ret);
       }
     }
-  
-    /* zero for computation; filled in later */
-    header[22]=0;
-    header[23]=0;
-    header[24]=0;
-    header[25]=0;
-  
-    /* segment table */
-    header[26]=(byte)vals;
-    for(i=0;i<vals;i++){
-      header[i+27]=(byte)lacing_vals[i];
-      bytes+=(header[i+27]&0xff);
+
+    ret=(buffer[ptr]&0xff)<<(24+endbit);
+    if(bits>8){
+      ret|=(buffer[ptr+1]&0xff)<<(16+endbit);
+      if(bits>16){
+	ret|=(buffer[ptr+2]&0xff)<<(8+endbit);
+	if(bits>24){
+	  ret|=(buffer[ptr+3]&0xff)<<(endbit);
+	  if(bits>32 && (endbit != 0))
+	    ret|=(buffer[ptr+4]&0xff)>>(8-endbit);
+	}
+      }
     }
-  
-    /* set pointers in the ogg_page struct */
-    og.header_base=header;
-    og.header=0;
-    og.header_len=header_fill=vals+27;
-    og.body_base=body_data;
-    og.body=body_returned;
-    og.body_len=bytes;
+    ret=(ret>>>(m>>1))>>>((m+1)>>1);
 
-    /* advance the lacing data and set the body_returned pointer */
-  
-//System.out.println("###body_returned: "+body_returned);
-
-    lacing_fill-=vals;
-    System.arraycopy(lacing_vals, vals, lacing_vals, 0, lacing_fill*4);
-    System.arraycopy(granule_vals, vals, granule_vals, 0, lacing_fill*8);
-    body_returned+=bytes;
-
-//System.out.println("####body_returned: "+body_returned);
-  
-    /* calculate the checksum */
-  
-    og.checksum();
-
-    /* done */
-    return(1);
+    ptr+=bits/8;
+    endbyte+=bits/8;
+    endbit=bits&7;
+    return(ret);
   }
 
-
-/* This constructs pages from buffered packet segments.  The pointers
-returned are to static buffers; do not free. The returned buffers are
-good only until the next call (using the same ogg_stream_state) */
-  public int pageout(Page og){
-//    if(body_returned!=0){
-//    /* advance packet data according to the body_returned pointer. We
-//       had to keep it around to return a pointer into the buffer last
-//       call */
-//
-//      body_fill-=body_returned;
-//      if(body_fill!=0){ // overlap?
-//	System.arraycopy(body_data, body_returned, body_data, 0, body_fill);
-//      }
-//      body_returned=0;
-//    }
-//
-//System.out.println("pageout: e_o_s="+e_o_s+" lacing_fill="+lacing_fill+" body_fill="+body_fill+", lacing_fill="+lacing_fill+" b_o_s="+b_o_s);
-//
-//    if((e_o_s!=0&&lacing_fill!=0) ||  /* 'were done, now flush' case */
-//       body_fill > 4096 ||          /* 'page nominal size' case */
-//       lacing_fill>=255 ||          /* 'segment table full' case */
-//       (lacing_fill!=0&&b_o_s==0)){  /* 'initial header page' case */
-//      int vals=0,bytes=0;
-//      int maxvals=(lacing_fill>255?255:lacing_fill);
-//      long acc=0;
-//      long pcm_pos=granule_vals[0];
-//
-//    /* construct a page */
-//    /* decide how many segments to include */
-//
-//    /* If this is the initial header case, the first page must only include
-//       the initial header packet */
-//      if(b_o_s==0){  /* 'initial header page' case */
-//        pcm_pos=0;
-//        for(vals=0;vals<maxvals;vals++){
-//  	  if((lacing_vals[vals]&0x0ff)<255){
-// 	    vals++;
-//	    break;
-//	  }
-//        }
-//      }
-//      else{
-//        for(vals=0;vals<maxvals;vals++){
-//	  if(acc>4096)break;
-//	  acc+=lacing_vals[vals]&0x0ff;
-//	  pcm_pos=granule_vals[vals];
-//        }
-//      }
-//
-//    /* construct the header in temp storage */
-//      System.arraycopy("OggS".getBytes(), 0, header, 0, 4);
-//
-//    /* stream structure version */
-//      header[4]=0x00;
-//    
-//    /* continued packet flag? */
-//      header[5]=0x00;
-//      if((lacing_vals[0]&0x100)==0)header[5]|=0x01;
-//    /* first page flag? */
-//      if(b_o_s==0)header[5]|=0x02;
-//    /* last page flag? */
-//      if(e_o_s!=0 && lacing_fill==vals)header[5]|=0x04;
-//      b_o_s=1;
-//
-//    /* 64 bits of PCM position */
-//      for(int i=6;i<14;i++){
-//        header[i]=(byte)pcm_pos;
-//        pcm_pos>>>=8;
-//      }
-//
-//    /* 32 bits of stream serial number */
-//      {
-//        int serialn=serialno;
-//        for(int i=14;i<18;i++){
-//  	  header[i]=(byte)serialn;
-//	  serialn>>>=8;
-//        }
-//      }
-//
-//
-///* 32 bits of page counter (we have both counter and page header
-//       because this val can roll over) */
-//      if(pageno==-1)pageno=0; /* because someone called
-//                                       stream_reset; this would be a
-//                                       strange thing to do in an
-//                                       encode stream, but it has
-//                                       plausible uses */
-//      {
-//        int pagen=pageno++;
-//        for(int i=18;i<22;i++){
-//	  header[i]=(byte)pagen;
-//	  pagen>>>=8;
-//        }
-//      }
-//
-//    /* zero for computation; filled in later */
-//      header[22]=0;
-//      header[23]=0;
-//      header[24]=0;
-//      header[25]=0;
-//
-//    /* segment table */
-//      header[26]=(byte)vals;
-//      for(int i=0;i<vals;i++){
-//        header[i+27]=(byte)lacing_vals[i];
-//        bytes+=header[i+27]&0xff;
-////      bytes+=header[i+27]=(lacing_vals[i]&0xff);
-//      }
-//      
-//    /* advance the lacing data and set the body_returned pointer */
-//
-//      lacing_fill-=vals;
-//      System.arraycopy(lacing_vals, vals, lacing_vals, 0, lacing_fill);
-//      System.arraycopy(granule_vals, vals, granule_vals, 0, lacing_fill);
-//      body_returned=bytes;
-//
-//    /* set pointers in the ogg_page struct */
-//      og.header_base=header;
-//      og.header=0;
-//      og.header_len=header_fill=vals+27;
-//
-//      og.body_base=body_data;
-//      og.body=0;
-//      og.body_len=bytes;
-//
-//    /* calculate the checksum */
-//
-//      og.checksum();
-//      return(1);
-//    }
-//    /* not enough data to construct a page and not end of stream */
-//    return(0);
-//System.out.println("pageout: "+body_returned);
-    if((e_o_s!=0&&lacing_fill!=0) ||  /* 'were done, now flush' case */
-        body_fill-body_returned> 4096 ||     /* 'page nominal size' case */
-        lacing_fill>=255 ||          /* 'segment table full' case */
-        (lacing_fill!=0&&b_o_s==0)){  /* 'initial header page' case */
-      return flush(og);
+  public int read1(){
+    int ret;
+    if(endbyte>=storage){
+      ret=-1;
+      endbit++;
+      if(endbit>7){
+        endbit=0;
+        ptr++;
+        endbyte++;
+      }
+      return(ret);
     }
-    return 0;
+
+    ret=(buffer[ptr]>>endbit)&1;
+
+    endbit++;
+    if(endbit>7){
+      endbit=0;
+      ptr++;
+      endbyte++;
+    }
+    return(ret);
   }
 
-  public int eof(){
-    return e_o_s;
+  public int bytes(){
+    return(endbyte+(endbit+7)/8);
   }
 
-  public int reset(){
-    body_fill=0;
-    body_returned=0;
-
-    lacing_fill=0;
-    lacing_packet=0;
-    lacing_returned=0;
-
-    header_fill=0;
-
-    e_o_s=0;
-    b_o_s=0;
-    pageno=-1;
-    packetno=0;
-    granulepos=0;
-    return(0);
+  public int bits(){
+    return(endbyte*8+endbit);
   }
+
+  public byte[] buffer(){
+    return(buffer);
+  }
+
+  public static int ilog(int v){
+    int ret=0;
+    while(v>0){
+      ret++;
+      v>>>=1;
+    }
+    return(ret);
+  }
+
+  public static void report(String in){
+    System.err.println(in);
+    System.exit(1);
+  }
+
+  /*
+  static void cliptest(int[] b, int vals, int bits, int[] comp, int compsize){
+    int bytes;
+    byte[] buffer;
+
+    o.reset();
+    for(int i=0;i<vals;i++){
+      o.write(b[i],((bits!=0)?bits:ilog(b[i])));
+    }
+    buffer=o.buffer();
+    bytes=o.bytes();
+System.err.println("cliptest: bytes="+bytes);
+    if(bytes!=compsize)report("wrong number of bytes!\n");
+    for(int i=0;i<bytes;i++){
+      if(buffer[i]!=(byte)comp[i]){
+        for(int j=0;j<bytes;j++){
+          System.err.println(j+": "+Integer.toHexString(buffer[j])+" "+
+                             Integer.toHexString(comp[j]));
+	}
+	report("wrote incorrect value!\n");
+      }
+    }
+System.err.println("bits: "+bits);
+    r.readinit(buffer,bytes);
+    for(int i=0;i<vals;i++){
+      int tbit=(bits!=0)?bits:ilog(b[i]);
+System.err.println(Integer.toHexString(b[i])+" tbit: "+tbit); 
+      if(r.look(tbit)==-1){
+        report("out of data!\n");
+      }
+      if(r.look(tbit)!=(b[i]&mask[tbit])){
+        report(i+" looked at incorrect value! "+Integer.toHexString(r.look(tbit))+", "+Integer.toHexString(b[i]&mask[tbit])+":"+b[i]+" bit="+tbit);
+      }
+      if(tbit==1){
+        if(r.look1()!=(b[i]&mask[tbit])){
+  	  report("looked at single bit incorrect value!\n");
+	}
+      }
+      if(tbit==1){
+        if(r.read1()!=(b[i]&mask[tbit])){
+	  report("read incorrect single bit value!\n");
+	}
+      }
+      else{
+	if(r.read(tbit)!=(b[i]&mask[tbit])){
+	  report("read incorrect value!\n");
+	}
+      }
+    }
+    if(r.bytes()!=bytes){
+      report("leftover bytes after read!\n");
+    }
+  }
+
+  static int[] testbuffer1=
+    {18,12,103948,4325,543,76,432,52,3,65,4,56,32,42,34,21,1,23,32,546,456,7,
+       567,56,8,8,55,3,52,342,341,4,265,7,67,86,2199,21,7,1,5,1,4};
+  static int test1size=43;
+
+  static int[] testbuffer2=
+    {216531625,1237861823,56732452,131,3212421,12325343,34547562,12313212,
+       1233432,534,5,346435231,14436467,7869299,76326614,167548585,
+       85525151,0,12321,1,349528352};
+  static int test2size=21;
+
+  static int[] large=
+    {2136531625,2137861823,56732452,131,3212421,12325343,34547562,12313212,
+       1233432,534,5,2146435231,14436467,7869299,76326614,167548585,
+       85525151,0,12321,1,2146528352};
+
+  static int[] testbuffer3=
+    {1,0,14,0,1,0,12,0,1,0,0,0,1,1,0,1,0,1,0,1,0,1,0,1,0,1,0,0,1,1,1,1,1,0,0,1,
+       0,1,30,1,1,1,0,0,1,0,0,0,12,0,11,0,1,0,0,1};
+  static int test3size=56;
+
+  static int onesize=33;
+  static int[] one={146,25,44,151,195,15,153,176,233,131,196,65,85,172,47,40,
+                    34,242,223,136,35,222,211,86,171,50,225,135,214,75,172,
+                    223,4};
+
+  static int twosize=6;
+  static int[] two={61,255,255,251,231,29};
+
+  static int threesize=54;
+  static int[] three={169,2,232,252,91,132,156,36,89,13,123,176,144,32,254,
+                      142,224,85,59,121,144,79,124,23,67,90,90,216,79,23,83,
+                      58,135,196,61,55,129,183,54,101,100,170,37,127,126,10,
+                      100,52,4,14,18,86,77,1};
+
+  static int foursize=38;
+  static int[] four={18,6,163,252,97,194,104,131,32,1,7,82,137,42,129,11,72,
+                     132,60,220,112,8,196,109,64,179,86,9,137,195,208,122,169,
+                     28,2,133,0,1};
+
+  static int fivesize=45;
+  static int[] five={169,2,126,139,144,172,30,4,80,72,240,59,130,218,73,62,
+                     241,24,210,44,4,20,0,248,116,49,135,100,110,130,181,169,
+                     84,75,159,2,1,0,132,192,8,0,0,18,22};
+
+  static int sixsize=7;
+  static int[] six={17,177,170,242,169,19,148};
+
+  static Buffer o=new Buffer();
+  static Buffer r=new Buffer();
+
+  public static void main(String[] arg){
+    byte[] buffer;
+    int bytes;
+//  o=new Buffer();
+//  r=new Buffer();
+
+    o.writeinit();
+
+    System.err.print("\nSmall preclipped packing: ");
+    cliptest(testbuffer1,test1size,0,one,onesize);
+    System.err.print("ok.");
+
+    System.err.print("\nNull bit call: ");
+    cliptest(testbuffer3,test3size,0,two,twosize);
+    System.err.print("ok.");
+
+    System.err.print("\nLarge preclipped packing: ");
+    cliptest(testbuffer2,test2size,0,three,threesize);
+    System.err.print("ok.");
+
+    System.err.print("\n32 bit preclipped packing: ");
+    o.reset();
+    for(int i=0;i<test2size;i++)
+      o.write(large[i],32);
+    buffer=o.buffer();
+    bytes=o.bytes();
+
+
+    r.readinit(buffer,bytes);
+    for(int i=0;i<test2size;i++){
+      if(r.look(32)==-1){
+	report("out of data. failed!");
+      }
+      if(r.look(32)!=large[i]){
+	System.err.print(r.look(32)+" != "+large[i]+" ("+
+                         Integer.toHexString(r.look(32))+"!="+
+                         Integer.toHexString(large[i])+")");
+	report("read incorrect value!\n");
+      }
+      r.adv(32);
+    }
+    if(r.bytes()!=bytes)report("leftover bytes after read!\n");
+    System.err.print("ok.");
+
+    System.err.print("\nSmall unclipped packing: ");
+    cliptest(testbuffer1,test1size,7,four,foursize);
+    System.err.print("ok.");
+
+    System.err.print("\nLarge unclipped packing: ");
+    cliptest(testbuffer2,test2size,17,five,fivesize);
+    System.err.print("ok.");
+
+    System.err.print("\nSingle bit unclicpped packing: ");
+    cliptest(testbuffer3,test3size,1,six,sixsize);
+    System.err.print("ok.");
+
+    System.err.print("\nTesting read past end: ");
+    r.readinit("\0\0\0\0\0\0\0\0".getBytes(),8);
+    for(int i=0;i<64;i++){
+      if(r.read(1)!=0){
+	System.err.print("failed; got -1 prematurely.\n");
+	System.exit(1);
+      }
+    }
+
+    if(r.look(1)!=-1 ||
+       r.read(1)!=-1){
+      System.err.print("failed; read past end without -1.\n");
+      System.exit(1);
+    }
+
+    r.readinit("\0\0\0\0\0\0\0\0".getBytes(),8);
+    if(r.read(30)!=0 || r.read(16)!=0){
+      System.err.print("failed 2; got -1 prematurely.\n");
+    System.exit(1);
+    }
+
+    if(r.look(18)!=0 ||
+       r.look(18)!=0){
+      System.err.print("failed 3; got -1 prematurely.\n");
+      System.exit(1);
+    }
+    if(r.look(19)!=-1 ||
+       r.look(19)!=-1){
+      System.err.print("failed; read past end without -1.\n");
+      System.exit(1);
+    }
+    if(r.look(32)!=-1 ||
+       r.look(32)!=-1){
+      System.err.print("failed; read past end without -1.\n");
+      System.exit(1);
+    }
+    System.err.print("ok.\n\n");
+  }
+  */
 }
+
+
+
+
+

@@ -1,96 +1,32 @@
 
-;com.jcraft.jorbis.Info#blocksize(Lcom/jcraft/jogg/Packet;)IW
-KC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/Info.java÷ ÷("8*µ
-2W
-KC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/Info.javaÓ Ó($t
-r
-W
-KC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/Info.javaÓ Ó($	
-%7int"__id*
-"""a
-W
-KC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/Info.javaÓ Ó(&
-""*°
-3W
-KC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/Info.javaÏ Ï(∫∑
-W
-KC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/Info.javaÏ Ï(	
-%6int"com.jcraft.jogg.Buffer#read(I)I*
-
-opbcom.jcraft.jogg.Buffer*
-""2read(I)*
-2
-1*µ
-7W
-KC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/Info.java· ·(t
-r
-W
-KC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/Info.java· ·(	
-%5int"__id*
-"""a
-W
-KC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/Info.java· ·(
-""*á	
-8W
-KC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/Info.javaÿ ÿ(íè
-W
-KC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/Info.javaÿ ÿ(
-%0com.jcraft.jogg.Buffer"com.jcraft.jogg.Buffer§
-°
-W
-KC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/Info.javaÿ ÿ(
-%1" com.jcraft.jogg.Buffer#<init>()V*
-
-%0com.jcraft.jogg.Buffer°
-û
-W
-KC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/Info.javaÿ ÿ(
-opbcom.jcraft.jogg.Buffer"__id*
-
-%0com.jcraft.jogg.Buffer°
-û
-W
-KC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/Info.java‹ ‹(
-%2byte[]"__id*/*-
-
-opcom.jcraft.jogg.Packet"
-packet_base·ﬁ
-W
-KC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/Info.java‹ ‹(5
-
-%3void"&com.jcraft.jogg.Buffer#readinit([BII)V*
-
-opbcom.jcraft.jogg.Buffer*
-
-%2byte[]*
-""*
-""2readinit([BII)∏µ
-W
-KC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/Info.javaﬂ ﬂ(	
-%4int"com.jcraft.jogg.Buffer#read(I)I*
-
-opbcom.jcraft.jogg.Buffer*22read(I)*
-3
-7*Ø
+Lcom.jcraft.jroar.Stats#wrapln(Ljava/lang/StringBuffer;[CLjava/lang/String;)VW
+KC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jroar/Stats.javaß ß("1*ª
 1W
-KC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/Info.javaÔ Ô(≤
-Ø
+KC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jroar/Stats.java® ®(ú
+ô
 W
-KC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/Info.javaÔ Ô( "
-%8com.jcraft.jorbis.InfoMode[]"__id***(
-com.jcraft.jorbis.Info"
+KC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jroar/Stats.java® ®(
 
-mode_param∏
-µ
+%0void"Jcom.jcraft.jroar.Stats#wrap(Ljava/lang/StringBuffer;[CLjava/lang/String;)V*
+com.jcraft.jroar.Stats*
+
+sbjava.lang.StringBuffer*
+
+tagchar[]*
+
+foojava.lang.String⁄
+◊
 W
-KC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/Info.javaÔ Ô(& 
-%9com.jcraft.jorbis.InfoMode"
-__arrayGet*$
-"
-%8com.jcraft.jorbis.InfoMode[]*
-"""a
+KC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jroar/Stats.java® ®(
+
+%1void"4com.jcraft.jroar.Stats#ln(Ljava/lang/StringBuffer;)V*
+com.jcraft.jroar.Stats*
+
+sbjava.lang.StringBuffer"a
 W
-KC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/Info.javaÔ Ô(3
+KC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jroar/Stats.java© ©(
 "":
-opcom.jcraft.jogg.PacketB
-com.jcraft.jorbis.Info
+sbjava.lang.StringBuffer:
+tagchar[]:
+foojava.lang.StringB
+com.jcraft.jroar.Stats

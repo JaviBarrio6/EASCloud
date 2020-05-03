@@ -1,249 +1,344 @@
-/* JOrbis
- * Copyright (C) 2000 ymnk, JCraft,Inc.
- *  
- * Written by: 2000 ymnk<ymnk@jcraft.com>
- *   
- * Many thanks to 
- *   Monty <monty@xiph.org> and 
- *   The XIPHOPHORUS Company http://www.xiph.org/ .
- * JOrbis has been based on their awesome works, Vorbis codec.
- *   
- * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU Library General Public License
- * as published by the Free Software Foundation; either version 2 of
- * the License, or (at your option) any later version.
-   
+/* -*-mode:java; c-basic-offset:2; -*- */
+/* JRoar -- pure Java streaming server for Ogg 
+ *
+ * Copyright (C) 2001,2002 ymnk, JCraft,Inc.
+ *
+ * Written by: 2001,2002 ymnk<ymnk@jcraft.com>
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Library General Public License for more details.
- * 
- * You should have received a copy of the GNU Library General Public
- * License along with this program; if not, write to the Free Software
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-package com.jcraft.jorbis;
+package com.jcraft.jroar;
+import java.io.*;
+import java.net.*;
+import java.util.*;
 
-class Mdct{
+import com.jcraft.jogg.*;
 
-  static private final float cPI3_8=0.38268343236508977175f;
-  static private final float cPI2_8=0.70710678118654752441f;
-  static private final float cPI1_8=0.92387953251128675613f;
+class Ice extends Source{
+  private static final int BUFSIZE=4096*2;
 
-  int n;
-  int log2n;
+  private static final int TIMEOUT=3000; // 3 seconds
+
+  private InputStream bitStream=null;
+  private MySocket mysocket=null;
+
+  private SyncState oy;
+  private com.jcraft.jogg.Page og;
   
-  float[] trig;
-  int[] bitrev;
+  private byte[] buffer=null;
+  private int bytes=0;
 
-  float scale;
+  private Thread me=null;
 
-  void init(int n){
-    bitrev=new int[n/4];
-    trig=new float[n+n/4];
+  private long lasttime=0;
 
-    int n2=n>>>1;
-    log2n=(int)Math.rint(Math.log(n)/Math.log(2));
-    this.n=n;
+  Vector http_header=new Vector();
 
-
-    int AE=0;
-    int AO=1;
-    int BE=AE+n/2;
-    int BO=BE+1;
-    int CE=BE+n/2;
-    int CO=CE+1;
-    // trig lookups...
-    for(int i=0;i<n/4;i++){
-      trig[AE+i*2]=(float)Math.cos((Math.PI/n)*(4*i));
-      trig[AO+i*2]=(float)-Math.sin((Math.PI/n)*(4*i));
-      trig[BE+i*2]=(float)Math.cos((Math.PI/(2*n))*(2*i+1));
-      trig[BO+i*2]=(float)Math.sin((Math.PI/(2*n))*(2*i+1));
-    }
-    for(int i=0;i<n/8;i++){
-      trig[CE+i*2]=(float)Math.cos((Math.PI/n)*(4*i+2));
-      trig[CO+i*2]=(float)-Math.sin((Math.PI/n)*(4*i+2));
-    }
-
-    {
-      int mask=(1<<(log2n-1))-1;
-      int msb=1<<(log2n-2);
-      for(int i=0;i<n/8;i++){
-	int acc=0;
-	for(int j=0;msb>>>j!=0;j++)
-	  if(((msb>>>j)&i)!=0)acc|=1<<j;
-	bitrev[i*2]=((~acc)&mask);
-//	bitrev[i*2]=((~acc)&mask)-1;
-	bitrev[i*2+1]=acc;
-      }
-    }
-    scale=4.f/n;
+  private static final String _icepasswd="ice-password: ";
+  private static final String _ice="ice-";
+  Ice(String mountpoint, MySocket mysocket, Vector headerfromice){
+    this(mountpoint, mysocket, headerfromice, "ICE/1.0");
   }
+  Ice(String mountpoint, MySocket mysocket, Vector headerfromice, String protocol){
+    super(mountpoint);
 
-  void clear(){
-  }
+    this.mysocket=mysocket;
+    this.bitStream=mysocket.getInputStream();
+    this.source="ice at "+mysocket.socket.getInetAddress();
 
-  void forward(float[] in, float[] out){
-  }
+    boolean accept=false;
+    String foo=null;
+    int size=headerfromice.size();
 
-  float[] _x=new float[1024];
-  float[] _w=new float[1024];
-
-  synchronized void backward(float[] in, float[] out){
-    if(_x.length<n/2){_x=new float[n/2];}
-    if(_w.length<n/2){_w=new float[n/2];}
-    float[] x=_x;
-    float[] w=_w;
-    int n2=n>>>1;
-    int n4=n>>>2;
-    int n8=n>>>3;
-
-    // rotate + step 1
-    {
-      int inO=1;
-      int xO=0;
-      int A=n2;
-
-      int i;
-      for(i=0;i<n8;i++){
-	A-=2;
-	x[xO++]=-in[inO+2]*trig[A+1] - in[inO]*trig[A];
-	x[xO++]= in[inO]*trig[A+1] - in[inO+2]*trig[A];
-	inO+=4;
-      }
-
-      inO=n2-4;
-
-      for(i=0;i<n8;i++){
-	A-=2;
-	x[xO++]=in[inO]*trig[A+1] + in[inO+2]*trig[A];
-	x[xO++]=in[inO]*trig[A] - in[inO+2]*trig[A+1];
-	inO-=4;
-      }
+    if(protocol==null || protocol.startsWith("ICE")){
+      for(int i=0; i<size;){
+        foo=(String)headerfromice.elementAt(i);
+//System.out.println("fromIce: "+foo);
+        if(foo.startsWith(_ice)){
+ 	  if(foo.startsWith(_icepasswd)){
+            String icepasswd=foo.substring(_icepasswd.length());
+            if(JRoar.icepasswd!=null && JRoar.icepasswd.equals(icepasswd)){
+              accept=true;
+	    }
+          }
+          headerfromice.removeElement(foo);
+          size--;
+          continue;
+        }
+        i++;
+      }	
     }
-
-    float[] xxx=mdct_kernel(x,w,n,n2,n4,n8);
-    int xx=0;
-
-    // step 8
-
-    {
-      int B=n2;
-      int o1=n4,o2=o1-1;
-      int o3=n4+n2,o4=o3-1;
-    
-      for(int i=0;i<n4;i++){
-	float temp1= (xxx[xx] * trig[B+1] - xxx[xx+1] * trig[B]);
-	float temp2=-(xxx[xx] * trig[B] + xxx[xx+1] * trig[B+1]);
-    
-	out[o1]=-temp1;
-	out[o2]= temp1;
-	out[o3]= temp2;
-	out[o4]= temp2;
-
-	o1++;
-	o2--;
-	o3++;
-	o4--;
-	xx+=2;
-	B+=2;
-      }
-    }
-  }
-  private float[] mdct_kernel(float[] x, float[] w,
-	                       int n, int n2, int n4, int n8){
-    // step 2
-
-    int xA=n4;
-    int xB=0;
-    int w2=n4;
-    int A=n2;
-
-    for(int i=0;i<n4;){
-      float x0=x[xA] - x[xB];
-      float x1;
-      w[w2+i]=x[xA++]+x[xB++];
-
-      x1=x[xA]-x[xB];
-      A-=4;
-
-      w[i++]=   x0 * trig[A] + x1 * trig[A+1];
-      w[i]=     x1 * trig[A] - x0 * trig[A+1];
-
-      w[w2+i]=x[xA++]+x[xB++];
-      i++;
-    }
-
-    // step 3
-
-    {
-      for(int i=0;i<log2n-3;i++){
-        int k0=n>>>(i+2);
-	int k1=1<<(i+3);
-	int wbase=n2-2;
-
-	A=0;
-	float[] temp;
-
-	for(int r=0;r<(k0>>>2);r++){
-	  int w1=wbase;
-	  w2=w1-(k0>>1);
-	  float AEv= trig[A],wA;
-	  float AOv= trig[A+1],wB;
-	  wbase-=2;
-		      
-	  k0++;
-	  for(int s=0;s<(2<<i);s++){
-	    wB     =w[w1]   -w[w2];
-	    x[w1]  =w[w1]   +w[w2];
-
-	    wA     =w[++w1] -w[++w2];
-	    x[w1]  =w[w1]   +w[w2];
-	    
-	    x[w2]  =wA*AEv  - wB*AOv;
-	    x[w2-1]=wB*AEv  + wA*AOv;
-
-	    w1-=k0;
-	    w2-=k0;
+    else if(protocol.startsWith("HTTP")){
+      String _auth="Authorization: Basic ";
+      for(int i=0; i<size;){
+        foo=(String)headerfromice.elementAt(i);
+System.out.println("fromIce: "+foo);
+        if(foo.startsWith(_auth)){
+          String icepasswd=foo.substring(_auth.length());
+          byte[] code=null;
+//        try{ code=(new sun.misc.BASE64Decoder()).decodeBuffer(icepasswd); }
+//        catch(Exception ee){ }
+	  try{
+            byte[] bar=icepasswd.getBytes();	      
+	    if(bar.length>0){
+              code=fromBase64(bar, 0, bar.length);
+	    }
 	  }
-	  k0--;
-	  A+=k1;
-	}
-
-	temp=w;
-	w=x;
-	x=temp;
+          catch(Exception ee){ }
+System.out.println("code: "+new String(code));
+          if(JRoar.icepasswd!=null && 
+	     code!=null &&
+             (java.util.Arrays.equals(code, ("source:"+JRoar.icepasswd).getBytes())||
+              java.util.Arrays.equals(code, ("relay:"+JRoar.icepasswd).getBytes()))
+	     ){
+            accept=true;
+	  }
+          headerfromice.removeElement(foo);
+          size--;
+          continue;
+        }
+        i++;
+      }	
+System.out.println("accept: "+accept);
+      if(JRoar.icepasswd!=null && !accept){
+        try { 
+          mysocket.println("HTTP/1.0 401 Authentication Required");
+          mysocket.println("www-authenticate: Basic realm=\"jroar\"");
+          mysocket.println("");
+   	  mysocket.flush();
+        }
+        catch(Exception e){}
+        drop();
+        mountpoint=null;
+        try { if(mysocket!=null)mysocket.close(); } 
+        catch(Exception e){}
+        //mysocket=null;
+        return;
       }
+      try { 
+        mysocket.println("HTTP/1.0 200 OK");
+        mysocket.println("");
+        mysocket.flush();
+      }
+      catch(Exception e){}
+    }
+    else {
+      System.out.println("unkown protocol: "+protocol);
     }
 
-    // step 4, 5, 6, 7
-    {
-      int C=n;
-      int bit=0;
-      int x1=0;
-      int x2=n2-1;
-
-      for(int i=0;i<n8;i++){
-	int t1=bitrev[bit++];
-	int t2=bitrev[bit++];
-
-	float wA=w[t1]-w[t2+1];
-	float wB=w[t1-1]+w[t2];
-	float wC=w[t1]+w[t2+1];
-	float wD=w[t1-1]-w[t2];
-
-	float wACE=wA* trig[C];
-	float wBCE=wB* trig[C++];
-	float wACO=wA* trig[C];
-	float wBCO=wB* trig[C++];
-      
-	x[x1++]=( wC+wACO+wBCE)*.5f;
-	x[x2--]=(-wD+wBCO-wACE)*.5f;
-	x[x1++]=( wD+wBCO-wACE)*.5f; 
-	x[x2--]=( wC-wACO-wBCE)*.5f;
-      }
+    if(JRoar.icepasswd!=null && !accept){
+      drop();
+      mountpoint=null;
+      try { if(mysocket!=null)mysocket.close(); } 
+      catch(Exception e){}
+      //mysocket=null;
+      return;
     }
-    return(x);
+
+    http_header.addElement("HTTP/1.0 200 OK");
+    http_header.addElement("Content-Type: application/x-ogg");
+  }
+
+  void init_ogg(){
+    oy=new SyncState();
+    og=new com.jcraft.jogg.Page();
+    buffer=null;
+    bytes=0;
+    oy.init();
+  }
+
+  public void kick(){
+    if(mountpoint==null) return;
+    if(me!=null) return;
+    me=Thread.currentThread();
+    run();
+  }
+
+  public void run(){
+    lasttime=System.currentTimeMillis();
+
+    init_ogg();
+
+    int serialno=-1;
+
+    ByteArrayOutputStream _header=new ByteArrayOutputStream();
+    byte[] header=null;
+
+    while(me!=null){
+      boolean eos=false;
+      while(!eos){
+        if(me==null)break;
+        int index=oy.buffer(BUFSIZE);
+        buffer=oy.data;
+        try{ bytes=bitStream.read(buffer, index, BUFSIZE); }
+        catch(Exception e){
+//        System.err.println(e);
+          if(me==null)break;
+          bytes=-1;
+        }
+
+        if(bytes==-1)break;
+        if(bytes==0)break;
+
+        try{Thread.sleep(1);}  // sleep for green thread.
+        catch(Exception e){}
+
+        lasttime=System.currentTimeMillis();
+
+        oy.wrote(bytes);
+
+        while(!eos){
+          if(me==null)break;
+
+	  int result=oy.pageout(og);
+
+	  if(result==0)break; // need more data
+	  if(result==-1){ // missing or corrupt data at this page position
+//	    System.err.println("Corrupt or missing data in bitstream; continuing...");
+	  }
+	  else{
+  	    if(serialno!=og.serialno()){
+              header=null;
+              serialno=og.serialno();
+	    }
+          
+            if((og.granulepos()==0)
+               || (og.granulepos()==-1)          // hack for Speex
+              ){ 
+
+              _header.write(og.header_base, og.header, og.header_len);
+              _header.write(og.body_base, og.body, og.body_len);
+	    }
+            else{
+              if(header==null){
+                header=_header.toByteArray();
+                _header.reset();
+                parseHeader(header);
+	      }
+	    }
+
+//          synchronized(listeners){   // In some case, c.write will block.
+  	      int size=listeners.size();
+
+              Client c=null;
+              for(int i=0; i<size;){
+                try{
+	          c=(Client)(listeners.elementAt(i));
+                  c.write(http_header, header,
+  			  og.header_base, og.header, og.header_len,
+			  og.body_base, og.body, og.body_len);
+		}
+		catch(Exception e){
+                  c.close();
+                  removeListener(c);
+                  size--;
+                  continue;
+                }
+                i++;
+	      }
+//          }
+	    if(og.eos()!=0)eos=true;
+	  }
+        }
+      }
+      if(bytes==-1) break;
+    }
+
+    oy.clear();
+//    try { if(bitStream!=null)bitStream.close(); } 
+//    catch(Exception e){}
+//    bitStream=null;
+    try { if(mysocket!=null)mysocket.close(); } 
+    catch(Exception e){}
+    mysocket=null;
+    me=null;
+    drop();
+  }
+
+  void stop(){
+    if(me!=null){
+      if(oy!=null) oy.clear();
+      try { if(mysocket!=null)mysocket.close(); } 
+      catch(Exception e){}
+      mysocket=null;
+      me=null;
+    }
+    drop();
+  }
+
+  void drop_clients(){
+    Client c=null;
+    synchronized(listeners){
+      int size=listeners.size();
+      for(int i=0; i<size;i++){
+        c=(Client)(listeners.elementAt(i));
+        try{ c.close();}
+        catch(Exception e){}
+      }
+      listeners.removeAllElements();
+    }
+  }
+
+  void drop(){
+    drop_clients();
+    super.drop();
+  }
+
+  void addListener(Client c){
+    super.addListener(c);
+    if((System.currentTimeMillis()-lasttime)>TIMEOUT){
+System.out.println("drop[0]:  current="+System.currentTimeMillis()+", last="+lasttime);
+	/*
+      stop();
+	*/
+    }
+  }
+ 
+  boolean isAlive(){
+    if((System.currentTimeMillis()-lasttime)>TIMEOUT){
+System.out.println("drop[1]:  current="+System.currentTimeMillis()+", last="+lasttime);
+	/*
+      return false;
+	*/
+    }
+    return true;
+  }
+
+  private static final byte[] b64 ="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=".getBytes();
+  private static byte val(byte foo){
+    if(foo == '=') return 0;
+    for(int j=0; j<b64.length; j++){
+      if(foo==b64[j]) return (byte)j;
+    }
+    return 0;
+  }
+  private static byte[] fromBase64(byte[] buf, int start, int length){
+    byte[] foo=new byte[length];
+    int j=0;
+    int l=length;
+    for(int i=start;i<start+length;i+=4){
+      foo[j]=(byte)((val(buf[i])<<2)|((val(buf[i+1])&0x30)>>>4));
+      if(buf[i+2]==(byte)'='){ j++; break;}
+      foo[j+1]=(byte)(((val(buf[i+1])&0x0f)<<4)|((val(buf[i+2])&0x3c)>>>2));
+      if(buf[i+3]==(byte)'='){ j+=2; break;}
+      foo[j+2]=(byte)(((val(buf[i+2])&0x03)<<6)|(val(buf[i+3])&0x3f));
+      j+=3;
+    }
+    byte[] bar=new byte[j];
+    System.arraycopy(foo, 0, bar, 0, j);
+    return bar;
   }
 }

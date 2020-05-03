@@ -1,32 +1,9 @@
 
-Lcom.jcraft.jroar.Stats#wrapln(Ljava/lang/StringBuffer;[CLjava/lang/String;)VW
-KC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jroar/Stats.java§ §("1*»
+com.jcraft.jogg.Buffer#bytes()IW
+KC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jogg/Buffer.java¶ ¶("1*¿
 1W
-KC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jroar/Stats.java¨ ¨(œ
-™
+KC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jogg/Buffer.java· ·("a
 W
-KC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jroar/Stats.java¨ ¨(
-
-%0void"Jcom.jcraft.jroar.Stats#wrap(Ljava/lang/StringBuffer;[CLjava/lang/String;)V*
-com.jcraft.jroar.Stats*
-
-sbjava.lang.StringBuffer*
-
-tagchar[]*
-
-foojava.lang.StringÚ
-×
-W
-KC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jroar/Stats.java¨ ¨(
-
-%1void"4com.jcraft.jroar.Stats#ln(Ljava/lang/StringBuffer;)V*
-com.jcraft.jroar.Stats*
-
-sbjava.lang.StringBuffer"a
-W
-KC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jroar/Stats.java© ©(
-"":
-sbjava.lang.StringBuffer:
-tagchar[]:
-foojava.lang.StringB
-com.jcraft.jroar.Stats
+KC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jogg/Buffer.java· ·(!
+""B
+com.jcraft.jogg.Buffer

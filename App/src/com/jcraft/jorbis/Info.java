@@ -28,10 +28,7 @@ package com.jcraft.jorbis;
 import com.jcraft.jogg.*;
 
 public class Info {
-	private static final int OV_EBADPACKET = -136;
-	private static final int OV_ENOTAUDIO = -135;
 
-	private static byte[] _vorbis = "vorbis".getBytes();
 	private static final int VI_TIMEB = 1;
 	private static final int VI_FLOORB = 2;
 	private static final int VI_RESB = 3;
@@ -42,33 +39,11 @@ public class Info {
 	public int channels;
 	public int rate;
 
-	// The below bitrate declarations are *hints*.
-	// Combinations of the three values carry the following implications:
-	//
-	// all three set to the same value:
-	// implies a fixed rate bitstream
-	// only nominal set:
-	// implies a VBR stream that averages the nominal bitrate. No hard
-	// upper/lower limit
-	// upper and or lower set:
-	// implies a VBR bitstream that obeys the bitrate limits. nominal
-	// may also be set to give a nominal rate.
-	// none set:
-	// the coder does not care to speculate.
-
 	int bitrate_upper;
 	int bitrate_nominal;
 	int bitrate_lower;
 
-	// Vorbis supports only short and long blocks, but allows the
-	// encoder to choose the sizes
-
 	int[] blocksizes = new int[2];
-
-	// modes are the primary means of supporting on-the-fly different
-	// blocksizes, different channel mappings (LR or mid-side),
-	// different residue backends, etc. Each mode consists of a
-	// blocksize flag and a mapping (along with the mapping setup
 
 	int modes;
 	int maps;
@@ -96,15 +71,9 @@ public class Info {
 
 	PsyInfo[] psy_param = new PsyInfo[64]; // encode only
 
-	// for block long/sort tuning; encode only
-	int envelopesa;
-	float preecho_thresh;
-	float preecho_clamp;
-
 	// used by synthesis, which has a full, alloced vi
 	public void init() {
 		rate = 0;
-		// memset(vi,0,sizeof(vorbis_info));
 	}
 
 	public void clear() {
@@ -354,119 +323,6 @@ public class Info {
 			}
 		}
 		return (-1);
-	}
-
-	// pack side
-	int pack_info(Buffer opb) {
-		// preamble
-		opb.write(0x01, 8);
-		opb.write(_vorbis);
-
-		// basic information about the stream
-		opb.write(0x00, 32);
-		opb.write(channels, 8);
-		opb.write(rate, 32);
-
-		opb.write(bitrate_upper, 32);
-		opb.write(bitrate_nominal, 32);
-		opb.write(bitrate_lower, 32);
-
-		opb.write(ilog2(blocksizes[0]), 4);
-		opb.write(ilog2(blocksizes[1]), 4);
-		opb.write(1, 1);
-		return (0);
-	}
-
-	int pack_books(Buffer opb) {
-		opb.write(0x05, 8);
-		opb.write(_vorbis);
-
-		// books
-		opb.write(books - 1, 8);
-		for (int i = 0; i < books; i++) {
-			if (book_param[i].pack(opb) != 0) {
-				return (-1);
-			}
-		}
-
-		// times
-		opb.write(times - 1, 6);
-		for (int i = 0; i < times; i++) {
-			opb.write(time_type[i], 16);
-			FuncTime.time_P[time_type[i]].pack(this.time_param[i], opb);
-		}
-
-		// floors
-		opb.write(floors - 1, 6);
-		for (int i = 0; i < floors; i++) {
-			opb.write(floor_type[i], 16);
-			FuncFloor.floor_P[floor_type[i]].pack(floor_param[i], opb);
-		}
-
-		// residues
-		opb.write(residues - 1, 6);
-		for (int i = 0; i < residues; i++) {
-			opb.write(residue_type[i], 16);
-			FuncResidue.residue_P[residue_type[i]].pack(residue_param[i], opb);
-		}
-
-		// maps
-		opb.write(maps - 1, 6);
-		for (int i = 0; i < maps; i++) {
-			opb.write(map_type[i], 16);
-			FuncMapping.mapping_P[map_type[i]].pack(this, map_param[i], opb);
-		}
-
-		// modes
-		opb.write(modes - 1, 6);
-		for (int i = 0; i < modes; i++) {
-			opb.write(mode_param[i].blockflag, 1);
-			opb.write(mode_param[i].windowtype, 16);
-			opb.write(mode_param[i].transformtype, 16);
-			opb.write(mode_param[i].mapping, 8);
-		}
-		opb.write(1, 1);
-		return (0);
-
-	}
-
-	public int blocksize(Packet op) {
-
-		Buffer opb = new Buffer();
-
-		int mode;
-
-		opb.readinit(op.packet_base, op.packet, op.bytes);
-
-		/* Check the packet type */
-		if (opb.read(1) != 0) {
-			/* Oops. This is not an audio data packet */
-			return (OV_ENOTAUDIO);
-		}
-		{
-			int modebits = 0;
-			int v = modes;
-			while (v > 1) {
-				modebits++;
-				v >>>= 1;
-			}
-
-			/* read our mode and pre/post windowsize */
-			mode = opb.read(modebits);
-		}
-		if (mode == -1)
-			return (OV_EBADPACKET);
-		return (blocksizes[mode_param[mode].blockflag]);
-//    }
-	}
-
-	private static int ilog2(int v) {
-		int ret = 0;
-		while (v > 1) {
-			ret++;
-			v >>>= 1;
-		}
-		return (ret);
 	}
 
 	public String toString() {

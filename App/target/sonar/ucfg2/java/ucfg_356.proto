@@ -1,77 +1,0 @@
-
-Fcom.jcraft.jorbis.Comment#query(Ljava/lang/String;I)Ljava/lang/String;X
-NC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/Comment.javao o("8*¢
-3X
-NC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/Comment.javau u(!‡„
-X
-NC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/Comment.javau u(
-%4java.lang.String"java.lang.StringÂ
-¿
-X
-NC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/Comment.javau u(C
-%5"java.lang.String#<init>([BII)V*
-
-%4java.lang.String*
-
-commentbyte[]*
-""*
-"""t
-X
-NC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/Comment.javau u(D
-
-%4java.lang.String*ª
-6X
-NC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/Comment.javar r( ¥
-¢
-X
-NC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/Comment.javar r( 
-%2byte[][]"__id*0*.
-com.jcraft.jorbis.Comment"
-user_comments‘
-Ž
-X
-NC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/Comment.javar r(%
-%3byte[]"
-__arrayGet*
-
-%2byte[][]*
-""†
-ƒ
-X
-NC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/Comment.javar r(&
-commentbyte[]"__id*
-
-%3byte[]*
-3
-1*Á
-7X
-NC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/Comment.javaq q("b
-X
-NC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/Comment.javaq q(
-""*â
-8X
-NC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/Comment.javap p(±®
-X
-NC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/Comment.javap p( 
-%0byte[]"java.lang.String#getBytes()[B*
-
-tagjava.lang.String2
-getBytes()Æ
-Ã
-X
-NC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/Comment.javap p((	
-%1int"%com.jcraft.jorbis.Comment#query([BI)I*
-com.jcraft.jorbis.Comment*
-
-%0byte[]*
-""*
-6
-7*Á
-1X
-NC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/Comment.javax x("b
-X
-NC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jorbis/Comment.javax x(
-"":
-tagjava.lang.String:
-""B
-com.jcraft.jorbis.Comment

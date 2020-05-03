@@ -27,14 +27,65 @@ package com.jcraft.jorbis;
 
 import com.jcraft.jogg.*;
 
-abstract class FuncMapping{
-  public static FuncMapping[] mapping_P={new Mapping0()};
+class Residue0 extends FuncResidue{
 
-  abstract void pack(Info info , Object imap, Buffer buffer);
-  abstract Object unpack(Info info , Buffer buffer);
-  abstract Object look(DspState vd, InfoMode vm, Object m);
-  abstract void free_info(Object imap);
-  abstract void free_look(Object imap);
-//  abstract int forward(Block vd, Object lm);
-  abstract int inverse(Block vd, Object lm);
+  Object unpack(Info vi, Buffer opb){
+    int acc=0;
+    InfoResidue0 info=new InfoResidue0();
+
+    info.begin=opb.read(24);
+    info.end=opb.read(24);
+    info.grouping=opb.read(24)+1;
+    info.partitions=opb.read(6)+1;
+    info.groupbook=opb.read(8);
+
+    for(int j=0;j<info.partitions;j++){
+      int cascade=opb.read(3);
+      if(opb.read(1)!=0){
+        cascade|=(opb.read(5)<<3);
+      }
+      info.secondstages[j]=cascade;
+      acc+=icount(cascade);
+    }
+
+    for(int j=0;j<acc;j++){
+      info.booklist[j]=opb.read(8);
+    }
+
+    if(info.groupbook>=vi.books){
+      free_info(info);
+      return(null);
+    }
+
+    for(int j=0;j<acc;j++){
+      if(info.booklist[j]>=vi.books){
+	free_info(info);
+	return(null);
+      }
+    }
+    return(info);
+  }
+
+  void free_info(Object i){}
+
+  private static int icount(int v){
+    int ret=0;
+   while(v!=0){
+      ret+=(v&1);
+      v>>>=1;
+    }
+    return(ret);
+  }
+}
+
+class InfoResidue0{
+  int begin;
+  int end;
+
+
+  int grouping;
+  int partitions;
+  int groupbook;
+  int[] secondstages=new int[64];
+  int[] booklist=new int[256];
 }
