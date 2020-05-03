@@ -61,10 +61,6 @@ private  int body_returned;   /* elements of fill returned */
     init();
   }
 
-  StreamState(int serialno){
-    this();
-    init(serialno);
-  }
   void init(){
     body_storage=16*1024;
     body_data=new byte[body_storage];
@@ -81,22 +77,13 @@ private  int body_returned;   /* elements of fill returned */
     }
     this.serialno=serialno;
   }
-  public void clear(){
-    body_data=null;
-    lacing_vals=null;
-    granule_vals=null;
-    //memset(os,0,sizeof(ogg_stream_state));    
-  }
-  void destroy(){
-    clear();
-  }
+
   void body_expand(int needed){
     if(body_storage<=body_fill+needed){
       body_storage+=(needed+1024);
       byte[] foo=new byte[body_storage];
       System.arraycopy(body_data, 0, foo, 0, body_data.length);
       body_data=foo;
-//System.out.println("expand: body_fill="+body_fill+", body_storage="+body_data.length);
     }
   }
   void lacing_expand(int needed){
@@ -110,58 +97,6 @@ private  int body_returned;   /* elements of fill returned */
       System.arraycopy(granule_vals, 0, bar, 0, granule_vals.length);
       granule_vals=bar;
     }
-  }
-
-  /* submit data to the internal buffer of the framing engine */
-  public int packetin(Packet op){
-    int lacing_val=op.bytes/255+1;
-
-    if(body_returned!=0){
-      /* advance packet data according to the body_returned pointer. We
-         had to keep it around to return a pointer into the buffer last
-         call */
-    
-      body_fill-=body_returned;
-      if(body_fill!=0){
-//        memmove(os->body_data,os->body_data+os->body_returned,
-//  	        os->body_fill*sizeof(char));
-        System.arraycopy(body_data, body_returned, body_data, 0, body_fill);
-      }
-      body_returned=0;
-    }
-
-    /* make sure we have the buffer storage */
-    body_expand(op.bytes);
-    lacing_expand(lacing_val);
-
-  /* Copy in the submitted packet.  Yes, the copy is a waste; this is
-     the liability of overly clean abstraction for the time being.  It
-     will actually be fairly easy to eliminate the extra copy in the
-     future */
-
-    System.arraycopy(op.packet_base, op.packet, body_data, body_fill, op.bytes);
-    body_fill+=op.bytes;
-//System.out.println("add: "+body_fill);
-
-  /* Store lacing vals for this packet */
-    int j;
-    for(j=0;j<lacing_val-1;j++){
-      lacing_vals[lacing_fill+j]=255;
-      granule_vals[lacing_fill+j]=granulepos;
-    }
-    lacing_vals[lacing_fill+j]=(op.bytes)%255;
-    granulepos=granule_vals[lacing_fill+j]=op.granulepos;
-
-  /* flag the first segment as the beginning of the packet */
-    lacing_vals[lacing_fill]|= 0x100;
-
-    lacing_fill+=lacing_val;
-
-  /* for the sake of completeness */
-    packetno++;
-
-    if(op.e_o_s!=0)e_o_s=1;
-    return(0);
   }
 
   public int packetout(Packet op){
@@ -488,153 +423,6 @@ private  int body_returned;   /* elements of fill returned */
 
     /* done */
     return(1);
-  }
-
-
-/* This constructs pages from buffered packet segments.  The pointers
-returned are to static buffers; do not free. The returned buffers are
-good only until the next call (using the same ogg_stream_state) */
-  public int pageout(Page og){
-//    if(body_returned!=0){
-//    /* advance packet data according to the body_returned pointer. We
-//       had to keep it around to return a pointer into the buffer last
-//       call */
-//
-//      body_fill-=body_returned;
-//      if(body_fill!=0){ // overlap?
-//	System.arraycopy(body_data, body_returned, body_data, 0, body_fill);
-//      }
-//      body_returned=0;
-//    }
-//
-//System.out.println("pageout: e_o_s="+e_o_s+" lacing_fill="+lacing_fill+" body_fill="+body_fill+", lacing_fill="+lacing_fill+" b_o_s="+b_o_s);
-//
-//    if((e_o_s!=0&&lacing_fill!=0) ||  /* 'were done, now flush' case */
-//       body_fill > 4096 ||          /* 'page nominal size' case */
-//       lacing_fill>=255 ||          /* 'segment table full' case */
-//       (lacing_fill!=0&&b_o_s==0)){  /* 'initial header page' case */
-//      int vals=0,bytes=0;
-//      int maxvals=(lacing_fill>255?255:lacing_fill);
-//      long acc=0;
-//      long pcm_pos=granule_vals[0];
-//
-//    /* construct a page */
-//    /* decide how many segments to include */
-//
-//    /* If this is the initial header case, the first page must only include
-//       the initial header packet */
-//      if(b_o_s==0){  /* 'initial header page' case */
-//        pcm_pos=0;
-//        for(vals=0;vals<maxvals;vals++){
-//  	  if((lacing_vals[vals]&0x0ff)<255){
-// 	    vals++;
-//	    break;
-//	  }
-//        }
-//      }
-//      else{
-//        for(vals=0;vals<maxvals;vals++){
-//	  if(acc>4096)break;
-//	  acc+=lacing_vals[vals]&0x0ff;
-//	  pcm_pos=granule_vals[vals];
-//        }
-//      }
-//
-//    /* construct the header in temp storage */
-//      System.arraycopy("OggS".getBytes(), 0, header, 0, 4);
-//
-//    /* stream structure version */
-//      header[4]=0x00;
-//    
-//    /* continued packet flag? */
-//      header[5]=0x00;
-//      if((lacing_vals[0]&0x100)==0)header[5]|=0x01;
-//    /* first page flag? */
-//      if(b_o_s==0)header[5]|=0x02;
-//    /* last page flag? */
-//      if(e_o_s!=0 && lacing_fill==vals)header[5]|=0x04;
-//      b_o_s=1;
-//
-//    /* 64 bits of PCM position */
-//      for(int i=6;i<14;i++){
-//        header[i]=(byte)pcm_pos;
-//        pcm_pos>>>=8;
-//      }
-//
-//    /* 32 bits of stream serial number */
-//      {
-//        int serialn=serialno;
-//        for(int i=14;i<18;i++){
-//  	  header[i]=(byte)serialn;
-//	  serialn>>>=8;
-//        }
-//      }
-//
-//
-///* 32 bits of page counter (we have both counter and page header
-//       because this val can roll over) */
-//      if(pageno==-1)pageno=0; /* because someone called
-//                                       stream_reset; this would be a
-//                                       strange thing to do in an
-//                                       encode stream, but it has
-//                                       plausible uses */
-//      {
-//        int pagen=pageno++;
-//        for(int i=18;i<22;i++){
-//	  header[i]=(byte)pagen;
-//	  pagen>>>=8;
-//        }
-//      }
-//
-//    /* zero for computation; filled in later */
-//      header[22]=0;
-//      header[23]=0;
-//      header[24]=0;
-//      header[25]=0;
-//
-//    /* segment table */
-//      header[26]=(byte)vals;
-//      for(int i=0;i<vals;i++){
-//        header[i+27]=(byte)lacing_vals[i];
-//        bytes+=header[i+27]&0xff;
-////      bytes+=header[i+27]=(lacing_vals[i]&0xff);
-//      }
-//      
-//    /* advance the lacing data and set the body_returned pointer */
-//
-//      lacing_fill-=vals;
-//      System.arraycopy(lacing_vals, vals, lacing_vals, 0, lacing_fill);
-//      System.arraycopy(granule_vals, vals, granule_vals, 0, lacing_fill);
-//      body_returned=bytes;
-//
-//    /* set pointers in the ogg_page struct */
-//      og.header_base=header;
-//      og.header=0;
-//      og.header_len=header_fill=vals+27;
-//
-//      og.body_base=body_data;
-//      og.body=0;
-//      og.body_len=bytes;
-//
-//    /* calculate the checksum */
-//
-//      og.checksum();
-//      return(1);
-//    }
-//    /* not enough data to construct a page and not end of stream */
-//    return(0);
-//System.out.println("pageout: "+body_returned);
-    if((e_o_s!=0&&lacing_fill!=0) ||  /* 'were done, now flush' case */
-        body_fill-body_returned> 4096 ||     /* 'page nominal size' case */
-        lacing_fill>=255 ||          /* 'segment table full' case */
-        (lacing_fill!=0&&b_o_s==0)){  /* 'initial header page' case */
-      return flush(og);
-    }
-    return 0;
-  }
-
-  public int eof(){
-    return e_o_s;
   }
 
   public int reset(){
