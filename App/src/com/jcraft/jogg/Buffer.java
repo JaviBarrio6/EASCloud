@@ -27,9 +27,9 @@
 package com.jcraft.jogg;
 
 public class Buffer{
-  private static final int BUFFER_INCREMENT=256;
+  private static final int BUFFER_INCREMENT = 256;
 
-  private static final int[] mask={
+  private static final int[] mask = {
     0x00000000,0x00000001,0x00000003,0x00000007,0x0000000f,
     0x0000001f,0x0000003f,0x0000007f,0x000000ff,0x000001ff,
     0x000003ff,0x000007ff,0x00000fff,0x00001fff,0x00003fff,
@@ -39,119 +39,108 @@ public class Buffer{
     0x3fffffff,0x7fffffff,0xffffffff
   };
 
-  int ptr=0;
-  byte[] buffer=null;
-  int endbit=0;
-  int endbyte=0;
-  int storage=0;
+  int ptr = 0;
+  byte[] buffer;
+  int endbit = 0;
+  int endbyte = 0;
+  int storage = 0;
 
 
   public void write(byte[] s){
-    for(int i=0; i<s.length; i++){
-      if(s[i]==0)break;
-      write(s[i],8);
+    for (byte b : s) {
+      if (b == 0) break;
+      write(b, 8);
     }
   }
 
   public void read(byte[] s, int bytes){
-    int i=0;
-    while(bytes--!=0){
-      s[i++]=(byte)(read(8));
+    int i = 0;
+    while(bytes-- != 0){
+      s[i++] = (byte)(read(8));
     }
   }
 
   public void readinit(byte[] buf, int start, int bytes){
-    ptr=start;
-    buffer=buf;
-    endbit=endbyte=0;
-    storage=bytes;
+    ptr = start;
+    buffer = buf;
+    endbit = endbyte=0;
+    storage = bytes;
   }
 
   public void write(int value, int bits){
-    if(endbyte+4>=storage){
-      byte[] foo=new byte[storage+BUFFER_INCREMENT];
+    if(endbyte + 4 >= storage){
+      byte[] foo = new byte[storage+BUFFER_INCREMENT];
       System.arraycopy(buffer, 0, foo, 0, storage);
-      buffer=foo;
-      storage+=BUFFER_INCREMENT;
+      buffer = foo;
+      storage += BUFFER_INCREMENT;
     }
 
-    value&=mask[bits];
-    bits+=endbit;
-    buffer[ptr]|=(byte)(value<<endbit);
+    value &= mask[bits];
+    bits += endbit;
+    buffer[ptr] |= (byte)(value << endbit);
 
-    if(bits>=8){
-      buffer[ptr+1]=(byte)(value>>>(8-endbit));
-      if(bits>=16){
-        buffer[ptr+2]=(byte)(value>>>(16-endbit));  
-        if(bits>=24){
-	  buffer[ptr+3]=(byte)(value>>>(24-endbit));  
-          if(bits>=32){
-	    if(endbit>0)
-	      buffer[ptr+4]=(byte)(value>>>(32-endbit));
-	    else
-	      buffer[ptr+4]=0;
-	  }
+    if(bits >= 8){
+      buffer[ptr+1] = (byte)(value>>>(8 - endbit));
+      if(bits >= 16){
+        buffer[ptr + 2] = (byte)(value>>>(16 - endbit));
+        if(bits >= 24){
+	      buffer[ptr + 3] = (byte)(value >>> (24 - endbit));
+          if(bits >= 32){
+            if(endbit > 0)
+              buffer[ptr + 4] = (byte)(value >>> (32 - endbit));
+            else
+              buffer[ptr + 4] = 0;
+	      }
         }
       }
     }
 
-    endbyte+=bits/8;
-    ptr+=bits/8;
-    endbit=bits&7;
+    endbyte += bits / 8;
+    ptr += bits / 8;
+    endbit = bits & 7;
   }
 
   public int read(int bits){
-//System.err.println(this+" read: bits="+bits+", storage="+storage+", endbyte="+endbyte);
-//System.err.println(this+" read: bits="+bits+", storage="+storage+", endbyte="+endbyte+
-//                        ", ptr="+ptr+", endbit="+endbit+", buf[ptr]="+buffer[ptr]);
-
     int ret;
-    int m=mask[bits];
+    int m = mask[bits];
 
-    bits+=endbit;
+    bits += endbit;
 
-    if(endbyte+4>=storage){
-      ret=-1;
-      if(endbyte+(bits-1)/8>=storage){
-        ptr+=bits/8;
-        endbyte+=bits/8;
-        endbit=bits&7;
+    if(endbyte + 4 >= storage){
+      ret = -1;
+      if(endbyte + (bits - 1) /8 >= storage){
+        ptr += bits / 8;
+        endbyte += bits / 8;
+        endbit = bits & 7;
         return(ret);
       }
     }
 
-    ret=((buffer[ptr])&0xff)>>>endbit;
-    if(bits>8){
-    ret|=((buffer[ptr+1])&0xff)<<(8-endbit);
-//      ret|=((byte)(buffer[ptr+1]))<<(8-endbit);
+    ret = ((buffer[ptr]) & 0xff) >>> endbit;
+    if(bits > 8){
+      ret |= ((buffer[ptr + 1]) & 0xff) << (8 - endbit);
       if(bits>16){
-      ret|=((buffer[ptr+2])&0xff)<<(16-endbit);
-//        ret|=((byte)(buffer[ptr+2]))<<(16-endbit);
+        ret |= ((buffer[ptr + 2]) & 0xff) << (16 - endbit);
         if(bits>24){
-	  ret|=((buffer[ptr+3])&0xff)<<(24-endbit);
-//	  ret|=((byte)(buffer[ptr+3]))<<(24-endbit);
- 	  if(bits>32 && endbit!=0){
-	    ret|=((buffer[ptr+4])&0xff)<<(32-endbit);
-//	    ret|=((byte)(buffer[ptr+4]))<<(32-endbit);
-	  }
+          ret |= ((buffer[ptr + 3]) & 0xff) << (24 - endbit);
+          if(bits > 32 && endbit != 0){
+            ret |= ((buffer[ptr + 4]) & 0xff) << (32 - endbit);
+          }
         }
       }
     }
 
-    ret&=m;
+    ret &= m;
 
-    ptr+=bits/8;
-//    ptr=bits/8;
-    endbyte+=bits/8;
-//    endbyte=bits/8;
-    endbit=bits&7;
+    ptr += bits / 8;
+    endbyte += bits / 8;
+    endbit = bits & 7;
     return(ret);
   }
 
   public byte[] buffer(){
     return(buffer);
   }
-
 }
 
 
