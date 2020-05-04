@@ -36,9 +36,8 @@ public class SyncState{
   int headerbytes;
   int bodybytes;
 
-  public int clear(){
+  public void clear(){
     data=null;
-    return(0);
   }
 
   public int buffer(int size){
@@ -51,8 +50,7 @@ public class SyncState{
     }
 
     if(size>storage-fill){
-      // We need to extend the internal buffer
-      int newsize=size+fill+4096; // an extra page to be nice
+      int newsize=size+fill+4096;
       if(data!=null){
 	byte[] foo=new byte[newsize];
 	System.arraycopy(data, 0, foo, 0, data.length);
@@ -67,14 +65,13 @@ public class SyncState{
     return(fill);
   }
 
-  public int wrote(int bytes){
-    if(fill+bytes>storage)return(-1);
+  public void wrote(int bytes){
+    if(fill+bytes>storage)return;
     fill+=bytes;
-    return(0);
   }
 
-  private Page pageseek=new Page();
-  private  byte[] chksum=new byte[4];
+  private final Page pageseek=new Page();
+  private final byte[] chksum=new byte[4];
   public int pageseek(Page og){
     int page=returned;
     int next;
@@ -130,31 +127,24 @@ public class SyncState{
       log.body_len=bodybytes;
       log.checksum();
 
-      // Compare
       if(chksum[0]!=data[page+22] ||
          chksum[1]!=data[page+23] ||
          chksum[2]!=data[page+24] ||
          chksum[3]!=data[page+25]){
-        // D'oh.  Mismatch! Corrupt page (or miscapture and not a page at all)
-        // replace the computed checksum with the one actually read in
         System.arraycopy(chksum, 0, data, page+22, 4);
-        // Bad checksum. Lose sync */
 
         headerbytes=0;
         bodybytes=0;
-        // search for possible capture
         next=0;
         for(int ii=0; ii<bytes-1; ii++){
           if(data[page+1+ii]=='O'){next=page+1+ii; break;}
         }
-        //next=memchr(page+1,'O',bytes-1);
         if(next==0) next=fill;
         returned=next;
         return(-(next-page));
       }
     }
-  
-    // yes, have a whole page all ready to go
+
     {
       page=returned;
 
@@ -162,7 +152,7 @@ public class SyncState{
         og.header_base=data;
         og.header=page;
         og.header_len=headerbytes;
-	og.body_base=data;
+	    og.body_base=data;
         og.body=page+headerbytes;
         og.body_len=bodybytes;
       }
@@ -180,31 +170,26 @@ public class SyncState{
     while(true){
       int ret=pageseek(og);
       if(ret>0){
-        // have a page
         return(1);
       }
       if(ret==0){
-        // need more data
         return(0);
       }
-    
-      // head did not start a synced page... skipped some bytes
       if(unsynced==0){
         unsynced=1;
         return(-1);
       }
-      // loop. keep looking
+
     }
   }
 
 
-  public int reset(){
+  public void reset(){
     fill=0;
     returned=0;
     unsynced=0;
     headerbytes=0;
     bodybytes=0;
-    return(0);
   }
   public void init(){}
 

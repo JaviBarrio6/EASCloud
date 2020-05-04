@@ -25,36 +25,30 @@
 
 package com.jcraft.jogg;
 
+import java.util.Arrays;
+
 public class StreamState{
-  byte[] body_data;    /* bytes from packet bodies */
-  int body_storage;    /* storage elements allocated */
-  int body_fill;       /* elements stored; fill mark */
-private  int body_returned;   /* elements of fill returned */
+  byte[] body_data;
+  int body_storage;
+  int body_fill;
+private  int body_returned;
 
 
-  int[] lacing_vals;    /* The values that will go to the segment table */
-  long[] granule_vals;  /* pcm_pos values for headers. Not compact
-			   this way, but it is simple coupled to the
-			   lacing fifo */
+  int[] lacing_vals;
+  long[] granule_vals;
   int lacing_storage;
   int lacing_fill;
   int lacing_packet;
   int lacing_returned;
 
-  byte[] header=new byte[282];      /* working space for header encode */
+  byte[] header=new byte[282];
   int header_fill;
 
-  public int e_o_s;   /* set when we have buffered the last packet in the
-			 logical bitstream */
-  int b_o_s;          /* set after we've written the initial page
-			 of a logical bitstream */
+  public int e_o_s;
+  int b_o_s;
   int serialno;
   int pageno;
-  long packetno;      /* sequence number for decode; the framing
-                         knows where there's a hole in the data,
-                         but we need coupling so that the codec
-                         (which is in a seperate abstraction
-                         layer) also knows about the gap */
+  long packetno;
   long granulepos;
 
   public StreamState(){
@@ -71,9 +65,9 @@ private  int body_returned;   /* elements of fill returned */
   public void init(int serialno){
     if(body_data==null){ init(); }
     else{
-      for(int i=0; i<body_data.length; i++) body_data[i]=0;
-      for(int i=0; i<lacing_vals.length; i++) lacing_vals[i]=0;
-      for(int i=0; i<granule_vals.length; i++) granule_vals[i]=0;
+      Arrays.fill(body_data, (byte) 0);
+      Arrays.fill(lacing_vals, 0);
+      Arrays.fill(granule_vals, 0);
     }
     this.serialno=serialno;
   }
@@ -101,10 +95,6 @@ private  int body_returned;   /* elements of fill returned */
 
   public int packetout(Packet op){
 
-  /* The last part of decode. We have the stream broken into packet
-     segments.  Now we need to group them into packets (or return the
-     out of sync markers) */
-
     int ptr=lacing_returned;
 
     if(lacing_packet<=ptr){
@@ -112,24 +102,19 @@ private  int body_returned;   /* elements of fill returned */
     }
 
     if((lacing_vals[ptr]&0x400)!=0){
-    /* We lost sync here; let the app know */
       lacing_returned++;
-
-    /* we need to tell the codec there's a gap; it might need to
-       handle previous packet dependencies. */
       packetno++;
       return(-1);
     }
 
-  /* Gather the whole packet. We'll have no holes or a partial packet */
     {
       int size=lacing_vals[ptr]&0xff;
       int bytes=0;
 
       op.packet_base=body_data;
       op.packet=body_returned;
-      op.e_o_s=lacing_vals[ptr]&0x200; /* last packet of the stream? */
-      op.b_o_s=lacing_vals[ptr]&0x100; /* first packet of the stream? */
+      op.e_o_s=lacing_vals[ptr]&0x200;
+      op.b_o_s=lacing_vals[ptr]&0x100;
       bytes+=size;
 
       while(size==255){
@@ -142,20 +127,12 @@ private  int body_returned;   /* elements of fill returned */
       op.packetno=packetno;
       op.granulepos=granule_vals[ptr];
       op.bytes=bytes;
-
-//System.out.println(this+" # body_returned="+body_returned);
       body_returned+=bytes;
-//System.out.println(this+"## body_returned="+body_returned);
-
       lacing_returned=ptr+1;
     }
     packetno++;
     return(1);
   }
-
-
-  // add the incoming page to the stream state; we decompose the page
-  // into packet segments here as well.
 
   public int pagein(Page og){
     byte[] header_base=og.header_base;
@@ -174,14 +151,9 @@ private  int body_returned;   /* elements of fill returned */
     int _pageno=og.pageno();
     int segments=header_base[header+26]&0xff;
 
-    // clean up 'returned data'
     {
       int lr=lacing_returned;
       int br=body_returned;
-
-      // body data
-
-//System.out.println("br="+br+", body_fill="+body_fill);
 
       if(br!=0){
         body_fill-=br;
@@ -191,10 +163,8 @@ private  int body_returned;   /* elements of fill returned */
 	body_returned=0;
       }
 
-//System.out.println("?? br="+br+", body_fill="+body_fill+" body_returned="+body_returned);
-
       if(lr!=0){
-        // segment table
+
 	if((lacing_fill-lr)!=0){
 	  System.arraycopy(lacing_vals, lr, lacing_vals, 0, lacing_fill-lr);
 	  System.arraycopy(granule_vals, lr, granule_vals, 0, lacing_fill-lr);
@@ -205,31 +175,24 @@ private  int body_returned;   /* elements of fill returned */
       }
     }
 
-    // check the serial number
     if(_serialno!=serialno)return(-1);
     if(version>0)return(-1);
 
     lacing_expand(segments+1);
 
-    // are we in sequence?
     if(_pageno!=pageno){
       int i;
 
-      // unroll previous partial packet (if any)
       for(i=lacing_packet;i<lacing_fill;i++){
 	body_fill-=lacing_vals[i]&0xff;
-//System.out.println("??");
       }
       lacing_fill=lacing_packet;
 
-      // make a note of dropped data in segment table
       if(pageno!=-1){
 	lacing_vals[lacing_fill++]=0x400;
 	lacing_packet++;
       }
 
-      // are we a 'continued packet' page?  If so, we'll need to skip
-      // some segments
       if(continued!=0){
 	bos=0;
 	for(;segptr<segments;segptr++){
@@ -244,15 +207,12 @@ private  int body_returned;   /* elements of fill returned */
       }
     }
 
-//System.out.println("bodysize="+bodysize);
-
     if(bodysize!=0){
       body_expand(bodysize);
       System.arraycopy(body_base, body, body_data, body_fill, bodysize);
       body_fill+=bodysize;
     }
 
-//System.out.println("bodyfill="+body_fill);
 
     {
       int saved=-1;
@@ -273,8 +233,7 @@ private  int body_returned;   /* elements of fill returned */
       
 	if(val<255)lacing_packet=lacing_fill;
       }
-  
-    /* set the granulepos on the last pcmval of the last full packet */
+
       if(saved!=-1){
 	granule_vals[saved]=granulepos;
       }
@@ -290,40 +249,18 @@ private  int body_returned;   /* elements of fill returned */
     return(0);
   }
 
-
-/* This will flush remaining packets into a page (returning nonzero),
-   even if there is not enough data to trigger a flush normally
-   (undersized page). If there are no packets or partial packets to
-   flush, ogg_stream_flush returns 0.  Note that ogg_stream_flush will
-   try to flush a normal sized page like ogg_stream_pageout; a call to
-   ogg_stream_flush does not gurantee that all packets have flushed.
-   Only a return value of 0 from ogg_stream_flush indicates all packet
-   data is flushed into pages.
-
-   ogg_stream_page will flush the last page in a stream even if it's
-   undersized; you almost certainly want to use ogg_stream_pageout
-   (and *not* ogg_stream_flush) unless you need to flush an undersized
-   page in the middle of a stream for some reason. */
-
   public int flush(Page og){
 
-//System.out.println(this+" ---body_returned: "+body_returned);
 
     int i;
-    int vals=0;
-    int maxvals=(lacing_fill>255?255:lacing_fill);
+    int vals;
+    int maxvals=(Math.min(lacing_fill, 255));
     int bytes=0;
     int acc=0;
     long granule_pos=granule_vals[0];
 
     if(maxvals==0)return(0);
-  
-    /* construct a page */
-    /* decide how many segments to include */
-  
-    /* If this is the initial header case, the first page must only include
-       the initial header packet */
-    if(b_o_s==0){  /* 'initial header page' case */
+    if(b_o_s==0){
       granule_pos=0;
       for(vals=0;vals<maxvals;vals++){
         if((lacing_vals[vals]&0x0ff)<255){
@@ -339,29 +276,21 @@ private  int body_returned;   /* elements of fill returned */
         granule_pos=granule_vals[vals];
       }
     }
-
-    /* construct the header in temp storage */
     System.arraycopy("OggS".getBytes(), 0, header, 0, 4);
-  
-    /* stream structure version */
     header[4]=0x00;
 
-    /* continued packet flag? */
     header[5]=0x00;
     if((lacing_vals[0]&0x100)==0)header[5]|=0x01;
-    /* first page flag? */
     if(b_o_s==0) header[5]|=0x02;
-    /* last page flag? */
     if(e_o_s!=0 && lacing_fill==vals) header[5]|=0x04;
     b_o_s=1;
 
-    /* 64 bits of PCM position */
+
     for(i=6;i<14;i++){
       header[i]=(byte)granule_pos;
       granule_pos>>>=8;
     }
 
-    /* 32 bits of stream serial number */
     {
       int _serialno=serialno;
       for(i=14;i<18;i++){
@@ -370,13 +299,7 @@ private  int body_returned;   /* elements of fill returned */
       }
     }
 
-    /* 32 bits of page counter (we have both counter and page header
-       because this val can roll over) */
-    if(pageno==-1)pageno=0;       /* because someone called
-				     stream_reset; this would be a
-				     strange thing to do in an
-				     encode stream, but it has
-				     plausible uses */
+    if(pageno==-1)pageno=0;
     {
       int _pageno=pageno++;
       for(i=18;i<22;i++){
@@ -384,21 +307,17 @@ private  int body_returned;   /* elements of fill returned */
         _pageno>>>=8;
       }
     }
-  
-    /* zero for computation; filled in later */
     header[22]=0;
     header[23]=0;
     header[24]=0;
     header[25]=0;
-  
-    /* segment table */
+
     header[26]=(byte)vals;
     for(i=0;i<vals;i++){
       header[i+27]=(byte)lacing_vals[i];
       bytes+=(header[i+27]&0xff);
     }
-  
-    /* set pointers in the ogg_page struct */
+
     og.header_base=header;
     og.header=0;
     og.header_len=header_fill=vals+27;
@@ -406,26 +325,17 @@ private  int body_returned;   /* elements of fill returned */
     og.body=body_returned;
     og.body_len=bytes;
 
-    /* advance the lacing data and set the body_returned pointer */
-  
-//System.out.println("###body_returned: "+body_returned);
-
     lacing_fill-=vals;
     System.arraycopy(lacing_vals, vals, lacing_vals, 0, lacing_fill*4);
     System.arraycopy(granule_vals, vals, granule_vals, 0, lacing_fill*8);
     body_returned+=bytes;
 
-//System.out.println("####body_returned: "+body_returned);
-  
-    /* calculate the checksum */
-  
     og.checksum();
 
-    /* done */
     return(1);
   }
 
-  public int reset(){
+  public void reset(){
     body_fill=0;
     body_returned=0;
 
@@ -440,6 +350,5 @@ private  int body_returned;   /* elements of fill returned */
     pageno=-1;
     packetno=0;
     granulepos=0;
-    return(0);
   }
 }

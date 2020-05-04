@@ -59,7 +59,6 @@ public class Comment{
     for(int i=0;i<comments;i++){
       int len=opb.read(32);
       if(len<0){
-	//goto err_out;
 	clear();
 	return(-1);
       }
@@ -68,7 +67,6 @@ public class Comment{
       opb.read(user_comments[i], len);
     }	  
     if(opb.read(1)!=1){
-      //goto err_out; // EOP check
       clear();
       return(-1);
 
@@ -85,11 +83,11 @@ public class Comment{
   }
 
   public String toString(){
-    String foo="Vendor: "+new String(vendor, 0, vendor.length-1);
+    StringBuilder foo= new StringBuilder("Vendor: " + new String(vendor, 0, vendor.length - 1));
     for(int i=0; i<comments; i++){
-      foo=foo+"\nComment: "+new String(user_comments[i], 0, user_comments[i].length-1);
+      foo.append("\nComment: ").append(new String(user_comments[i], 0, user_comments[i].length - 1));
     }
-    foo=foo+"\n";
-    return foo;
+    foo.append("\n");
+    return foo.toString();
   }
 }
