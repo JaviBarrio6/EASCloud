@@ -140,7 +140,7 @@ LC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jroar/Source.javaé
 13
 4
 21
-1*Ä
+1*Å
 20X
 LC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jroar/Source.javaÄ Ä(ûõ
 X
@@ -163,11 +163,10 @@ LC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jroar/Source.javaÅ
 %22void"$com.jcraft.jogg.StreamState#init(I)V*#
 !
 oscom.jcraft.jogg.StreamState*
-""2init(I)Ω∫
+""2init(I)æª
 X
-LC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jroar/Source.javaÇ Ç(
-
-%23int"$com.jcraft.jogg.StreamState#reset()I*#
+LC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jroar/Source.javaÇ Ç(
+%23void"$com.jcraft.jogg.StreamState#reset()V*#
 !
 oscom.jcraft.jogg.StreamState2reset()äá
 X

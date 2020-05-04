@@ -1,1 +1,1 @@
- 2javaXÁhr)src/com/jcraft/jorbis/StaticCodeBook.java
+ 2javaX´hr)src/com/jcraft/jorbis/StaticCodeBook.java

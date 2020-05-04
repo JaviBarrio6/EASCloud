@@ -697,7 +697,7 @@ KC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jroar/Proxy.java]
 com.jcraft.jroar.Pls*
 
 _sourcejava.lang.String*
-95*ý
+95*þ
 52W
 KC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jroar/Proxy.java« «(
 ¨
@@ -707,11 +707,10 @@ KC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jroar/Proxy.java«
  
 %48com.jcraft.jogg.SyncState"__id*"* 
 com.jcraft.jroar.Proxy"
-oyÃÀ
+oyÄÁ
 W
-KC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jroar/Proxy.java« «(
-
-%49int"#com.jcraft.jogg.SyncState#wrote(I)I*"
+KC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jroar/Proxy.java« «(
+%49void"#com.jcraft.jogg.SyncState#wrote(I)V*"
  
 %48com.jcraft.jogg.SyncState*
 ""2wrote(I)¦

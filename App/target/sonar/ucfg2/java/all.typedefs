@@ -1361,12 +1361,12 @@ read([CII)"java.io.BufferedReader#read([CII)IC
 com.jcraft.jogg.SyncStatejava.lang.Object_
  pageseek(Lcom/jcraft/jogg/Page;);com.jcraft.jogg.SyncState#pageseek(Lcom/jcraft/jogg/Page;)I1
 	buffer(I)$com.jcraft.jogg.SyncState#buffer(I)I-
-reset()"com.jcraft.jogg.SyncState#reset()I/
+reset()"com.jcraft.jogg.SyncState#reset()V/
 <init>()#com.jcraft.jogg.SyncState#<init>()V]
 pageout(Lcom/jcraft/jogg/Page;):com.jcraft.jogg.SyncState#pageout(Lcom/jcraft/jogg/Page;)I+
 init()!com.jcraft.jogg.SyncState#init()V/
-wrote(I)#com.jcraft.jogg.SyncState#wrote(I)I-
-clear()"com.jcraft.jogg.SyncState#clear()Iš
+wrote(I)#com.jcraft.jogg.SyncState#wrote(I)V-
+clear()"com.jcraft.jogg.SyncState#clear()Vš
 com.jcraft.jogg.Pagejava.lang.Object2
 granulepos()"com.jcraft.jogg.Page#granulepos()J.
 
@@ -2251,7 +2251,7 @@ register()"com.jcraft.jroar.Stats#register()VX
 <init>() com.jcraft.jogg.Packet#<init>()Vš
 com.jcraft.jogg.StreamStatejava.lang.ObjectA
 lacing_expand(I)-com.jcraft.jogg.StreamState#lacing_expand(I)V/
-reset()$com.jcraft.jogg.StreamState#reset()I1
+reset()$com.jcraft.jogg.StreamState#reset()V1
 <init>()%com.jcraft.jogg.StreamState#<init>()V]
 pagein(Lcom/jcraft/jogg/Page;);com.jcraft.jogg.StreamState#pagein(Lcom/jcraft/jogg/Page;)I/
 init(I)$com.jcraft.jogg.StreamState#init(I)V[
@@ -2421,11 +2421,7 @@ $<init>([BIILjava/net/SocketAddress;)=java.net.DatagramPacket#<init>([BIILjava/
 setPort(I)#java.net.DatagramPacket#setPort(I)V)
 init()java.net.DatagramPacket#init()Vc
 #<init>([BILjava/net/SocketAddress;)<java.net.DatagramPacket#<init>([BILjava/net/SocketAddress;)V/
-	getPort()"java.net.DatagramPacket#getPort()IÞ
-com.jcraft.jorbis.Time0com.jcraft.jorbis.FuncTimež
-8unpack(Lcom/jcraft/jorbis/Info;Lcom/jcraft/jogg/Buffer;)bcom.jcraft.jorbis.Time0#unpack(Lcom/jcraft/jorbis/Info;Lcom/jcraft/jogg/Buffer;)Ljava/lang/Object;-
-<init>()!com.jcraft.jorbis.Time0#<init>()VW
-free_info(Ljava/lang/Object;)6com.jcraft.jorbis.Time0#free_info(Ljava/lang/Object;)Vßj
+	getPort()"java.net.DatagramPacket#getPort()Ißj
 java.util.Arraysjava.lang.ObjectL
 sort([Ljava/lang/Object;II)-java.util.Arrays#sort([Ljava/lang/Object;II)V9
 copyOfRange([CII)$java.util.Arrays#copyOfRange([CII)[C6
@@ -2611,10 +2607,65 @@ sort([JII)java.util.Arrays#sort([JII)VŒ
 ;parallelPrefix([JIILjava/util/function/LongBinaryOperator;)Mjava.util.Arrays#parallelPrefix([JIILjava/util/function/LongBinaryOperator;)V*
 
 sort([BII)java.util.Arrays#sort([BII)Va
-toString([Ljava/lang/Object;)@java.util.Arrays#toString([Ljava/lang/Object;)Ljava/lang/String;õ
+toString([Ljava/lang/Object;)@java.util.Arrays#toString([Ljava/lang/Object;)Ljava/lang/String;Þ
+com.jcraft.jorbis.Time0com.jcraft.jorbis.FuncTimež
+8unpack(Lcom/jcraft/jorbis/Info;Lcom/jcraft/jogg/Buffer;)bcom.jcraft.jorbis.Time0#unpack(Lcom/jcraft/jorbis/Info;Lcom/jcraft/jogg/Buffer;)Ljava/lang/Object;-
+<init>()!com.jcraft.jorbis.Time0#<init>()VW
+free_info(Ljava/lang/Object;)6com.jcraft.jorbis.Time0#free_info(Ljava/lang/Object;)Võ
 misc.PlayListcom.jcraft.jroar.UserPage#
 <init>()misc.PlayList#<init>()V£
-Hkick(Lcom/jcraft/jroar/MySocket;Ljava/util/Hashtable;Ljava/util/Vector;)Wmisc.PlayList#kick(Lcom/jcraft/jroar/MySocket;Ljava/util/Hashtable;Ljava/util/Vector;)V…
+Hkick(Lcom/jcraft/jroar/MySocket;Ljava/util/Hashtable;Ljava/util/Vector;)Wmisc.PlayList#kick(Lcom/jcraft/jroar/MySocket;Ljava/util/Hashtable;Ljava/util/Vector;)Vø
+java.lang.StringBuilderjava.lang.CharSequencejava.lang.AbstractStringBuilderjava.io.Serializable/
+	<init>(I)"java.lang.StringBuilder#<init>(I)VG
+	append(I):java.lang.StringBuilder#append(I)Ljava/lang/StringBuilder;u
+ append(Ljava/lang/StringBuffer;)Qjava.lang.StringBuilder#append(Ljava/lang/StringBuffer;)Ljava/lang/StringBuilder;O
+insert(I[CII)>java.lang.StringBuilder#insert(I[CII)Ljava/lang/StringBuilder;-
+<init>()!java.lang.StringBuilder#<init>()VI
+
+delete(II);java.lang.StringBuilder#delete(II)Ljava/lang/StringBuilder;G
+	append(C):java.lang.StringBuilder#append(C)Ljava/lang/StringBuilder;w
+!insert(ILjava/lang/CharSequence;)Rjava.lang.StringBuilder#insert(ILjava/lang/CharSequence;)Ljava/lang/StringBuilder;k
+'readObject(Ljava/io/ObjectInputStream;)@java.lang.StringBuilder#readObject(Ljava/io/ObjectInputStream;)VI
+
+insert(II);java.lang.StringBuilder#insert(II)Ljava/lang/StringBuilder;Q
+<init>(Ljava/lang/String;)3java.lang.StringBuilder#<init>(Ljava/lang/String;)VG
+	append(Z):java.lang.StringBuilder#append(Z)Ljava/lang/StringBuilder;i
+append(Ljava/lang/Object;)Kjava.lang.StringBuilder#append(Ljava/lang/Object;)Ljava/lang/StringBuilder;o
+replace(IILjava/lang/String;)Njava.lang.StringBuilder#replace(IILjava/lang/String;)Ljava/lang/StringBuilder;S
+indexOf(Ljava/lang/String;)4java.lang.StringBuilder#indexOf(Ljava/lang/String;)IU
+indexOf(Ljava/lang/String;I)5java.lang.StringBuilder#indexOf(Ljava/lang/String;I)IM
+append([CII)=java.lang.StringBuilder#append([CII)Ljava/lang/StringBuilder;I
+
+insert(IC);java.lang.StringBuilder#insert(IC)Ljava/lang/StringBuilder;]
+ lastIndexOf(Ljava/lang/String;I)9java.lang.StringBuilder#lastIndexOf(Ljava/lang/String;I)IB
+
+toString()4java.lang.StringBuilder#toString()Ljava/lang/String;G
+	reverse():java.lang.StringBuilder#reverse()Ljava/lang/StringBuilder;k
+insert(ILjava/lang/Object;)Ljava.lang.StringBuilder#insert(ILjava/lang/Object;)Ljava/lang/StringBuilder;i
+append(Ljava/lang/String;)Kjava.lang.StringBuilder#append(Ljava/lang/String;)Ljava/lang/StringBuilder;I
+
+insert(IZ);java.lang.StringBuilder#insert(IZ)Ljava/lang/StringBuilder;k
+insert(ILjava/lang/String;)Ljava.lang.StringBuilder#insert(ILjava/lang/String;)Ljava/lang/StringBuilder;S
+deleteCharAt(I)@java.lang.StringBuilder#deleteCharAt(I)Ljava/lang/StringBuilder;G
+	append(J):java.lang.StringBuilder#append(J)Ljava/lang/StringBuilder;G
+	append(F):java.lang.StringBuilder#append(F)Ljava/lang/StringBuilder;Y
+appendCodePoint(I)Cjava.lang.StringBuilder#appendCodePoint(I)Ljava/lang/StringBuilder;u
+ append(Ljava/lang/CharSequence;)Qjava.lang.StringBuilder#append(Ljava/lang/CharSequence;)Ljava/lang/StringBuilder;[
+lastIndexOf(Ljava/lang/String;)8java.lang.StringBuilder#lastIndexOf(Ljava/lang/String;)IG
+	append(D):java.lang.StringBuilder#append(D)Ljava/lang/StringBuilder;I
+
+append([C);java.lang.StringBuilder#append([C)Ljava/lang/StringBuilder;y
+"append(Ljava/lang/CharSequence;II)Sjava.lang.StringBuilder#append(Ljava/lang/CharSequence;II)Ljava/lang/StringBuilder;K
+insert(I[C)<java.lang.StringBuilder#insert(I[C)Ljava/lang/StringBuilder;{
+#insert(ILjava/lang/CharSequence;II)Tjava.lang.StringBuilder#insert(ILjava/lang/CharSequence;II)Ljava/lang/StringBuilder;I
+
+insert(IJ);java.lang.StringBuilder#insert(IJ)Ljava/lang/StringBuilder;]
+ <init>(Ljava/lang/CharSequence;)9java.lang.StringBuilder#<init>(Ljava/lang/CharSequence;)VI
+
+insert(ID);java.lang.StringBuilder#insert(ID)Ljava/lang/StringBuilder;o
+)writeObject(Ljava/io/ObjectOutputStream;)Bjava.lang.StringBuilder#writeObject(Ljava/io/ObjectOutputStream;)VI
+
+insert(IF);java.lang.StringBuilder#insert(IF)Ljava/lang/StringBuilder;…
 misc.mplistener#com.jcraft.jroar.MountPointListenerjava.lang.ObjectK
 unmount(Ljava/lang/String;),misc.mplistener#unmount(Ljava/lang/String;)V%
 <init>()misc.mplistener#<init>()VG
