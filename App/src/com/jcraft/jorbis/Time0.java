@@ -27,7 +27,11 @@ package com.jcraft.jorbis;
 
 import com.jcraft.jogg.*;
 
-class Time0 extends FuncTime{
-  Object unpack(Info vi , Buffer opb){return "";}
-  void free_info(Object i){}
+class Time0 extends FuncTime {
+	Object unpack(Info vi, Buffer opb) {
+		return "";
+	}
+
+	void free_info(Object i) {
+	}
 }
