@@ -1,3 +1,24 @@
+/* -*-mode:java; c-basic-offset:2; -*- */
+/* JRoar -- pure Java streaming server for Ogg 
+ *
+ * Copyright (C) 2001,2002 ymnk, JCraft,Inc.
+ *
+ * Written by: 2001,2002 ymnk<ymnk@jcraft.com>
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ */
 
 package com.jcraft.jroar;
 import java.util.*;
@@ -7,18 +28,19 @@ import java.awt.*;
 import java.awt.event.*;
 import java.applet.*;
 
+
 public class JRoar extends Applet implements Runnable{
   static final String version="0.0.9";
 
   static boolean running_as_applet=true;
   static java.net.URL codebase=null;
-//  static String passwd="passssap";
+
   static String passwd=null;
-//static String icepasswd="changeme";
+
   static String icepasswd=null;
   static String comment=null;
 
-  static Vector<MountPointListener> mplisteners = new Vector();
+  static final java.util.Vector mplisteners=new java.util.Vector();
 
   Button mount;
 
@@ -33,11 +55,9 @@ public class JRoar extends Applet implements Runnable{
     s=getParameter("jroar.port");
     if(s!=null){
       try{ HttpServer.port=Integer.parseInt(s); }
-      catch(Exception e){}
+      catch(Exception ignored){}
     }
 
-//  s=getParameter("jroar.ipaddress");
-//  HttpServer.myaddress=s;
 
     s=getParameter("jroar.myaddress");
     HttpServer.myaddress=s;
@@ -60,7 +80,7 @@ public class JRoar extends Applet implements Runnable{
           URL url=new URL(HttpServer.myURL+"/ctrl.html");
           getAppletContext().showDocument(url, "_blank");
 	}
-	catch(Exception ee){System.out.println(ee);}
+	catch(Exception ee){ee.printStackTrace();}
       }
     });
     setBackground(Color.white);
@@ -102,13 +122,9 @@ public class JRoar extends Applet implements Runnable{
     for(int i=0; i<arg.length; i++){
       if(arg[i].equals("-port") && arg.length>i+1){
         try{ HttpServer.port=Integer.parseInt(arg[i+1]);}
-	catch(Exception e){}
+	catch(Exception ignored){}
 	i++;
       }
-//    else if(arg[i].equals("-ipaddress") && arg.length>i+1){
-//      HttpServer.myaddress=arg[i+1];
-//      i++;
-//    }
       else if(arg[i].equals("-myaddress") && arg.length>i+1){
         HttpServer.myaddress=arg[i+1];
         i++;
@@ -131,7 +147,7 @@ public class JRoar extends Applet implements Runnable{
         i+=2;
         if(arg.length>i+1 && !(arg[i+1].startsWith("-"))){
           try{ proxy.setLimit(Integer.parseInt(arg[i+1])); }
-          catch(Exception e){
+          catch(Exception ignored){
 	  }
           i++;
 	}
@@ -141,32 +157,17 @@ public class JRoar extends Applet implements Runnable{
         i+=2;
         if(arg.length>i+1 && !(arg[i+1].startsWith("-"))){
           try{ p.setLimit(Integer.parseInt(arg[i+1])); }
-          catch(Exception e){
+          catch(Exception ignored){
 	  }
           i++;
 	}
         p.kick();
       }
       else if(arg[i].equals("-udp") && arg.length>i+4){
-        int port=0;
-        try{ port=Integer.parseInt(arg[i+3]);}
-  	catch(Exception e){System.err.println(e);}
-        UDPBroadcast u=new UDPBroadcast(arg[i+1], // src mount point
-                                        arg[i+2], // broadcast address
-					port,     // port number
-					arg[i+4]);// dst mount point
-        i+=4;
+        break;
       }
       else if(arg[i].equals("-shout") && arg.length>i+5){
-        int port=0;
-        try{ port=Integer.parseInt(arg[i+3]);}
-  	catch(Exception e){System.err.println(e);}
-        ShoutClient sc=new ShoutClient(arg[i+1], // src mount point
-                                       arg[i+2], // dst ip address
-                                       port,     // dst port number
-				       arg[i+4], // passwd
-				       arg[i+5]);// dst mount point
-        i+=5;
+        break;
       }
       else if(arg[i].equals("-page") && arg.length>i+2){
         try{
@@ -181,8 +182,7 @@ public class JRoar extends Applet implements Runnable{
         try{
           new Store(arg[i+1], arg[i+2]);
         }
-        catch(Exception e){
-//        System.err.println("Unknown class: "+arg[i+2]);
+        catch(Exception ignored){
         }
         i+=2;
       }
@@ -190,7 +190,7 @@ public class JRoar extends Applet implements Runnable{
         try{
           Class c=Class.forName(arg[i+1]);
 	  System.out.println("c: "+c);
-          addMountPointListener((MountPointListener)(c.newInstance()));
+          addMountPointListener((MountPointListener)(c.getDeclaredConstructor().newInstance()));
         }
         catch(Exception e){
           System.err.println("Unknown listener class: "+arg[i+1]);
@@ -203,9 +203,9 @@ public class JRoar extends Applet implements Runnable{
       }
       else {
         System.err.println("invalid option: "+arg[i]);
-        for(int ii=0; ii<usage.length; ii++){
-          System.err.println(usage[ii]);
-	}
+        for (String s : usage) {
+          System.err.println(s);
+        }
         System.exit(-1);
       }
     }
@@ -221,14 +221,14 @@ public class JRoar extends Applet implements Runnable{
     InputStream pstream=null;
     if(m3u.startsWith("http://")){
       try{
-        URL url=null;
+        URL url;
         if(running_as_applet) url=new URL(codebase, m3u);
         else url=new URL(m3u);
         URLConnection urlc=url.openConnection();
         pstream=urlc.getInputStream();
       }
       catch(Exception ee){
-        System.err.println(ee); 	    
+        ee.printStackTrace();
         return null;
       }
     }
@@ -237,7 +237,7 @@ public class JRoar extends Applet implements Runnable{
         pstream=new FileInputStream(System.getProperty("user.dir")+"/"+m3u);
       }
       catch(Exception ee){
-        System.err.println(ee); 	    
+        ee.printStackTrace();
         return null;
       }
     }
@@ -245,7 +245,7 @@ public class JRoar extends Applet implements Runnable{
     String line=null;
     Vector foo=new Vector();
     while(true){
-      try{line=readline(pstream);}catch(Exception e){}
+      try{line=readline(pstream);}catch(Exception ignored){}
       if(line==null)break;
 System.out.println("playFile ("+line+")");
       if(line.startsWith("#")) continue;
@@ -300,10 +300,10 @@ System.out.println("playFile ("+line+")");
       while(true){
         try{
           sources=Source.sources.elements();
-          for(; sources.hasMoreElements();){
+          while (sources.hasMoreElements()) {
             source=((Source)sources.nextElement());
             int size=source.listeners.size();
-            Client c=null;
+            Client c;
             for(int i=0; i<size; i++){
               try{
                 c=(Client)(source.listeners.elementAt(i));
@@ -312,16 +312,16 @@ System.out.println("playFile ("+line+")");
                   ((HttpClient)c).ms.close();
 	        }
 	      }
-              catch(Exception ee){}
+              catch(Exception ignored){}
 	    }
   	  }
-	}
+        }
         catch(Exception e){
-System.out.println("WatchDog: "+e);
-	}
+        System.out.println("WatchDog: "+e);
+        }
 
         try{Thread.sleep(WATCHDOGSLEEP);}
-        catch(Exception e){}
+        catch(Exception ignored){}
       }
     }
   }

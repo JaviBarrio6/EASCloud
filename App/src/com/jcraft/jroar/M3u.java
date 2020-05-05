@@ -23,11 +23,10 @@
 package com.jcraft.jroar;
 import java.lang.*;
 import java.io.*;
-import java.net.*;
 import java.util.*;
 
 class M3u extends Page{
-  String pls=null;
+  String pls;
 
   M3u(String pls){
     super();

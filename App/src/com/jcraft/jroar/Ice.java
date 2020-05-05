@@ -22,9 +22,7 @@
 
 package com.jcraft.jroar;
 import java.io.*;
-import java.net.*;
 import java.util.*;
-
 import com.jcraft.jogg.*;
 
 class Ice extends Source{
@@ -32,8 +30,8 @@ class Ice extends Source{
 
   private static final int TIMEOUT=3000; // 3 seconds
 
-  private InputStream bitStream=null;
-  private MySocket mysocket=null;
+  private final InputStream bitStream;
+  private MySocket mysocket;
 
   private SyncState oy;
   private com.jcraft.jogg.Page og;
@@ -49,9 +47,6 @@ class Ice extends Source{
 
   private static final String _icepasswd="ice-password: ";
   private static final String _ice="ice-";
-  Ice(String mountpoint, MySocket mysocket, Vector headerfromice){
-    this(mountpoint, mysocket, headerfromice, "ICE/1.0");
-  }
   Ice(String mountpoint, MySocket mysocket, Vector headerfromice, String protocol){
     super(mountpoint);
 
@@ -60,7 +55,7 @@ class Ice extends Source{
     this.source="ice at "+mysocket.socket.getInetAddress();
 
     boolean accept=false;
-    String foo=null;
+    String foo;
     int size=headerfromice.size();
 
     if(protocol==null || protocol.startsWith("ICE")){
@@ -94,15 +89,13 @@ System.out.println("fromIce: "+foo);
 	  try{
             byte[] bar=icepasswd.getBytes();	      
 	    if(bar.length>0){
-              code=fromBase64(bar, 0, bar.length);
+              code=fromBase64(bar, bar.length);
 	    }
 	  }
-          catch(Exception ee){ }
-System.out.println("code: "+new String(code));
-          if(JRoar.icepasswd!=null && 
-	     code!=null &&
-             (java.util.Arrays.equals(code, ("source:"+JRoar.icepasswd).getBytes())||
-              java.util.Arrays.equals(code, ("relay:"+JRoar.icepasswd).getBytes()))
+          catch(Exception ignored){ }
+          assert code != null;
+          System.out.println("code: "+new String(code));
+          if(JRoar.icepasswd != null && (Arrays.equals(code, ("source:" + JRoar.icepasswd).getBytes()) || Arrays.equals(code, ("relay:" + JRoar.icepasswd).getBytes()))
 	     ){
             accept=true;
 	  }
@@ -120,11 +113,13 @@ System.out.println("accept: "+accept);
           mysocket.println("");
    	  mysocket.flush();
         }
-        catch(Exception e){}
+        catch(Exception ignored){}
         drop();
 
-        try { if(mysocket!=null)mysocket.close(); } 
-        catch(Exception e){}
+        try {
+          mysocket.close();
+        }
+        catch(Exception ignored){}
 
         return;
       }
@@ -133,7 +128,7 @@ System.out.println("accept: "+accept);
         mysocket.println("");
         mysocket.flush();
       }
-      catch(Exception e){}
+      catch(Exception ignored){}
     }
     else {
       System.out.println("unkown protocol: "+protocol);
@@ -142,8 +137,10 @@ System.out.println("accept: "+accept);
     if(JRoar.icepasswd!=null && !accept){
       drop();
 
-      try { if(mysocket!=null)mysocket.close(); } 
-      catch(Exception e){}
+      try {
+        mysocket.close();
+      }
+      catch(Exception ignored){}
 
       return;
     }
@@ -185,7 +182,6 @@ System.out.println("accept: "+accept);
         buffer=oy.data;
         try{ bytes=bitStream.read(buffer, index, BUFSIZE); }
         catch(Exception e){
-//        System.err.println(e);
           if(me==null)break;
           bytes=-1;
         }
@@ -194,7 +190,7 @@ System.out.println("accept: "+accept);
         if(bytes==0)break;
 
         try{Thread.sleep(1);}  // sleep for green thread.
-        catch(Exception e){}
+        catch(Exception ignored){}
 
         lasttime=System.currentTimeMillis();
 
@@ -206,9 +202,9 @@ System.out.println("accept: "+accept);
 	  int result=oy.pageout(og);
 
 	  if(result==0)break; // need more data
-	  if(result==-1){ // missing or corrupt data at this page position
-//	    System.err.println("Corrupt or missing data in bitstream; continuing...");
-	  }
+	  if(result==-1){
+	    break;
+      }
 	  else{
   	    if(serialno!=og.serialno()){
               header=null;
@@ -258,11 +254,9 @@ System.out.println("accept: "+accept);
     }
 
     oy.clear();
-//    try { if(bitStream!=null)bitStream.close(); } 
-//    catch(Exception e){}
-//    bitStream=null;
+
     try { if(mysocket!=null)mysocket.close(); } 
-    catch(Exception e){}
+    catch(Exception ignored){}
     mysocket=null;
     me=null;
     drop();
@@ -272,7 +266,7 @@ System.out.println("accept: "+accept);
     if(me!=null){
       if(oy!=null) oy.clear();
       try { if(mysocket!=null)mysocket.close(); } 
-      catch(Exception e){}
+      catch(Exception ignored){}
       mysocket=null;
       me=null;
     }
@@ -286,7 +280,7 @@ System.out.println("accept: "+accept);
       for(int i=0; i<size;i++){
         c=(Client)(listeners.elementAt(i));
         try{ c.close();}
-        catch(Exception e){}
+        catch(Exception ignored){}
       }
       listeners.removeAllElements();
     }
@@ -325,11 +319,10 @@ System.out.println("drop[1]:  current="+System.currentTimeMillis()+", last="+las
     }
     return 0;
   }
-  private static byte[] fromBase64(byte[] buf, int start, int length){
+  private static byte[] fromBase64(byte[] buf, int length){
     byte[] foo=new byte[length];
     int j=0;
-    int l=length;
-    for(int i=start;i<start+length;i+=4){
+    for(int i = 0; i< length; i+=4){
       foo[j]=(byte)((val(buf[i])<<2)|((val(buf[i+1])&0x30)>>>4));
       if(buf[i+2]==(byte)'='){ j++; break;}
       foo[j+1]=(byte)(((val(buf[i+1])&0x0f)<<4)|((val(buf[i+2])&0x3c)>>>2));

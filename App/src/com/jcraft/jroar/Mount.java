@@ -21,10 +21,10 @@
  */
 
 package com.jcraft.jroar;
-import java.lang.*;
-import java.io.*;
-import java.net.*;
-import java.util.*;
+
+import java.io.IOException;
+import java.util.Hashtable;
+import java.util.Vector;
 
 class Mount extends Page{
   static void register(){
@@ -47,7 +47,7 @@ class Mount extends Page{
       String _limit=(String)vars.get("limit");
       if(_limit!=null){
         try{ limit=Integer.parseInt(_limit); }
-        catch(Exception e){}
+        catch(Exception ignored){}
       }
     }
 
@@ -74,7 +74,7 @@ class Mount extends Page{
         p.kick();
       }
 
-      if(((String)vars.get("jroar-method")).equals("GET")){
+      if((vars.get("jroar-method")).equals("GET")){
         Source s=Source.getSource(mountpoint);
         s.addListener(new HttpClient(ms, h, mountpoint));
         if(s instanceof Proxy){
@@ -85,7 +85,6 @@ class Mount extends Page{
 
     }
     forward(ms, "/");
-    return;
   }
 
 }
