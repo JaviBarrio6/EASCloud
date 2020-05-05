@@ -21,84 +21,104 @@
  */
 
 package com.jcraft.jroar;
+
 import java.io.*;
 import java.net.*;
-import java.util.*;
 
 public class MySocket {
-  Socket socket=null;
-  private DataInputStream dataInputStream=null;
-  private OutputStream os=null;
+	Socket socket = null;
+	private DataInputStream dataInputStream = null;
+	private OutputStream os = null;
 
-  MySocket(Socket s) throws IOException{
+	MySocket(Socket s) throws IOException {
 
-    try{ s.setTcpNoDelay(true); }
-    catch(Exception e){
-      System.out.println(e+" tcpnodelay");
-    }
-    socket=s;
-    BufferedInputStream bis=new BufferedInputStream(s.getInputStream());
-    dataInputStream=new DataInputStream(bis);
-    os=s.getOutputStream();
-  }
+		try {
+			s.setTcpNoDelay(true);
+		} catch (Exception e) {
+			System.out.println(e + " tcpnodelay");
+		}
+		socket = s;
+		BufferedInputStream bis = new BufferedInputStream(s.getInputStream());
+		dataInputStream = new DataInputStream(bis);
+		os = s.getOutputStream();
+	}
 
-  InputStream getInputStream(){
-    try{ return dataInputStream;}
-    catch(Exception e){}
-    return null;
-  }
+	InputStream getInputStream() {
+		try {
+			return dataInputStream;
+		} catch (Exception e) {
+		}
+		return null;
+	}
 
-  public void close(){
-    try{
-      socket.shutdownOutput();
-      dataInputStream.close();
-      os.close();
-      socket.close();
-    }
-    catch(IOException e){ }
-  }
+	public void close() {
+		try {
+			socket.shutdownOutput();
+			dataInputStream.close();
+			os.close();
+			socket.close();
+		} catch (IOException e) {
+		}
+	}
 
-  public int readByte(){
-    try{ int r=dataInputStream.readByte(); return(r&0xff); }
-    catch(IOException e){ return(-1); }
-  }
+	public int readByte() {
+		try {
+			int r = dataInputStream.readByte();
+			return (r & 0xff);
+		} catch (IOException e) {
+			return (-1);
+		}
+	}
 
-  public String readLine(){
-    try{ return(dataInputStream.readLine()); }
-    catch(IOException e){ return(null); }
-  }
+	@SuppressWarnings("deprecation")
+	public String readLine() {
+		try {
+			return (dataInputStream.readLine());
+		} catch (IOException e) {
+			return (null);
+		}
+	}
 
-  public void write(byte[] foo, int start, int length) throws IOException{
-    os.write(foo, start, length);
-  }
-  public void p(String s) throws IOException{
-    os.write(s.getBytes());
-  }
-  public void print(String s) throws IOException{
-    os.write(s.getBytes());
-  }
-  public void p(byte[] s) throws IOException{
-    os.write(s);
-  }
-  public void print(byte[] s) throws IOException{
-    os.write(s);
-  }
+	public void write(byte[] foo, int start, int length) throws IOException {
+		os.write(foo, start, length);
+	}
 
-  public void p(int c) throws IOException{
-    os.write(Integer.toString(c).getBytes());
-  }
-  public void print(int c) throws IOException{
-    os.write(Integer.toString(c).getBytes());
-  }
+	public void p(String s) throws IOException {
+		os.write(s.getBytes());
+	}
 
-  static final private byte[] _rn="\r\n".getBytes();
-  public void pn(String s) throws IOException{
-    println(s);
-  }
-  public void println(String s) throws IOException{
-    print(s); print(_rn);
-  }
-  public void flush() throws IOException{
-    os.flush();
-  }
+	public void print(String s) throws IOException {
+		os.write(s.getBytes());
+	}
+
+	public void p(byte[] s) throws IOException {
+		os.write(s);
+	}
+
+	public void print(byte[] s) throws IOException {
+		os.write(s);
+	}
+
+	public void p(int c) throws IOException {
+		os.write(Integer.toString(c).getBytes());
+	}
+
+	public void print(int c) throws IOException {
+		os.write(Integer.toString(c).getBytes());
+	}
+
+	static final private byte[] _rn = "\r\n".getBytes();
+
+	public void pn(String s) throws IOException {
+		println(s);
+	}
+
+	public void println(String s) throws IOException {
+		print(s);
+		print(_rn);
+	}
+
+	public void flush() throws IOException {
+		os.flush();
+	}
 }
