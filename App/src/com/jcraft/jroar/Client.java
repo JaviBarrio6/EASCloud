@@ -25,21 +25,22 @@ import java.io.*;
 import java.util.*;
 
 abstract class Client{
-  static Vector clients=new Vector();
-  String proxy=null;
-  long lasttime=0;
-  boolean ready=false;
+  static final Vector<Client> clients = new Vector<Client>();
+  String proxy = null;
+  long lasttime = 0;
+  boolean ready = false;
 
   Client(){
-    lasttime=System.currentTimeMillis();
+    lasttime = System.currentTimeMillis();
     synchronized(clients){
       clients.addElement(this);
     }
   }
 
-  abstract void write(Vector http_header, byte[] header,
+  abstract void write(Vector<?> http_header, byte[] header,
 	     byte[] foo, int foostart, int foolength,
 	     byte[] bar, int barstart, int barlength) throws IOException;
+
   void close(){
     synchronized(clients){
       clients.removeElement(this);

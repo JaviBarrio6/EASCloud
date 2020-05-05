@@ -23,7 +23,6 @@
 package com.jcraft.jroar;
 import java.lang.*;
 import java.io.*;
-import java.net.*;
 import java.util.*;
 
 class HomePage extends Page{
@@ -35,7 +34,7 @@ class HomePage extends Page{
 
   private static int count=0;
 
-  public void kick(MySocket s, Hashtable vars, Vector httpheader) throws IOException{
+  public void kick(MySocket s, Hashtable<?, ?> vars, Vector<?> httpheader) throws IOException{
     count++;
     s.pn( "HTTP/1.0 200 OK" );
     s.pn( "Content-Type: text/html" );
@@ -48,9 +47,9 @@ class HomePage extends Page{
     s.p( "<h1>JRoar "); s.p(JRoar.version); s.p(" at ");
                         s.p(HttpServer.myURL); s.pn("/</h1>");
 
-    Enumeration keys=Source.sources.keys();
+    Enumeration<?> keys = Source.sources.keys();
     if(keys.hasMoreElements()){ 
-      //s.pn("Mount points.<br>"); 
+      s.pn("Mount points.<br>");
     }
     else{ s.pn("There is no mount point.<br>"); }
 
@@ -93,23 +92,29 @@ class HomePage extends Page{
       s.pn("</tr>");
 
       Object[] proxies=source.getProxies();
-      if(proxies!=null){
-        for(int i=0; i<proxies.length; i++){
-          String foo=(String)(proxies[i]);
+      if(proxies != null){
+        for (Object proxy : proxies) {
+          String foo = (String) proxy;
           s.pn("<tr>");
           s.pn("<td>&nbsp;</td>");
           s.pn("<td nowrap>---&gt</td>");
-          String host=getHost(foo);
-          if(host==null){
-            s.p("<td><a href="); s.p(ogg2m3u(foo)); s.p(">"); s.p(foo);
-            s.pn("</a></td>");
-	  }
-          else{
-            s.p("<td><a href="); s.p(ogg2m3u(foo)); s.p(">"); s.p(foo.substring(host.length()-1)); s.p("</a>&nbsp;at&nbsp;");
-            s.p("<a href="); s.p(host); s.p(">"); s.p(host); s.pn("</a></td>");
-	  }
+          String host = getHost(foo);
+          s.p("<td><a href=");
+          s.p(ogg2m3u(foo));
+          s.p(">");
+          if (host == null) {
+            s.p(foo);
+          } else {
+            s.p(foo.substring(host.length() - 1));
+            s.p("</a>&nbsp;at&nbsp;");
+            s.p("<a href=");
+            s.p(host);
+            s.p(">");
+            s.p(host);
+          }
+          s.pn("</a></td>");
           s.pn("</tr>");
-	}
+        }
       }
 
     }

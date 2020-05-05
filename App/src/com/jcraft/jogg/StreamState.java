@@ -62,9 +62,11 @@ private  int body_returned;
     lacing_vals=new int[lacing_storage];
     granule_vals=new long[lacing_storage];
   }
+
   public void init(int serialno){
-    if(body_data==null){ init(); }
-    else{
+    if(body_data == null){
+      init();
+    } else{
       Arrays.fill(body_data, (byte) 0);
       Arrays.fill(lacing_vals, 0);
       Arrays.fill(granule_vals, 0);
@@ -254,7 +256,7 @@ private  int body_returned;
 
     int i;
     int vals;
-    int maxvals=(Math.min(lacing_fill, 255));
+    int maxvals = (Math.min(lacing_fill, 255));
     int bytes=0;
     int acc=0;
     long granule_pos=granule_vals[0];

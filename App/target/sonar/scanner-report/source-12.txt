@@ -83,8 +83,8 @@ public class Comment{
   }
 
   public String toString(){
-    StringBuilder foo= new StringBuilder("Vendor: " + new String(vendor, 0, vendor.length - 1));
-    for(int i=0; i<comments; i++){
+    StringBuilder foo = new StringBuilder("Vendor: " + new String(vendor, 0, vendor.length - 1));
+    for(int i = 0; i < comments; i++){
       foo.append("\nComment: ").append(new String(user_comments[i], 0, user_comments[i].length - 1));
     }
     foo.append("\n");

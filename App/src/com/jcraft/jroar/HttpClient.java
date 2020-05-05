@@ -26,16 +26,16 @@ import java.util.*;
 
 class HttpClient extends Client{
   boolean headerIsSent=false;
-  MySocket ms=null;
-  String file=null;
+  MySocket ms;
+  String file;
 
 String touched="not yet";
 
-  HttpClient(MySocket ms, Vector httpheader, String file){
+  HttpClient(MySocket ms, Vector<?> httpheader, String file){
     super();
-    this.ms=ms;
-    this.file=file;
-    String foo=null;
+    this.ms = ms;
+    this.file = file;
+    String foo;
     for(int i=0; i<httpheader.size(); i++){
       foo=(String)httpheader.elementAt(i);
       if(foo.startsWith("jroar-proxy: ")){
@@ -44,10 +44,11 @@ String touched="not yet";
     }
   }
 
-  public void write(Vector http_header, byte[] header,
-		    byte[] foo, int foostart, int foolength,
-		    byte[] bar, int barstart, int barlength) throws IOException{
-touched="done";
+  public void write(Vector<?> http_header, byte[] header,
+                    byte[] foo, int foostart, int foolength,
+                    byte[] bar, int barstart, int barlength) throws IOException{
+
+    touched="done";
     lasttime=System.currentTimeMillis();
     ready=true;
     if(!headerIsSent){
@@ -73,10 +74,10 @@ touched="done";
   public void close(){
     if(!headerIsSent){
       try{Page.unknown(ms, file);}
-      catch(Exception e){}
+      catch(Exception ignored){}
     }
     try{ms.close();}
-    catch(Exception e){}
+    catch(Exception ignored){}
     ms=null;
     super.close();
   }

@@ -23,7 +23,6 @@
 package com.jcraft.jroar;
 import java.lang.*;
 import java.io.*;
-import java.net.*;
 import java.util.*;
 
 class Ctrl extends Page{
@@ -33,7 +32,7 @@ class Ctrl extends Page{
   }
   private static int count=0;
 
-  public void kick(MySocket s, Hashtable vars, Vector httpheader) throws IOException{
+  public void kick(MySocket s, Hashtable<?, ?> vars, Vector<?> httpheader) throws IOException{
     count++;
     s.println( "HTTP/1.0 200 OK" );
     s.println( "Content-Type: text/html" );
@@ -44,9 +43,9 @@ class Ctrl extends Page{
     s.println("</HEAD><BODY>");
     s.println( "<h1>JRoar "+JRoar.version+" at "+HttpServer.myURL+"/</h1>" );
 
-    Enumeration keys=Source.sources.keys();
+    Enumeration<?> keys=Source.sources.keys();
     if(keys.hasMoreElements()){ 
-      //s.println("Mount points.<br>"); 
+      s.println("Mount points.<br>");
     }
     else{ s.println("There is no mount point.<br>"); }
 
@@ -87,20 +86,19 @@ class Ctrl extends Page{
       s.println("</tr>");
       Object[] proxies=source.getProxies();
       if(proxies!=null){
-        for(int i=0; i<proxies.length; i++){
-          String foo=(String)(proxies[i]);
+        for (Object proxy : proxies) {
+          String foo = (String) proxy;
           s.println("<tr>");
           s.println("<td>&nbsp;</td>");
           s.println("<td nowrap>---&gt</td>");
-          String host=getHost(foo);
-          if(host==null){
-            s.println("<td><a href="+ogg2m3u(foo)+">"+foo+"</a></td>");
-	  }
-          else{
-            s.println("<td><a href="+ogg2m3u(foo)+">"+foo.substring(host.length()-1)+"</a>&nbsp;at&nbsp;<a href="+host+">"+host+"</a></td>");
-	  }
+          String host = getHost(foo);
+          if (host == null) {
+            s.println("<td><a href=" + ogg2m3u(foo) + ">" + foo + "</a></td>");
+          } else {
+            s.println("<td><a href=" + ogg2m3u(foo) + ">" + foo.substring(host.length() - 1) + "</a>&nbsp;at&nbsp;<a href=" + host + ">" + host + "</a></td>");
+          }
           s.println("</tr>");
-	}
+        }
       }
 
     }
@@ -174,7 +172,7 @@ class Ctrl extends Page{
 
     s.println("<table cellpadding=3 cellspacing=0 border=0>");
     for(int i=0; i<Client.clients.size(); i++){
-      Client c=((Client)(Client.clients.elementAt(i)));
+      Client c=((Client.clients.elementAt(i)));
       if(c instanceof ShoutClient){
       ShoutClient sc=(ShoutClient)c;
       s.println("<tr>");

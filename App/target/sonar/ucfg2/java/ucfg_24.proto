@@ -1,16 +1,18 @@
 
 ?com.jcraft.jroar.MySocket#getInputStream()Ljava/io/InputStream;X
-NC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jroar/MySocket.java- -("3*“
+NC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jroar/MySocket.java. .("3*“
 3X
-NC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jroar/MySocket.java. .(¶
+NC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jroar/MySocket.java0
+ 0(¶
 ³
 X
-NC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jroar/MySocket.java. .(
+NC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jroar/MySocket.java0
+ 0(
 %0java.io.DataInputStream"__id*2*0
 com.jcraft.jroar.MySocket"
 dataInputStream"{
 X
-NC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jroar/MySocket.java.	 .( 
+NC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jroar/MySocket.java0 0(
 
 %0java.io.DataInputStreamB
 com.jcraft.jroar.MySocket

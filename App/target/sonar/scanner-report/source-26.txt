@@ -29,7 +29,7 @@ class Debug extends Page{
     register("/debug.html", Debug.class.getName());
   }
 
-  public void kick(MySocket s, Hashtable vars, Vector httpheader) throws IOException{
+  public void kick(MySocket s, Hashtable<?, ?> vars, Vector<?> httpheader) throws IOException{
     s.println( "HTTP/1.0 200 OK" );
     s.println( "Content-Type: text/html" );
     s.println( "" ) ;
@@ -41,7 +41,7 @@ class Debug extends Page{
     s.println( "<pre>" );
 
     Source source;
-    Enumeration sources=Source.sources.elements();
+    Enumeration<?> sources= Source.sources.elements();
     for(; sources.hasMoreElements();){
       source=((Source)sources.nextElement());
       s.println("Source: "+source);
