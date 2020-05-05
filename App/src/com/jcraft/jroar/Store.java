@@ -25,15 +25,13 @@ import java.io.*;
 import java.net.*;
 import java.util.*;
 
-import com.jcraft.jogg.*;
-
 class Store extends Page{
   static void register(){
     register("/store", Mount.class.getName());
   }
 
-  String source=null;
-  Vector header=new Vector();
+  String source;
+  Vector<String> header= new Vector<>();
   byte[] content=null;
 
   Store(String mountpoint, String source){
@@ -41,7 +39,7 @@ class Store extends Page{
     store(mountpoint, source);
   }
 
-  public void kick(MySocket s, Hashtable vars, Vector httpheader) throws IOException{
+  public void kick(MySocket s, Hashtable<?, ?> vars, Vector<?> httpheader) throws IOException{
     if(content==null){
       String mountpoint=(String)vars.get("mountpoint");
       String source=(String)vars.get("source");
@@ -55,18 +53,14 @@ class Store extends Page{
       return;
     }
 
-//    System.out.println("! header:"+ header);
     s.pn( "HTTP/1.0 200 OK" );
     for(int i=0; i<header.size(); i++){
-//    System.out.println("i="+i);
-      String foo=(String)header.elementAt(i);
+      String foo= header.elementAt(i);
       s.pn(foo);
-//    System.out.println(foo);
+
     }
     s.pn( "" ) ;
-//    System.out.println("!! content:"+ content+" ,"+content.length);
     s.p(content);
-//    System.out.println("!|");
     s.flush();
     s.close();
   }
@@ -78,26 +72,25 @@ class Store extends Page{
       String foo=urlc.getHeaderField(0); // HTTP/1.0 200 OK
       InputStream bitStream=urlc.getInputStream();
 
-      if(foo.indexOf(" 200 ")==-1){
+      if(!foo.contains(" 200 ")){
         bitStream.close();
         return;
       }
   
       int i=0;
-      String s=null;
-      String t=null;
+      String s;
+      String t;
       while(true){
         s=urlc.getHeaderField(i);
         t=urlc.getHeaderFieldKey(i);
         if(s==null)break;
-        // System.out.println("header: "+t+": "+s);
         header.addElement((t==null?s:(t+": "+s)));
         i++;
       }
 
       ByteArrayOutputStream bos=new ByteArrayOutputStream();
       byte[] buffer=new byte[1024];
-      int bytes=0;
+      int bytes;
       try{
         while(true){
           bytes=bitStream.read(buffer, 0, 1024);
@@ -105,7 +98,7 @@ class Store extends Page{
           bos.write(buffer, 0, bytes);
         }
       }
-      catch(Exception ee){ }
+      catch(Exception ignored){ }
 
       bitStream.close();
       bos.close();
@@ -114,7 +107,7 @@ class Store extends Page{
 
       register(mountpoint, this);
     }
-    catch(Exception e){
+    catch(Exception ignored){
     }
   }
 
