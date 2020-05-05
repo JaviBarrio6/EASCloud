@@ -31,14 +31,14 @@ class Mount extends Page{
     register("/mount", Mount.class.getName());
   }
 
-  public void kick(MySocket ms, Hashtable vars, Vector h) throws IOException{
+  public void kick(MySocket ms, Hashtable<?, ?> vars, Vector<?> h) throws IOException{
 
     String mountpoint=(String)vars.get("mountpoint");
     String source=(String)vars.get("source");
     String passwd=(String)vars.get("passwd");
 
     if(passwd==null || !passwd.equals(JRoar.passwd)){
-      forward(ms, "/");
+      forward(ms);
       return;
     }
     String livestream=(String)vars.get("livestream");
@@ -84,7 +84,7 @@ class Mount extends Page{
       }
 
     }
-    forward(ms, "/");
+    forward(ms);
   }
 
 }

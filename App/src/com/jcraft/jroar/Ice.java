@@ -43,11 +43,11 @@ class Ice extends Source{
 
   private long lasttime=0;
 
-  Vector http_header=new Vector();
+  Vector<String> http_header = new Vector<String>();
 
   private static final String _icepasswd="ice-password: ";
   private static final String _ice="ice-";
-  Ice(String mountpoint, MySocket mysocket, Vector headerfromice, String protocol){
+  Ice(String mountpoint, MySocket mysocket, Vector<?> headerfromice, String protocol){
     super(mountpoint);
 
     this.mysocket=mysocket;
@@ -232,12 +232,13 @@ System.out.println("accept: "+accept);
               Client c=null;
               for(int i=0; i<size;){
                 try{
-	          c=(Client)(listeners.elementAt(i));
+	          c=(listeners.elementAt(i));
                   c.write(http_header, header,
   			  og.header_base, og.header, og.header_len,
 			  og.body_base, og.body, og.body_len);
 		}
 		catch(Exception e){
+                  assert c != null;
                   c.close();
                   removeListener(c);
                   size--;
@@ -274,11 +275,11 @@ System.out.println("accept: "+accept);
   }
 
   void drop_clients(){
-    Client c=null;
+    Client c;
     synchronized(listeners){
       int size=listeners.size();
       for(int i=0; i<size;i++){
-        c=(Client)(listeners.elementAt(i));
+        c=(listeners.elementAt(i));
         try{ c.close();}
         catch(Exception ignored){}
       }
@@ -323,7 +324,7 @@ System.out.println("drop[1]:  current="+System.currentTimeMillis()+", last="+las
     byte[] foo=new byte[length];
     int j=0;
     for(int i = 0; i< length; i+=4){
-      foo[j]=(byte)((val(buf[i])<<2)|((val(buf[i+1])&0x30)>>>4));
+      foo[j] = (byte)((val(buf[i])<<2)|((val(buf[i+1])&0x30)>>>4));
       if(buf[i+2]==(byte)'='){ j++; break;}
       foo[j+1]=(byte)(((val(buf[i+1])&0x0f)<<4)|((val(buf[i+2])&0x3c)>>>2));
       if(buf[i+3]==(byte)'='){ j+=2; break;}

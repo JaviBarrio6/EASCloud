@@ -23,7 +23,6 @@
 package com.jcraft.jroar;
 import java.lang.*;
 import java.io.*;
-import java.net.*;
 import java.util.*;
 
 class Stats extends Page{
@@ -42,7 +41,7 @@ class Stats extends Page{
   static final private char[] _sources="sources".toCharArray();
   static final private char[] _listeners="listeners".toCharArray();
 
-  public void kick(MySocket s, Hashtable vars, Vector httpheader) throws IOException{
+  public void kick(MySocket s, Hashtable<?, ?> vars, Vector<?> httpheader) throws IOException{
 
     StringBuffer sb=new StringBuffer();
     sb.append("<?xml version=\"1.0\"?>");
@@ -55,14 +54,14 @@ class Stats extends Page{
     synchronized(Source.sources){
       if(HttpServer.source_connections>0){
       wrap(sb, _source_connections, HttpServer.source_connections);
-      Enumeration keys=Source.sources.keys();
+      Enumeration<?> keys=Source.sources.keys();
       wrap(sb, _sources, Source.sources.size());
 
-      if(keys.hasMoreElements()){ 
-        for(; keys.hasMoreElements();){
+      if(keys.hasMoreElements()){
+        while (keys.hasMoreElements()) {
           String mount=((String)(keys.nextElement()));
-          Source source=(Source)(Source.getSource(mount));
-          sb.append("<source mount=\""+mount+"\">");
+          Source source= Source.getSource(mount);
+          sb.append("<source mount=\"").append(mount).append("\">");
 
           if(source.getLimit()!=0){
             wrap(sb, _limit, source.getLimit());
@@ -88,10 +87,8 @@ class Stats extends Page{
   }
 
   private void  wrap(StringBuffer sb, char[] tag, int foo){
-    //sb.append("<"+tag+">"+foo+"</"+tag+">");
     sb.append(_lt); sb.append(tag); sb.append(_gt);
     sb.append(foo);
     sb.append(_ltslash); sb.append(tag); sb.append(_gt);
-    return;
   }
 }

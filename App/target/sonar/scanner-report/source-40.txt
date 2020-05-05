@@ -49,6 +49,7 @@ class PlayFile extends Source implements Runnable {
 		this.source = "playlist";
 		if (file.startsWith("http://") && file.endsWith(".m3u")) {
 			Vector<?> foo = JRoar.fetch_m3u(file);
+			assert foo != null;
 			if (foo.size() > 0) {
 				this.files = new String[foo.size()];
 				for (int i = 0; i < foo.size(); i++) {
@@ -76,7 +77,7 @@ class PlayFile extends Source implements Runnable {
 			try {
 				updateFiles(file);
 			} catch (Exception e) {
-				System.out.println(e);
+				e.printStackTrace();
 				drop();
 				HttpServer.source_connections--;
 			}
@@ -104,11 +105,11 @@ class PlayFile extends Source implements Runnable {
 				v.addElement(s);
 			}
 			d.close();
-		} catch (Exception ee) {
+		} catch (Exception ignored) {
 		}
 		this.files = new String[v.size()];
 		for (int i = 0; i < v.size(); i++) {
-			this.files[i] = (String) v.elementAt(i);
+			this.files[i] = v.elementAt(i);
 		}
 	}
 
@@ -163,7 +164,7 @@ class PlayFile extends Source implements Runnable {
 
 					bitStream = urlc.getInputStream();
 				} catch (Exception e) {
-					System.out.println(e);
+					e.printStackTrace();
 				}
 			} else if (files[ii].equals("-")) {
 				bitStream = System.in;
@@ -175,7 +176,7 @@ class PlayFile extends Source implements Runnable {
 				try {
 					bitStream = new FileInputStream(files[ii]);
 				} catch (Exception e) {
-					System.out.println(e);
+					e.printStackTrace();
 				}
 			}
 
@@ -205,8 +206,8 @@ class PlayFile extends Source implements Runnable {
 
 			init_ogg();
 
-			int serialno = -1;
-			long granulepos = -1;
+			int serialno;
+			long granulepos;
 
 			long start_time = -1;
 			long last_sample = 0;
@@ -228,7 +229,7 @@ class PlayFile extends Source implements Runnable {
 				try {
 					bytes = bitStream.read(buffer, index, BUFSIZE);
 				} catch (Exception e) {
-					System.err.println(e);
+					e.printStackTrace();
 					eos = true;
 					continue;
 				}
@@ -239,7 +240,7 @@ class PlayFile extends Source implements Runnable {
 				status = "status5";
 				oy.wrote(bytes);
 
-				while (!eos) {
+				while (true) {
 					status = "status6";
 					if (me == null)
 						break;
@@ -248,17 +249,11 @@ class PlayFile extends Source implements Runnable {
 
 					if (result == 0)
 						break; // need more data
-					if (result == -1) { // missing or corrupt data at this page position
-//	    System.err.println("Corrupt or missing data in bitstream; continuing...");
-					} else {
-						/*
-						 * if(serialno!=og.serialno()){ header=null; serialno=og.serialno(); }
-						 */
+					if (result != -1) {
 						serialno = og.serialno();
 						granulepos = og.granulepos();
 						status = "status8";
 
-//System.out.println("og: "+og+", pos="+og.granulepos());
 
 						if ((granulepos == 0) || (granulepos == -1) // hack for Speex
 						) {
@@ -298,10 +293,11 @@ class PlayFile extends Source implements Runnable {
 						for (int i = 0; i < size;) {
 							status = "status10";
 							try {
-								c = (Client) (listeners.elementAt(i));
+								c = (listeners.elementAt(i));
 								c.write(http_header, header, og.header_base, og.header, og.header_len, og.body_base,
 										og.body, og.body_len);
 							} catch (Exception e) {
+								assert c != null;
 								c.close();
 								removeListener(c);
 								size--;
@@ -316,7 +312,7 @@ class PlayFile extends Source implements Runnable {
 							if (last_sample == 0) {
 								time = (System.currentTimeMillis() - start_time) * 1000;
 							} else {
-								time += (long) (((granulepos - last_sample) * 1000000) / ((current_info.rate)));
+								time += (((granulepos - last_sample) * 1000000) / ((current_info.rate)));
 							}
 							last_sample = granulepos;
 							long sleep = (time / 1000) - (System.currentTimeMillis() - start_time);
@@ -327,7 +323,7 @@ class PlayFile extends Source implements Runnable {
 //System.out.println("sleep: "+sleep);
 								try {
 									Thread.sleep(sleep);
-								} catch (Exception e) {
+								} catch (Exception ignored) {
 								}
 							}
 							status = "status12";
@@ -336,7 +332,7 @@ class PlayFile extends Source implements Runnable {
 						// sleep for green thread.
 						try {
 							Thread.sleep(1);
-						} catch (Exception e) {
+						} catch (Exception ignored) {
 						}
 
 						status = "status13";
@@ -352,7 +348,7 @@ class PlayFile extends Source implements Runnable {
 			try {
 				if (bitStream != null)
 					bitStream.close();
-			} catch (Exception e) {
+			} catch (Exception ignored) {
 			}
 			bitStream = null;
 			status = "status16";
@@ -362,7 +358,7 @@ class PlayFile extends Source implements Runnable {
 		try {
 			if (bitStream != null)
 				bitStream.close();
-		} catch (Exception e) {
+		} catch (Exception ignored) {
 		}
 		bitStream = null;
 		status = "status14";
@@ -395,14 +391,14 @@ class PlayFile extends Source implements Runnable {
 	}
 
 	void drop_clients() {
-		Client c = null;
+		Client c;
 		synchronized (listeners) {
 			int size = listeners.size();
 			for (int i = 0; i < size; i++) {
-				c = (Client) (listeners.elementAt(i));
+				c = (listeners.elementAt(i));
 				try {
 					c.close();
-				} catch (Exception e) {
+				} catch (Exception ignored) {
 				}
 			}
 			listeners.removeAllElements();

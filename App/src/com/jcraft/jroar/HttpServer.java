@@ -102,21 +102,21 @@ class Dispatch{
     mySocket=new MySocket(s);
   }
 
-  private Vector getHttpHeader(MySocket ms){
-    Vector v=new Vector();
+  private Vector<?> getHttpHeader(MySocket ms){
+    Vector<String> v = new Vector<String>();
     String foo;
     while(true){
       foo=ms.readLine();
       if(foo.length()==0){
 	break;
       }
-System.out.println(" "+foo);
+      System.out.println(" " + foo);
       v.addElement(foo);
     }
     return v;
   }
 
-  private void procPOST(String string, Vector httpheader) throws IOException{
+  private void procPOST(String string, Vector<?> httpheader) throws IOException{
     String foo;
     int	len=0;
     String file=string.substring(string.indexOf(' ') + 1);
@@ -140,7 +140,7 @@ System.out.println(" "+foo);
         Page cgi = null;
         if(o instanceof String){
           String className=(String)o;
-          Class classObject=Class.forName(className);
+          Class<?> classObject = Class.forName(className);
           cgi=(Page)classObject.getDeclaredConstructor().newInstance();
         }
         else if(o instanceof Page){
@@ -159,7 +159,7 @@ System.out.println(" "+foo);
     Page.unknown(mySocket, file);
   }
 
-  private void procGET(String string, Vector httpheader) throws IOException{
+  private void procGET(String string, Vector<?> httpheader) throws IOException{
 
     String file;
 
@@ -218,7 +218,7 @@ System.out.println(" "+foo);
         Page cgi=null;
         if(o instanceof String){
           String className=(String)o;
-          Class classObject=Class.forName(className);
+          Class<?> classObject=Class.forName(className);
           cgi=(Page)classObject.newInstance();
 	}
         else if(o instanceof Page){
@@ -290,7 +290,7 @@ System.out.println(" "+foo);
     }
   }
 
-  private void procSOURCE(String string, Vector httpheader){
+  private void procSOURCE(String string, Vector<?> httpheader){
 
 HttpServer.source_connections++;
 
@@ -342,7 +342,7 @@ System.out.println(mySocket.socket.getInetAddress()+": "+foo+" "+(new java.util.
 
       String bar=foo.substring(0, foo.indexOf(' '));
 
-      Vector v=getHttpHeader(mySocket);
+      Vector<?> v = getHttpHeader(mySocket);
 
 
       if(bar.equalsIgnoreCase("POST")){

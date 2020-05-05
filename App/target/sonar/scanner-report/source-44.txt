@@ -28,11 +28,11 @@ import java.util.*;
 class ShoutClient extends Client{
   boolean headerIsSent=false;
   MySocket mysocket=null;
-  String srcmpoint=null;
-  String dstmpoint=null;
-  String dsthost=null;
-  int dstport=0;
-  String passwd=null;
+  String srcmpoint;
+  String dstmpoint;
+  String dsthost;
+  int dstport;
+  String passwd;
 
   ShoutClient(String srcmpoint, String dsthost, int dstport, String passwd, String dstmpoint){
     super();
@@ -62,7 +62,7 @@ class ShoutClient extends Client{
     }	
   }
 
-  public void write(Vector http_header, byte[] header,
+  public void write(Vector<?> http_header, byte[] header,
 		    byte[] foo, int foostart, int foolength,
 		    byte[] bar, int barstart, int barlength) throws IOException{
     lasttime=System.currentTimeMillis();
@@ -96,7 +96,7 @@ class ShoutClient extends Client{
 
   public void close(){
     try{mysocket.close();}
-    catch(Exception e){}
+    catch(Exception ignored){}
     mysocket=null;
     super.close();
   }

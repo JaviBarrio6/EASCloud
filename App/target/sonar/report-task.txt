@@ -3,5 +3,5 @@ projectKey=JaviBarrio6_EASCloud
 serverUrl=https://sonarcloud.io
 serverVersion=8.0.0.7525
 dashboardUrl=https://sonarcloud.io/dashboard?id=JaviBarrio6_EASCloud
-ceTaskId=AXHlcxF-WH7lXbswtM-H
-ceTaskUrl=https://sonarcloud.io/api/ce/task?id=AXHlcxF-WH7lXbswtM-H
+ceTaskId=AXHl0M6I7B1jKDQh1w0d
+ceTaskUrl=https://sonarcloud.io/api/ce/task?id=AXHl0M6I7B1jKDQh1w0d

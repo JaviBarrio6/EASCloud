@@ -26,7 +26,7 @@ import java.util.*;
 import java.io.*;
 
 public abstract class Page {
-	static Hashtable<String, Object> map = new Hashtable<String, Object>();
+	static final Hashtable<String, Object> map = new Hashtable<String, Object>();
 
 	static void register(String src, Object dst) {
 		synchronized (map) {
@@ -43,10 +43,10 @@ public abstract class Page {
 	String decode(String arg) {
 
 		byte[] foo = arg.getBytes();
-		StringBuffer sb = new StringBuffer();
+		StringBuilder sb = new StringBuilder();
 		for (int i = 0; i < foo.length; i++) {
 			if (foo[i] == '+') {
-				sb.append((char) ' ');
+				sb.append(' ');
 				continue;
 			}
 			if (foo[i] == '%' && i + 2 < foo.length) {
@@ -70,10 +70,10 @@ public abstract class Page {
 		return sb.toString();
 	}
 
-	static void forward(MySocket mysocket, String location) throws IOException {
+	static void forward(MySocket mysocket) throws IOException {
 		mysocket.println("HTTP/1.0 302 Found");
 		// mysocket.println("Location: "+HttpServer.myURL+location);
-		mysocket.println("Location: " + location);
+		mysocket.println("Location: " + "/");
 		mysocket.println("");
 		mysocket.flush();
 		mysocket.close();
@@ -116,7 +116,7 @@ public abstract class Page {
 
 		arg = decode(arg);
 
-		int foo = 0;
+		int foo;
 
 		String key, value;
 
@@ -150,8 +150,8 @@ public abstract class Page {
 			return vars;
 
 		int i = 0;
-		int c = 0;
-		StringBuffer sb = new StringBuffer();
+		int c;
+		StringBuilder sb = new StringBuilder();
 		String key, value;
 
 		while (i < len) {

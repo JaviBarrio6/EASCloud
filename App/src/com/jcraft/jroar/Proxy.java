@@ -77,7 +77,7 @@ HttpServer.source_connections++;
 
     lasttime=System.currentTimeMillis();
 
-    Vector<String> http_header=new Vector<>();
+    Vector<String> http_header = new Vector<String>();
     com.jcraft.jogg.Page[] pages=new com.jcraft.jogg.Page[10];
     int page_count=0;
 
@@ -288,7 +288,7 @@ HttpServer.source_connections++;
     synchronized(listeners){
       int size=listeners.size();
       for(int i=0; i<size;i++){
-        c=(Client)(listeners.elementAt(i));
+        c = (listeners.elementAt(i));
         try{ c.close();}
         catch(Exception ignored){}
       }

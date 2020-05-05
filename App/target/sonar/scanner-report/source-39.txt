@@ -38,7 +38,7 @@ class PeerCast {
 	}
 
 	static String getURL(String peercast) {
-		InputStream pstream = null;
+		InputStream pstream;
 		if (peercast.startsWith("peercast://")) {
 			peercast = "http://" + lookupHost + peercast.substring("peercast:/".length());
 		}
@@ -47,7 +47,7 @@ class PeerCast {
 			URLConnection urlc = url.openConnection();
 			pstream = urlc.getInputStream();
 		} catch (Exception ee) {
-			System.err.println(ee);
+			ee.printStackTrace();
 			return null;
 		}
 		if (pstream == null)
@@ -57,7 +57,7 @@ class PeerCast {
 		while (true) {
 			try {
 				tmp = readline(pstream);
-			} catch (Exception e) {
+			} catch (Exception ignored) {
 			}
 			if (tmp == null)
 				break;
@@ -67,13 +67,13 @@ class PeerCast {
 		}
 		try {
 			pstream.close();
-		} catch (Exception e) {
+		} catch (Exception ignored) {
 		}
 		return line;
 	}
 
 	static private String readline(InputStream is) {
-		StringBuffer rtn = new StringBuffer();
+		StringBuilder rtn = new StringBuilder();
 		int temp;
 		do {
 			try {

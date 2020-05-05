@@ -23,17 +23,16 @@
 package com.jcraft.jroar;
 import java.lang.*;
 import java.io.*;
-import java.net.*;
 import java.util.*;
 
 class M3u extends Page{
-  String pls=null;
+  String pls;
 
   M3u(String pls){
     super();
     this.pls=pls;
   }
-  public void kick(MySocket ms, Hashtable vars, Vector h) throws IOException{
+  public void kick(MySocket ms, Hashtable<?, ?> vars, Vector<?> h) throws IOException{
     byte[] foo=pls.getBytes();
     foo[foo.length-1]='g'; foo[foo.length-2]='g'; foo[foo.length-3]='o';
     String ogg=new String(foo);

@@ -35,7 +35,7 @@ class Drop extends Page{
     String mpoint = (String)vars.get("mpoint");
     String passwd = (String)vars.get("passwd");
     if(passwd == null || !passwd.equals(JRoar.passwd)){
-      forward(ms, "/");
+      forward(ms);
       return;
     }
 
@@ -43,6 +43,6 @@ class Drop extends Page{
        Source.getSource(mpoint) != null){
        Source.getSource(mpoint).drop();
     }
-    forward(ms, "/");
+    forward(ms);
   }
 }

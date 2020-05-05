@@ -40,25 +40,25 @@ class Shout extends Page {
     System.out.println("dst=" + dst + ",passwd=" + passwd);
 
     if (passwd == null || !passwd.equals(JRoar.passwd)) {
-      forward(ms, "/");
+      forward(ms);
       return;
     }
     if (srcmpoint == null ||
             dst == null ||
             ice_passwd == null ||
             !dst.startsWith("ice://")) {
-      forward(ms, "/");
+      forward(ms);
       return;
     }
     dst = dst.substring(6);
     if (dst.indexOf('/') == -1) {
-      forward(ms, "/");
+      forward(ms);
       return;
     }
     dst = dst.substring(0, dst.indexOf('/'));
     if (dst.indexOf(':') != -1) {
       System.out.println("?");
-      forward(ms, "/");
+      forward(ms);
     }
   }
 }

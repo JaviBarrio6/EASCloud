@@ -26,9 +26,9 @@ import java.io.*;
 import java.net.*;
 
 public class MySocket {
-	Socket socket = null;
-	private DataInputStream dataInputStream = null;
-	private OutputStream os = null;
+	Socket socket;
+	private DataInputStream dataInputStream;
+	private OutputStream os;
 
 	MySocket(Socket s) throws IOException {
 
@@ -46,7 +46,7 @@ public class MySocket {
 	InputStream getInputStream() {
 		try {
 			return dataInputStream;
-		} catch (Exception e) {
+		} catch (Exception ignored) {
 		}
 		return null;
 	}
@@ -57,7 +57,7 @@ public class MySocket {
 			dataInputStream.close();
 			os.close();
 			socket.close();
-		} catch (IOException e) {
+		} catch (IOException ignored) {
 		}
 	}
 
@@ -100,10 +100,6 @@ public class MySocket {
 	}
 
 	public void p(int c) throws IOException {
-		os.write(Integer.toString(c).getBytes());
-	}
-
-	public void print(int c) throws IOException {
 		os.write(Integer.toString(c).getBytes());
 	}
 

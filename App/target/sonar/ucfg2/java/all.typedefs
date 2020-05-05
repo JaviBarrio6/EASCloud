@@ -16,7 +16,7 @@ getClass(),java.lang.Object#getClass()Ljava/lang/Class;5
 notifyAll()java.lang.Object#notifyAll()V"
 wait()java.lang.Object#wait()V*
 
-hashCode()java.lang.Object#hashCode()I≈
+hashCode()java.lang.Object#hashCode()I†
 com.jcraft.jroar.Pagejava.lang.Objectá
 6unknown(Lcom/jcraft/jroar/MySocket;Ljava/lang/String;)Mcom.jcraft.jroar.Page#unknown(Lcom/jcraft/jroar/MySocket;Ljava/lang/String;)Ve
 %notFound(Lcom/jcraft/jroar/MySocket;)<com.jcraft.jroar.Page#notFound(Lcom/jcraft/jroar/MySocket;)VZ
@@ -24,10 +24,10 @@ hashCode()java.lang.Object#hashCode()I≈
 ok(Lcom/jcraft/jroar/MySocket;)6com.jcraft.jroar.Page#ok(Lcom/jcraft/jroar/MySocket;)Ve
 getVars(Ljava/lang/String;)Fcom.jcraft.jroar.Page#getVars(Ljava/lang/String;)Ljava/util/Hashtable;+
 <init>()com.jcraft.jroar.Page#<init>()Vw
-.register(Ljava/lang/String;Ljava/lang/Object;)Ecom.jcraft.jroar.Page#register(Ljava/lang/String;Ljava/lang/Object;)V`
+.register(Ljava/lang/String;Ljava/lang/Object;)Ecom.jcraft.jroar.Page#register(Ljava/lang/String;Ljava/lang/Object;)Vc
+$forward(Lcom/jcraft/jroar/MySocket;);com.jcraft.jroar.Page#forward(Lcom/jcraft/jroar/MySocket;)V`
 decode(Ljava/lang/String;)Bcom.jcraft.jroar.Page#decode(Ljava/lang/String;)Ljava/lang/String;y
-%getVars(Lcom/jcraft/jroar/MySocket;I)Pcom.jcraft.jroar.Page#getVars(Lcom/jcraft/jroar/MySocket;I)Ljava/util/Hashtable;á
-6forward(Lcom/jcraft/jroar/MySocket;Ljava/lang/String;)Mcom.jcraft.jroar.Page#forward(Lcom/jcraft/jroar/MySocket;Ljava/lang/String;)V∆
+%getVars(Lcom/jcraft/jroar/MySocket;I)Pcom.jcraft.jroar.Page#getVars(Lcom/jcraft/jroar/MySocket;I)Ljava/util/Hashtable;∆
 com.jcraft.jroar.UDPPagecom.jcraft.jroar.Page.
 <init>()"com.jcraft.jroar.UDPPage#<init>()VÆ
 Hkick(Lcom/jcraft/jroar/MySocket;Ljava/util/Hashtable;Ljava/util/Vector;)bcom.jcraft.jroar.UDPPage#kick(Lcom/jcraft/jroar/MySocket;Ljava/util/Hashtable;Ljava/util/Vector;)V2
@@ -411,10 +411,10 @@ valueOf(I)/java.lang.Integer#valueOf(I)Ljava/lang/Integer;5
 getConnections())com.jcraft.jroar.Source#getConnections()I1
 
 getLimit()#com.jcraft.jroar.Source#getLimit()Ig
-%parseHeader([Lcom/jcraft/jogg/Page;I)>com.jcraft.jroar.Source#parseHeader([Lcom/jcraft/jogg/Page;I)Z9
+%parseHeader([Lcom/jcraft/jogg/Page;I)>com.jcraft.jroar.Source#parseHeader([Lcom/jcraft/jogg/Page;I)V9
 getListeners()'com.jcraft.jroar.Source#getListeners()Ii
 &addListener(Lcom/jcraft/jroar/Client;)?com.jcraft.jroar.Source#addListener(Lcom/jcraft/jroar/Client;)V;
-parseHeader([B)(com.jcraft.jroar.Source#parseHeader([B)Za
+parseHeader([B)(com.jcraft.jroar.Source#parseHeader([B)Va
 "kickmplisters(Ljava/lang/String;Z);com.jcraft.jroar.Source#kickmplisters(Ljava/lang/String;Z)Vo
 getSource(Ljava/lang/String;)Ncom.jcraft.jroar.Source#getSource(Ljava/lang/String;)Lcom/jcraft/jroar/Source;)
 drop()com.jcraft.jroar.Source#drop()Vá
@@ -424,17 +424,19 @@ getLimit()#com.jcraft.jroar.Source#getLimit()Ig
 com.jcraft.jroar.UDPBroadcastcom.jcraft.jroar.Clienti
 #write(Ljava/util/Vector;[B[BII[BII)Bcom.jcraft.jroar.UDPBroadcast#write(Ljava/util/Vector;[B[BII[BII)V°
 ?<init>(Ljava/lang/String;Ljava/lang/String;ILjava/lang/String;)^com.jcraft.jroar.UDPBroadcast#<init>(Ljava/lang/String;Ljava/lang/String;ILjava/lang/String;)V1
-close()&com.jcraft.jroar.UDPBroadcast#close()V«
-com.jcraft.jroar.UserPagecom.jcraft.jroar.Page{
-.register(Ljava/lang/String;Ljava/lang/String;)Icom.jcraft.jroar.UserPage#register(Ljava/lang/String;Ljava/lang/String;)V/
-<init>()#com.jcraft.jroar.UserPage#<init>()VØ
-Hkick(Lcom/jcraft/jroar/MySocket;Ljava/util/Hashtable;Ljava/util/Vector;)ccom.jcraft.jroar.UserPage#kick(Lcom/jcraft/jroar/MySocket;Ljava/util/Hashtable;Ljava/util/Vector;)V3
+close()&com.jcraft.jroar.UDPBroadcast#close()V&
+java.lang.Runnablejava.lang.Objectπ
+com.jcraft.jroar.PlayFilecom.jcraft.jroar.Sourcejava.lang.Runnables
+*setURLProperties(Ljava/net/URLConnection;)Ecom.jcraft.jroar.PlayFile#setURLProperties(Ljava/net/URLConnection;)V)
+run() com.jcraft.jroar.PlayFile#run()V+
+stop()!com.jcraft.jroar.PlayFile#stop()V;
+drop_clients())com.jcraft.jroar.PlayFile#drop_clients()Vw
+,<init>(Ljava/lang/String;Ljava/lang/String;)Gcom.jcraft.jroar.PlayFile#<init>(Ljava/lang/String;Ljava/lang/String;)V+
+kick()!com.jcraft.jroar.PlayFile#kick()V]
+updateFiles(Ljava/lang/String;):com.jcraft.jroar.PlayFile#updateFiles(Ljava/lang/String;)V3
 
-register()%com.jcraft.jroar.UserPage#register()VÅ
-misc.JOrbisPlayercom.jcraft.jroar.UserPage'
-<init>()misc.JOrbisPlayer#<init>()Vß
-Hkick(Lcom/jcraft/jroar/MySocket;Ljava/util/Hashtable;Ljava/util/Vector;)[misc.JOrbisPlayer#kick(Lcom/jcraft/jroar/MySocket;Ljava/util/Hashtable;Ljava/util/Vector;)V&
-java.lang.Runnablejava.lang.Object2
+init_ogg()%com.jcraft.jroar.PlayFile#init_ogg()V+
+drop()!com.jcraft.jroar.PlayFile#drop()V2
 javax.accessibility.Accessiblejava.lang.Object0
 java.awt.image.ImageObserverjava.lang.Object*
 java.awt.MenuContainerjava.lang.ObjectõÊ
@@ -977,50 +979,15 @@ isActive()java.applet.Applet#isActive()Z{
 !setStub(Ljava/applet/AppletStub;)5java.applet.Applet#setStub(Ljava/applet/AppletStub;)Vf
 getAudioClip(Ljava/net/URL;)Fjava.applet.Applet#getAudioClip(Ljava/net/URL;)Ljava/applet/AudioClip;?
 getLocale()0java.applet.Applet#getLocale()Ljava/util/Locale;$
-init()java.applet.Applet#init()Væ
-com.jcraft.jroar.JRoarjava.applet.Appletjava.lang.Runnable\
- getListeners(Ljava/lang/String;)8com.jcraft.jroar.JRoar#getListeners(Ljava/lang/String;)I&
-run()com.jcraft.jroar.JRoar#run()VH
-getSources()8com.jcraft.jroar.JRoar#getSources()Ljava/util/Hashtable;î
+init()java.applet.Applet#init()V˝
+com.jcraft.jroar.JRoarjava.applet.Appletjava.lang.Runnable&
+run()com.jcraft.jroar.JRoar#run()Vî
 <addMountPointListener(Lcom/jcraft/jroar/MountPointListener;)Tcom.jcraft.jroar.JRoar#addMountPointListener(Lcom/jcraft/jroar/MountPointListener;)V,
 <init>() com.jcraft.jroar.JRoar#<init>()VN
-main([Ljava/lang/String;)1com.jcraft.jroar.JRoar#main([Ljava/lang/String;)Vr
-+store(Ljava/lang/String;Ljava/lang/String;)Ccom.jcraft.jroar.JRoar#store(Ljava/lang/String;Ljava/lang/String;)V(
-init()com.jcraft.jroar.JRoar#init()VA
-
-getMyURL()3com.jcraft.jroar.JRoar#getMyURL()Ljava/lang/String;g
+main([Ljava/lang/String;)1com.jcraft.jroar.JRoar#main([Ljava/lang/String;)V(
+init()com.jcraft.jroar.JRoar#init()Vg
 fetch_m3u(Ljava/lang/String;)Fcom.jcraft.jroar.JRoar#fetch_m3u(Ljava/lang/String;)Ljava/util/Vector;k
-readline(Ljava/io/InputStream;)Hcom.jcraft.jroar.JRoar#readline(Ljava/io/InputStream;)Ljava/lang/String;`
-"getConnections(Ljava/lang/String;):com.jcraft.jroar.JRoar#getConnections(Ljava/lang/String;)Iﬂ
-com.jcraft.jroar.MySocketjava.lang.Object/
-print(I)#com.jcraft.jroar.MySocket#print(I)VU
-println(Ljava/lang/String;)6com.jcraft.jroar.MySocket#println(Ljava/lang/String;)V-
-flush()"com.jcraft.jroar.MySocket#flush()VQ
-<init>(Ljava/net/Socket;)4com.jcraft.jroar.MySocket#<init>(Ljava/net/Socket;)VD
-
-readLine()6com.jcraft.jroar.MySocket#readLine()Ljava/lang/String;3
-
-readByte()%com.jcraft.jroar.MySocket#readByte()I'
-p(I)com.jcraft.jroar.MySocket#p(I)V5
-write([BII)&com.jcraft.jroar.MySocket#write([BII)VI
-p(Ljava/lang/String;)0com.jcraft.jroar.MySocket#p(Ljava/lang/String;)VK
-pn(Ljava/lang/String;)1com.jcraft.jroar.MySocket#pn(Ljava/lang/String;)V1
-	print([B)$com.jcraft.jroar.MySocket#print([B)V)
-p([B) com.jcraft.jroar.MySocket#p([B)VS
-getInputStream()?com.jcraft.jroar.MySocket#getInputStream()Ljava/io/InputStream;Q
-print(Ljava/lang/String;)4com.jcraft.jroar.MySocket#print(Ljava/lang/String;)V-
-close()"com.jcraft.jroar.MySocket#close()Vπ
-com.jcraft.jroar.PlayFilecom.jcraft.jroar.Sourcejava.lang.Runnables
-*setURLProperties(Ljava/net/URLConnection;)Ecom.jcraft.jroar.PlayFile#setURLProperties(Ljava/net/URLConnection;)V)
-run() com.jcraft.jroar.PlayFile#run()V+
-stop()!com.jcraft.jroar.PlayFile#stop()V;
-drop_clients())com.jcraft.jroar.PlayFile#drop_clients()Vw
-,<init>(Ljava/lang/String;Ljava/lang/String;)Gcom.jcraft.jroar.PlayFile#<init>(Ljava/lang/String;Ljava/lang/String;)V+
-kick()!com.jcraft.jroar.PlayFile#kick()V]
-updateFiles(Ljava/lang/String;):com.jcraft.jroar.PlayFile#updateFiles(Ljava/lang/String;)V3
-
-init_ogg()%com.jcraft.jroar.PlayFile#init_ogg()V+
-drop()!com.jcraft.jroar.PlayFile#drop()V÷
+readline(Ljava/io/InputStream;)Hcom.jcraft.jroar.JRoar#readline(Ljava/io/InputStream;)Ljava/lang/String;÷
 java.lang.Iterablejava.lang.Objectd
 &forEach(Ljava/util/function/Consumer;):java.lang.Iterable#forEach(Ljava/util/function/Consumer;)VH
 spliterator()7java.lang.Iterable#spliterator()Ljava/util/Spliterator;å
@@ -1141,7 +1108,43 @@ iterator()/java.util.Vector#iterator()Ljava/util/Iterator;F
 
 setSize(I)java.util.Vector#setSize(I)Vh
 )writeObject(Ljava/io/ObjectOutputStream;);java.util.Vector#writeObject(Ljava/io/ObjectOutputStream;)V"
-size()java.util.Vector#size()I(
+size()java.util.Vector#size()IÍ
+java.lang.Throwablejava.lang.Objectjava.io.Serializable;
+printStackTrace()&java.lang.Throwable#printStackTrace()V}
+2validateSuppressedExceptionsList(Ljava/util/List;)Gjava.lang.Throwable#validateSuppressedExceptionsList(Ljava/util/List;)Ic
+getStackTraceElement(I)Hjava.lang.Throwable#getStackTraceElement(I)Ljava/lang/StackTraceElement;¡
+ìprintEnclosedStackTrace(Ljava/lang/Throwable$PrintStreamOrWriter;[Ljava/lang/StackTraceElement;Ljava/lang/String;Ljava/lang/String;Ljava/util/Set;)®java.lang.Throwable#printEnclosedStackTrace(Ljava/lang/Throwable$PrintStreamOrWriter;[Ljava/lang/StackTraceElement;Ljava/lang/String;Ljava/lang/String;Ljava/util/Set;)Vw
+/<init>(Ljava/lang/String;Ljava/lang/Throwable;)Djava.lang.Throwable#<init>(Ljava/lang/String;Ljava/lang/Throwable;)VB
+getMessage()2java.lang.Throwable#getMessage()Ljava/lang/String;)
+<init>()java.lang.Throwable#<init>()Vg
+'readObject(Ljava/io/ObjectInputStream;)<java.lang.Throwable#readObject(Ljava/io/ObjectInputStream;)VM
+<init>(Ljava/lang/String;)/java.lang.Throwable#<init>(Ljava/lang/String;)VT
+getLocalizedMessage();java.lang.Throwable#getLocalizedMessage()Ljava/lang/String;e
+&printStackTrace(Ljava/io/PrintWriter;);java.lang.Throwable#printStackTrace(Ljava/io/PrintWriter;)VA
+getStackTraceDepth())java.lang.Throwable#getStackTraceDepth()IZ
+getOurStackTrace()Djava.lang.Throwable#getOurStackTrace()[Ljava/lang/StackTraceElement;>
+
+toString()0java.lang.Throwable#toString()Ljava/lang/String;Q
+fillInStackTrace();java.lang.Throwable#fillInStackTrace()Ljava/lang/Throwable;s
+-setStackTrace([Ljava/lang/StackTraceElement;)Bjava.lang.Throwable#setStackTrace([Ljava/lang/StackTraceElement;)Va
+$addSuppressed(Ljava/lang/Throwable;)9java.lang.Throwable#addSuppressed(Ljava/lang/Throwable;)Vç
+:printStackTrace(Ljava/lang/Throwable$PrintStreamOrWriter;)Ojava.lang.Throwable#printStackTrace(Ljava/lang/Throwable$PrintStreamOrWriter;)Vm
+ initCause(Ljava/lang/Throwable;)Ijava.lang.Throwable#initCause(Ljava/lang/Throwable;)Ljava/lang/Throwable;T
+getStackTrace()Ajava.lang.Throwable#getStackTrace()[Ljava/lang/StackTraceElement;A
+
+getCause()3java.lang.Throwable#getCause()Ljava/lang/Throwable;e
+&printStackTrace(Ljava/io/PrintStream;);java.lang.Throwable#printStackTrace(Ljava/io/PrintStream;)V{
+1<init>(Ljava/lang/String;Ljava/lang/Throwable;ZZ)Fjava.lang.Throwable#<init>(Ljava/lang/String;Ljava/lang/Throwable;ZZ)VS
+fillInStackTrace(I)<java.lang.Throwable#fillInStackTrace(I)Ljava/lang/Throwable;S
+<init>(Ljava/lang/Throwable;)2java.lang.Throwable#<init>(Ljava/lang/Throwable;)Vk
+)writeObject(Ljava/io/ObjectOutputStream;)>java.lang.Throwable#writeObject(Ljava/io/ObjectOutputStream;)VL
+getSuppressed()9java.lang.Throwable#getSuppressed()[Ljava/lang/Throwable;Ô
+java.lang.Exceptionjava.lang.Throwable)
+<init>()java.lang.Exception#<init>()VM
+<init>(Ljava/lang/String;)/java.lang.Exception#<init>(Ljava/lang/String;)Vw
+/<init>(Ljava/lang/String;Ljava/lang/Throwable;)Djava.lang.Exception#<init>(Ljava/lang/String;Ljava/lang/Throwable;)V{
+1<init>(Ljava/lang/String;Ljava/lang/Throwable;ZZ)Fjava.lang.Exception#<init>(Ljava/lang/String;Ljava/lang/Throwable;ZZ)VS
+<init>(Ljava/lang/Throwable;)2java.lang.Exception#<init>(Ljava/lang/Throwable;)V(
 java.lang.Appendablejava.lang.Object+
 java.lang.AutoCloseablejava.lang.Object>
 java.io.Closeablejava.lang.Objectjava.lang.AutoCloseable%
@@ -1715,10 +1718,10 @@ $checkLookupTable(Ljava/lang/String;)Pjava.net.InetAddress#checkLookupTable(Lja
 init()java.net.InetAddress#init()V|
 &getCachedAddresses(Ljava/lang/String;)Rjava.net.InetAddress#getCachedAddresses(Ljava/lang/String;)[Ljava/net/InetAddress;l
 )writeObject(Ljava/io/ObjectOutputStream;)?java.net.InetAddress#writeObject(Ljava/io/ObjectOutputStream;)VE
-readResolve()4java.net.InetAddress#readResolve()Ljava/lang/Object;˛
+readResolve()4java.net.InetAddress#readResolve()Ljava/lang/Object;√
 !com.jcraft.jroar.HttpServer$Spawnjava.lang.Thread1
-run()(com.jcraft.jroar.HttpServer$Spawn#run()Vì
-6<init>(Lcom/jcraft/jroar/HttpServer;Ljava/net/Socket;)Ycom.jcraft.jroar.HttpServer$Spawn#<init>(Lcom/jcraft/jroar/HttpServer;Ljava/net/Socket;)VÜ
+run()(com.jcraft.jroar.HttpServer$Spawn#run()VY
+<init>(Ljava/net/Socket;)<com.jcraft.jroar.HttpServer$Spawn#<init>(Ljava/net/Socket;)VÜ
 com.jcraft.jroar.Dispatchjava.lang.ObjectÑ
 *getHttpHeader(Lcom/jcraft/jroar/MySocket;)Vcom.jcraft.jroar.Dispatch#getHttpHeader(Lcom/jcraft/jroar/MySocket;)Ljava/util/Vector;+
 doit()!com.jcraft.jroar.Dispatch#doit()V
@@ -1726,7 +1729,112 @@ $checkLookupTable(Ljava/lang/String;)Pjava.net.InetAddress#checkLookupTable(Lja
 -procGET(Ljava/lang/String;Ljava/util/Vector;)Hcom.jcraft.jroar.Dispatch#procGET(Ljava/lang/String;Ljava/util/Vector;)VW
 procHEAD(Ljava/lang/String;)7com.jcraft.jroar.Dispatch#procHEAD(Ljava/lang/String;)VQ
 <init>(Ljava/net/Socket;)4com.jcraft.jroar.Dispatch#<init>(Ljava/net/Socket;)V{
-.procPOST(Ljava/lang/String;Ljava/util/Vector;)Icom.jcraft.jroar.Dispatch#procPOST(Ljava/lang/String;Ljava/util/Vector;)V 
+.procPOST(Ljava/lang/String;Ljava/util/Vector;)Icom.jcraft.jroar.Dispatch#procPOST(Ljava/lang/String;Ljava/util/Vector;)VÆ
+com.jcraft.jroar.MySocketjava.lang.ObjectU
+println(Ljava/lang/String;)6com.jcraft.jroar.MySocket#println(Ljava/lang/String;)V-
+flush()"com.jcraft.jroar.MySocket#flush()VQ
+<init>(Ljava/net/Socket;)4com.jcraft.jroar.MySocket#<init>(Ljava/net/Socket;)VD
+
+readLine()6com.jcraft.jroar.MySocket#readLine()Ljava/lang/String;3
+
+readByte()%com.jcraft.jroar.MySocket#readByte()I'
+p(I)com.jcraft.jroar.MySocket#p(I)V5
+write([BII)&com.jcraft.jroar.MySocket#write([BII)VI
+p(Ljava/lang/String;)0com.jcraft.jroar.MySocket#p(Ljava/lang/String;)VK
+pn(Ljava/lang/String;)1com.jcraft.jroar.MySocket#pn(Ljava/lang/String;)V1
+	print([B)$com.jcraft.jroar.MySocket#print([B)V)
+p([B) com.jcraft.jroar.MySocket#p([B)VS
+getInputStream()?com.jcraft.jroar.MySocket#getInputStream()Ljava/io/InputStream;Q
+print(Ljava/lang/String;)4com.jcraft.jroar.MySocket#print(Ljava/lang/String;)V-
+close()"com.jcraft.jroar.MySocket#close()V,
+java.lang.reflect.Memberjava.lang.Object©
+"java.lang.reflect.AccessibleObjectjava.lang.Object"java.lang.reflect.AnnotatedElementß
+/getDeclaredAnnotationsByType(Ljava/lang/Class;)tjava.lang.reflect.AccessibleObject#getDeclaredAnnotationsByType(Ljava/lang/Class;)[Ljava/lang/annotation/Annotation;y
+getDeclaredAnnotations()]java.lang.reflect.AccessibleObject#getDeclaredAnnotations()[Ljava/lang/annotation/Annotation;¨
+BcheckAccess(Ljava/lang/Class;Ljava/lang/Class;Ljava/lang/Object;I)fjava.lang.reflect.AccessibleObject#checkAccess(Ljava/lang/Class;Ljava/lang/Class;Ljava/lang/Object;I)Vó
+'getAnnotationsByType(Ljava/lang/Class;)ljava.lang.reflect.AccessibleObject#getAnnotationsByType(Ljava/lang/Class;)[Ljava/lang/annotation/Annotation;í
+5setAccessible0(Ljava/lang/reflect/AccessibleObject;Z)Yjava.lang.reflect.AccessibleObject#setAccessible0(Ljava/lang/reflect/AccessibleObject;Z)V„
+]slowCheckMemberAccess(Ljava/lang/Class;Ljava/lang/Class;Ljava/lang/Object;ILjava/lang/Class;)Åjava.lang.reflect.AccessibleObject#slowCheckMemberAccess(Ljava/lang/Class;Ljava/lang/Class;Ljava/lang/Object;ILjava/lang/Class;)Và
+ getAnnotation(Ljava/lang/Class;)djava.lang.reflect.AccessibleObject#getAnnotation(Ljava/lang/Class;)Ljava/lang/annotation/Annotation;í
+5setAccessible([Ljava/lang/reflect/AccessibleObject;Z)Yjava.lang.reflect.AccessibleObject#setAccessible([Ljava/lang/reflect/AccessibleObject;Z)Vi
+getAnnotations()Ujava.lang.reflect.AccessibleObject#getAnnotations()[Ljava/lang/annotation/Annotation;8
+<init>(),java.lang.reflect.AccessibleObject#<init>()Vt
+&isAnnotationPresent(Ljava/lang/Class;)Jjava.lang.reflect.AccessibleObject#isAnnotationPresent(Ljava/lang/Class;)Zò
+(getDeclaredAnnotation(Ljava/lang/Class;)ljava.lang.reflect.AccessibleObject#getDeclaredAnnotation(Ljava/lang/Class;)Ljava/lang/annotation/Annotation;H
+setAccessible(Z)4java.lang.reflect.AccessibleObject#setAccessible(Z)VD
+isAccessible()2java.lang.reflect.AccessibleObject#isAccessible()Zﬂ
+java.lang.reflect.Executable$java.lang.reflect.GenericDeclaration"java.lang.reflect.AccessibleObjectjava.lang.reflect.Member]
+getParameters()Jjava.lang.reflect.Executable#getParameters()[Ljava/lang/reflect/Parameter;s
+getDeclaredAnnotations()Wjava.lang.reflect.Executable#getDeclaredAnnotations()[Ljava/lang/annotation/Annotation;i
+synthesizeAllParams()Pjava.lang.reflect.Executable#synthesizeAllParams()[Ljava/lang/reflect/Parameter;{
+getAnnotatedExceptionTypes()[java.lang.reflect.Executable#getAnnotatedExceptionTypes()[Ljava/lang/reflect/AnnotatedType;Ç
+0verifyParameters([Ljava/lang/reflect/Parameter;)Njava.lang.reflect.Executable#verifyParameters([Ljava/lang/reflect/Parameter;)Vv
+getAnnotatedReceiverType()Xjava.lang.reflect.Executable#getAnnotatedReceiverType()Ljava/lang/reflect/AnnotatedType;™
+3sharedGetParameterAnnotations([Ljava/lang/Class;[B)sjava.lang.reflect.Executable#sharedGetParameterAnnotations([Ljava/lang/Class;[B)[[Ljava/lang/annotation/Annotation;n
+getGenericParameterTypes()Pjava.lang.reflect.Executable#getGenericParameterTypes()[Ljava/lang/reflect/Type;Ç
+ getAnnotation(Ljava/lang/Class;)^java.lang.reflect.Executable#getAnnotation(Ljava/lang/Class;)Ljava/lang/annotation/Annotation;2
+<init>()&java.lang.reflect.Executable#<init>()Vk
+privateGetParameters()Qjava.lang.reflect.Executable#privateGetParameters()[Ljava/lang/reflect/Parameter;8
+isVarArgs())java.lang.reflect.Executable#isVarArgs()Zä
+4printModifiersIfNonzero(Ljava/lang/StringBuilder;IZ)Rjava.lang.reflect.Executable#printModifiersIfNonzero(Ljava/lang/StringBuilder;IZ)VU
+getTypeAnnotationBytes0()8java.lang.reflect.Executable#getTypeAnnotationBytes0()[B_
+getParameters0()Kjava.lang.reflect.Executable#getParameters0()[Ljava/lang/reflect/Parameter;e
+sharedToGenericString(IZ)Hjava.lang.reflect.Executable#sharedToGenericString(IZ)Ljava/lang/String;~
+parseParameterAnnotations([B)]java.lang.reflect.Executable#parseParameterAnnotations([B)[[Ljava/lang/annotation/Annotation;Z
+declaredAnnotations()Ajava.lang.reflect.Executable#declaredAnnotations()Ljava/util/Map;t
+getAllGenericParameterTypes()Sjava.lang.reflect.Executable#getAllGenericParameterTypes()[Ljava/lang/reflect/Type;ë
+'getAnnotationsByType(Ljava/lang/Class;)fjava.lang.reflect.Executable#getAnnotationsByType(Ljava/lang/Class;)[Ljava/lang/annotation/Annotation;{
+getAnnotatedParameterTypes()[java.lang.reflect.Executable#getAnnotatedParameterTypes()[Ljava/lang/reflect/AnnotatedType;N
+hasRealParameterData()4java.lang.reflect.Executable#hasRealParameterData()Z§
+1getAnnotatedReturnType0(Ljava/lang/reflect/Type;)ojava.lang.reflect.Executable#getAnnotatedReturnType0(Ljava/lang/reflect/Type;)Ljava/lang/reflect/AnnotatedType;†
+?separateWithCommas([Ljava/lang/Class;Ljava/lang/StringBuilder;)]java.lang.reflect.Executable#separateWithCommas([Ljava/lang/Class;Ljava/lang/StringBuilder;)VH
+getParameterCount()1java.lang.reflect.Executable#getParameterCount()I<
+isSynthetic()+java.lang.reflect.Executable#isSynthetic()Zå
+5equalParamTypes([Ljava/lang/Class;[Ljava/lang/Class;)Sjava.lang.reflect.Executable#equalParamTypes([Ljava/lang/Class;[Ljava/lang/Class;)Zü
+6sharedToString(IZ[Ljava/lang/Class;[Ljava/lang/Class;)ejava.lang.reflect.Executable#sharedToString(IZ[Ljava/lang/Class;[Ljava/lang/Class;)Ljava/lang/String;S
+getTypeAnnotationBytes()7java.lang.reflect.Executable#getTypeAnnotationBytes()[Bn
+getGenericExceptionTypes()Pjava.lang.reflect.Executable#getGenericExceptionTypes()[Ljava/lang/reflect/Type;≥
+java.lang.reflect.Constructorjava.lang.reflect.ExecutableW
+equals(Ljava/lang/Object;)9java.lang.reflect.Constructor#equals(Ljava/lang/Object;)Zt
+getDeclaredAnnotations()Xjava.lang.reflect.Constructor#getDeclaredAnnotations()[Ljava/lang/annotation/Annotation;h
+getFactory()Xjava.lang.reflect.Constructor#getFactory()Lsun/reflect/generics/factory/GenericsFactory;Z
+getParameterTypes()Cjava.lang.reflect.Constructor#getParameterTypes()[Ljava/lang/Class;Ö
+1specificToStringHeader(Ljava/lang/StringBuilder;)Pjava.lang.reflect.Constructor#specificToStringHeader(Ljava/lang/StringBuilder;)Vw
+getAnnotatedReceiverType()Yjava.lang.reflect.Constructor#getAnnotatedReceiverType()Ljava/lang/reflect/AnnotatedType;7
+
+hashCode())java.lang.reflect.Constructor#hashCode()I5
+	getSlot()(java.lang.reflect.Constructor#getSlot()Io
+getGenericParameterTypes()Qjava.lang.reflect.Constructor#getGenericParameterTypes()[Ljava/lang/reflect/Type;e
+!handleParameterNumberMismatch(II)@java.lang.reflect.Constructor#handleParameterNumberMismatch(II)VÉ
+ getAnnotation(Ljava/lang/Class;)_java.lang.reflect.Constructor#getAnnotation(Ljava/lang/Class;)Ljava/lang/annotation/Annotation;P
+getSignature()>java.lang.reflect.Constructor#getSignature()Ljava/lang/String;F
+	getName()9java.lang.reflect.Constructor#getName()Ljava/lang/String;?
+getModifiers()-java.lang.reflect.Constructor#getModifiers()It
+ newInstance([Ljava/lang/Object;)Pjava.lang.reflect.Constructor#newInstance([Ljava/lang/Object;)Ljava/lang/Object;Õ
+U<init>(Ljava/lang/Class;[Ljava/lang/Class;[Ljava/lang/Class;IILjava/lang/String;[B[B)tjava.lang.reflect.Constructor#<init>(Ljava/lang/Class;[Ljava/lang/Class;[Ljava/lang/Class;IILjava/lang/String;[B[B)VY
+getDeclaringClass()Bjava.lang.reflect.Constructor#getDeclaringClass()Ljava/lang/Class;9
+isVarArgs()*java.lang.reflect.Constructor#isVarArgs()ZZ
+getExceptionTypes()Cjava.lang.reflect.Constructor#getExceptionTypes()[Ljava/lang/Class;s
+getAnnotatedReturnType()Wjava.lang.reflect.Constructor#getAnnotatedReturnType()Ljava/lang/reflect/AnnotatedType;i
+getTypeParameters()Rjava.lang.reflect.Constructor#getTypeParameters()[Ljava/lang/reflect/TypeVariable;H
+
+toString():java.lang.reflect.Constructor#toString()Ljava/lang/String;y
+getGenericInfo()ejava.lang.reflect.Constructor#getGenericInfo()Lsun/reflect/generics/repository/ConstructorRepository;Q
+hasGenericInformation()6java.lang.reflect.Constructor#hasGenericInformation()Zs
+getConstructorAccessor()Wjava.lang.reflect.Constructor#getConstructorAccessor()Lsun/reflect/ConstructorAccessor;{
+acquireConstructorAccessor()[java.lang.reflect.Constructor#acquireConstructorAccessor()Lsun/reflect/ConstructorAccessor;I
+getParameterCount()2java.lang.reflect.Constructor#getParameterCount()I=
+isSynthetic(),java.lang.reflect.Constructor#isSynthetic()ZJ
+getRawAnnotations()3java.lang.reflect.Constructor#getRawAnnotations()[BL
+getAnnotationBytes()4java.lang.reflect.Constructor#getAnnotationBytes()[Bï
+9setConstructorAccessor(Lsun/reflect/ConstructorAccessor;)Xjava.lang.reflect.Constructor#setConstructorAccessor(Lsun/reflect/ConstructorAccessor;)VV
+toGenericString()Ajava.lang.reflect.Constructor#toGenericString()Ljava/lang/String;R
+	getRoot()Ejava.lang.reflect.Constructor#getRoot()Ljava/lang/reflect/Executable;M
+copy()Cjava.lang.reflect.Constructor#copy()Ljava/lang/reflect/Constructor;\
+getRawParameterAnnotations()<java.lang.reflect.Constructor#getRawParameterAnnotations()[Bo
+getGenericExceptionTypes()Qjava.lang.reflect.Constructor#getGenericExceptionTypes()[Ljava/lang/reflect/Type;ì
+8specificToGenericStringHeader(Ljava/lang/StringBuilder;)Wjava.lang.reflect.Constructor#specificToGenericStringHeader(Ljava/lang/StringBuilder;)Vw
+getParameterAnnotations()Zjava.lang.reflect.Constructor#getParameterAnnotations()[[Ljava/lang/annotation/Annotation; 
 com.jcraft.jroar.HttpClientcom.jcraft.jroar.ClientØ
 G<init>(Lcom/jcraft/jroar/MySocket;Ljava/util/Vector;Ljava/lang/String;)dcom.jcraft.jroar.HttpClient#<init>(Lcom/jcraft/jroar/MySocket;Ljava/util/Vector;Ljava/lang/String;)VF
 
@@ -1752,15 +1860,14 @@ Hkick(Lcom/jcraft/jroar/MySocket;Ljava/util/Hashtable;Ljava/util/Vector;)^com.j
 readline(Ljava/io/InputStream;)Fcom.jcraft.jroar.Pls#readline(Ljava/io/InputStream;)Ljava/lang/String;™
 com.jcraft.jroar.M3ucom.jcraft.jroar.Page™
 Hkick(Lcom/jcraft/jroar/MySocket;Ljava/util/Hashtable;Ljava/util/Vector;)^com.jcraft.jroar.M3u#kick(Lcom/jcraft/jroar/MySocket;Ljava/util/Hashtable;Ljava/util/Vector;)VN
-<init>(Ljava/lang/String;)0com.jcraft.jroar.M3u#<init>(Ljava/lang/String;)V™
+<init>(Ljava/lang/String;)0com.jcraft.jroar.M3u#<init>(Ljava/lang/String;)V˝
 com.jcraft.jroar.Icecom.jcraft.jroar.Source$
 run()com.jcraft.jroar.Ice#run()V,
-	isAlive()com.jcraft.jroar.Ice#isAlive()Z;
-fromBase64([BII)'com.jcraft.jroar.Ice#fromBase64([BII)[BÃ
-Y<init>(Ljava/lang/String;Lcom/jcraft/jroar/MySocket;Ljava/util/Vector;Ljava/lang/String;)ocom.jcraft.jroar.Ice#<init>(Ljava/lang/String;Lcom/jcraft/jroar/MySocket;Ljava/util/Vector;Ljava/lang/String;)V®
-G<init>(Ljava/lang/String;Lcom/jcraft/jroar/MySocket;Ljava/util/Vector;)]com.jcraft.jroar.Ice#<init>(Ljava/lang/String;Lcom/jcraft/jroar/MySocket;Ljava/util/Vector;)V&
+	isAlive()com.jcraft.jroar.Ice#isAlive()ZÃ
+Y<init>(Ljava/lang/String;Lcom/jcraft/jroar/MySocket;Ljava/util/Vector;Ljava/lang/String;)ocom.jcraft.jroar.Ice#<init>(Ljava/lang/String;Lcom/jcraft/jroar/MySocket;Ljava/util/Vector;Ljava/lang/String;)V&
 stop()com.jcraft.jroar.Ice#stop()V&
-val(B)com.jcraft.jroar.Ice#val(B)B6
+val(B)com.jcraft.jroar.Ice#val(B)B9
+fromBase64([BI)&com.jcraft.jroar.Ice#fromBase64([BI)[B6
 drop_clients()$com.jcraft.jroar.Ice#drop_clients()V&
 kick()com.jcraft.jroar.Ice#kick()Vf
 &addListener(Lcom/jcraft/jroar/Client;)<com.jcraft.jroar.Ice#addListener(Lcom/jcraft/jroar/Client;)V.
@@ -2019,111 +2126,58 @@ getValue(),java.lang.AbstractStringBuilder#getValue()[C{
 #insert(ILjava/lang/CharSequence;II)djava.lang.AbstractStringBuilder#insert(ILjava/lang/CharSequence;II)Ljava/lang/AbstractStringBuilder;Q
 offsetByCodePoints(II)7java.lang.AbstractStringBuilder#offsetByCodePoints(II)IY
 
-insert(ID)Kjava.lang.AbstractStringBuilder#insert(ID)Ljava/lang/AbstractStringBuilder;”$
-java.lang.StringBufferjava.lang.CharSequencejava.lang.AbstractStringBuilderjava.io.Serializable6
-setCharAt(IC)%java.lang.StringBuffer#setCharAt(IC)V.
-	<init>(I)!java.lang.StringBuffer#<init>(I)V,
-length() java.lang.StringBuffer#length()IE
-	append(I)8java.lang.StringBuffer#append(I)Ljava/lang/StringBuffer;E
-substring(I)5java.lang.StringBuffer#substring(I)Ljava/lang/String;M
-insert(I[CII)<java.lang.StringBuffer#insert(I[CII)Ljava/lang/StringBuffer;,
-<init>() java.lang.StringBuffer#<init>()VG
+insert(ID)Kjava.lang.AbstractStringBuilder#insert(ID)Ljava/lang/AbstractStringBuilder;¯
+java.lang.StringBuilderjava.lang.CharSequencejava.lang.AbstractStringBuilderjava.io.Serializable/
+	<init>(I)"java.lang.StringBuilder#<init>(I)VG
+	append(I):java.lang.StringBuilder#append(I)Ljava/lang/StringBuilder;u
+ append(Ljava/lang/StringBuffer;)Qjava.lang.StringBuilder#append(Ljava/lang/StringBuffer;)Ljava/lang/StringBuilder;O
+insert(I[CII)>java.lang.StringBuilder#insert(I[CII)Ljava/lang/StringBuilder;-
+<init>()!java.lang.StringBuilder#<init>()VI
 
-delete(II)9java.lang.StringBuffer#delete(II)Ljava/lang/StringBuffer;j
-'readObject(Ljava/io/ObjectInputStream;)?java.lang.StringBuffer#readObject(Ljava/io/ObjectInputStream;)VG
+delete(II);java.lang.StringBuilder#delete(II)Ljava/lang/StringBuilder;G
+	append(C):java.lang.StringBuilder#append(C)Ljava/lang/StringBuilder;w
+!insert(ILjava/lang/CharSequence;)Rjava.lang.StringBuilder#insert(ILjava/lang/CharSequence;)Ljava/lang/StringBuilder;k
+'readObject(Ljava/io/ObjectInputStream;)@java.lang.StringBuilder#readObject(Ljava/io/ObjectInputStream;)VI
 
-insert(II)9java.lang.StringBuffer#insert(II)Ljava/lang/StringBuffer;@
-codePointCount(II)*java.lang.StringBuffer#codePointCount(II)IE
-	append(Z)8java.lang.StringBuffer#append(Z)Ljava/lang/StringBuffer;g
-append(Ljava/lang/Object;)Ijava.lang.StringBuffer#append(Ljava/lang/Object;)Ljava/lang/StringBuffer;R
-indexOf(Ljava/lang/String;)3java.lang.StringBuffer#indexOf(Ljava/lang/String;)IT
-indexOf(Ljava/lang/String;I)4java.lang.StringBuffer#indexOf(Ljava/lang/String;I)I.
-	charAt(I)!java.lang.StringBuffer#charAt(I)CK
-append([CII);java.lang.StringBuffer#append([CII)Ljava/lang/StringBuffer;A
+insert(II);java.lang.StringBuilder#insert(II)Ljava/lang/StringBuilder;Q
+<init>(Ljava/lang/String;)3java.lang.StringBuilder#<init>(Ljava/lang/String;)VG
+	append(Z):java.lang.StringBuilder#append(Z)Ljava/lang/StringBuilder;i
+append(Ljava/lang/Object;)Kjava.lang.StringBuilder#append(Ljava/lang/Object;)Ljava/lang/StringBuilder;o
+replace(IILjava/lang/String;)Njava.lang.StringBuilder#replace(IILjava/lang/String;)Ljava/lang/StringBuilder;S
+indexOf(Ljava/lang/String;)4java.lang.StringBuilder#indexOf(Ljava/lang/String;)IU
+indexOf(Ljava/lang/String;I)5java.lang.StringBuilder#indexOf(Ljava/lang/String;I)IM
+append([CII)=java.lang.StringBuilder#append([CII)Ljava/lang/StringBuilder;I
 
-toString()3java.lang.StringBuffer#toString()Ljava/lang/String;E
-	reverse()8java.lang.StringBuffer#reverse()Ljava/lang/StringBuffer;g
-append(Ljava/lang/String;)Ijava.lang.StringBuffer#append(Ljava/lang/String;)Ljava/lang/StringBuffer;G
+insert(IC);java.lang.StringBuilder#insert(IC)Ljava/lang/StringBuilder;]
+ lastIndexOf(Ljava/lang/String;I)9java.lang.StringBuilder#lastIndexOf(Ljava/lang/String;I)IB
 
-insert(IZ)9java.lang.StringBuffer#insert(IZ)Ljava/lang/StringBuffer;E
-	append(J)8java.lang.StringBuffer#append(J)Ljava/lang/StringBuffer;4
-trimToSize()$java.lang.StringBuffer#trimToSize()VE
-	append(F)8java.lang.StringBuffer#append(F)Ljava/lang/StringBuffer;W
-appendCodePoint(I)Ajava.lang.StringBuffer#appendCodePoint(I)Ljava/lang/StringBuffer;s
- append(Ljava/lang/CharSequence;)Ojava.lang.StringBuffer#append(Ljava/lang/CharSequence;)Ljava/lang/StringBuffer;Z
-lastIndexOf(Ljava/lang/String;)7java.lang.StringBuffer#lastIndexOf(Ljava/lang/String;)IG
+toString()4java.lang.StringBuilder#toString()Ljava/lang/String;G
+	reverse():java.lang.StringBuilder#reverse()Ljava/lang/StringBuilder;k
+insert(ILjava/lang/Object;)Ljava.lang.StringBuilder#insert(ILjava/lang/Object;)Ljava/lang/StringBuilder;i
+append(Ljava/lang/String;)Kjava.lang.StringBuilder#append(Ljava/lang/String;)Ljava/lang/StringBuilder;I
 
-append([C)9java.lang.StringBuffer#append([C)Ljava/lang/StringBuffer;:
-getChars(II[CI)'java.lang.StringBuffer#getChars(II[CI)Vw
-"append(Ljava/lang/CharSequence;II)Qjava.lang.StringBuffer#append(Ljava/lang/CharSequence;II)Ljava/lang/StringBuffer;I
-insert(I[C):java.lang.StringBuffer#insert(I[C)Ljava/lang/StringBuffer;0
+insert(IZ);java.lang.StringBuilder#insert(IZ)Ljava/lang/StringBuilder;k
+insert(ILjava/lang/String;)Ljava.lang.StringBuilder#insert(ILjava/lang/String;)Ljava/lang/StringBuilder;S
+deleteCharAt(I)@java.lang.StringBuilder#deleteCharAt(I)Ljava/lang/StringBuilder;G
+	append(J):java.lang.StringBuilder#append(J)Ljava/lang/StringBuilder;G
+	append(F):java.lang.StringBuilder#append(F)Ljava/lang/StringBuilder;Y
+appendCodePoint(I)Cjava.lang.StringBuilder#appendCodePoint(I)Ljava/lang/StringBuilder;u
+ append(Ljava/lang/CharSequence;)Qjava.lang.StringBuilder#append(Ljava/lang/CharSequence;)Ljava/lang/StringBuilder;[
+lastIndexOf(Ljava/lang/String;)8java.lang.StringBuilder#lastIndexOf(Ljava/lang/String;)IG
+	append(D):java.lang.StringBuilder#append(D)Ljava/lang/StringBuilder;I
 
-capacity()"java.lang.StringBuffer#capacity()IG
+append([C);java.lang.StringBuilder#append([C)Ljava/lang/StringBuilder;y
+"append(Ljava/lang/CharSequence;II)Sjava.lang.StringBuilder#append(Ljava/lang/CharSequence;II)Ljava/lang/StringBuilder;K
+insert(I[C)<java.lang.StringBuilder#insert(I[C)Ljava/lang/StringBuilder;{
+#insert(ILjava/lang/CharSequence;II)Tjava.lang.StringBuilder#insert(ILjava/lang/CharSequence;II)Ljava/lang/StringBuilder;I
 
-insert(IJ)9java.lang.StringBuffer#insert(IJ)Ljava/lang/StringBuffer;G
+insert(IJ);java.lang.StringBuilder#insert(IJ)Ljava/lang/StringBuilder;]
+ <init>(Ljava/lang/CharSequence;)9java.lang.StringBuilder#<init>(Ljava/lang/CharSequence;)VI
 
-insert(IF)9java.lang.StringBuffer#insert(IF)Ljava/lang/StringBuffer;>
-ensureCapacity(I))java.lang.StringBuffer#ensureCapacity(I)Vs
- append(Ljava/lang/StringBuffer;)Ojava.lang.StringBuffer#append(Ljava/lang/StringBuffer;)Ljava/lang/StringBuffer;E
-	append(C)8java.lang.StringBuffer#append(C)Ljava/lang/StringBuffer;u
-!insert(ILjava/lang/CharSequence;)Pjava.lang.StringBuffer#insert(ILjava/lang/CharSequence;)Ljava/lang/StringBuffer;P
-<init>(Ljava/lang/String;)2java.lang.StringBuffer#<init>(Ljava/lang/String;)V@
-codePointBefore(I)*java.lang.StringBuffer#codePointBefore(I)Im
-replace(IILjava/lang/String;)Ljava.lang.StringBuffer#replace(IILjava/lang/String;)Ljava/lang/StringBuffer;G
+insert(ID);java.lang.StringBuilder#insert(ID)Ljava/lang/StringBuilder;o
+)writeObject(Ljava/io/ObjectOutputStream;)Bjava.lang.StringBuilder#writeObject(Ljava/io/ObjectOutputStream;)VI
 
-insert(IC)9java.lang.StringBuffer#insert(IC)Ljava/lang/StringBuffer;\
- lastIndexOf(Ljava/lang/String;I)8java.lang.StringBuffer#lastIndexOf(Ljava/lang/String;I)I8
-codePointAt(I)&java.lang.StringBuffer#codePointAt(I)Ii
-insert(ILjava/lang/Object;)Jjava.lang.StringBuffer#insert(ILjava/lang/Object;)Ljava/lang/StringBuffer;i
-insert(ILjava/lang/String;)Jjava.lang.StringBuffer#insert(ILjava/lang/String;)Ljava/lang/StringBuffer;Q
-deleteCharAt(I)>java.lang.StringBuffer#deleteCharAt(I)Ljava/lang/StringBuffer;E
-	append(D)8java.lang.StringBuffer#append(D)Ljava/lang/StringBuffer;G
-substring(II)6java.lang.StringBuffer#substring(II)Ljava/lang/String;Q
-subSequence(II)>java.lang.StringBuffer#subSequence(II)Ljava/lang/CharSequence;Ö
-)append(Ljava/lang/AbstractStringBuilder;)Xjava.lang.StringBuffer#append(Ljava/lang/AbstractStringBuilder;)Ljava/lang/StringBuffer;4
-setLength(I)$java.lang.StringBuffer#setLength(I)Vy
-#insert(ILjava/lang/CharSequence;II)Rjava.lang.StringBuffer#insert(ILjava/lang/CharSequence;II)Ljava/lang/StringBuffer;H
-offsetByCodePoints(II).java.lang.StringBuffer#offsetByCodePoints(II)I\
- <init>(Ljava/lang/CharSequence;)8java.lang.StringBuffer#<init>(Ljava/lang/CharSequence;)VG
-
-insert(ID)9java.lang.StringBuffer#insert(ID)Ljava/lang/StringBuffer;n
-)writeObject(Ljava/io/ObjectOutputStream;)Ajava.lang.StringBuffer#writeObject(Ljava/io/ObjectOutputStream;)VÍ
-java.lang.Throwablejava.lang.Objectjava.io.Serializable;
-printStackTrace()&java.lang.Throwable#printStackTrace()V}
-2validateSuppressedExceptionsList(Ljava/util/List;)Gjava.lang.Throwable#validateSuppressedExceptionsList(Ljava/util/List;)Ic
-getStackTraceElement(I)Hjava.lang.Throwable#getStackTraceElement(I)Ljava/lang/StackTraceElement;¡
-ìprintEnclosedStackTrace(Ljava/lang/Throwable$PrintStreamOrWriter;[Ljava/lang/StackTraceElement;Ljava/lang/String;Ljava/lang/String;Ljava/util/Set;)®java.lang.Throwable#printEnclosedStackTrace(Ljava/lang/Throwable$PrintStreamOrWriter;[Ljava/lang/StackTraceElement;Ljava/lang/String;Ljava/lang/String;Ljava/util/Set;)Vw
-/<init>(Ljava/lang/String;Ljava/lang/Throwable;)Djava.lang.Throwable#<init>(Ljava/lang/String;Ljava/lang/Throwable;)VB
-getMessage()2java.lang.Throwable#getMessage()Ljava/lang/String;)
-<init>()java.lang.Throwable#<init>()Vg
-'readObject(Ljava/io/ObjectInputStream;)<java.lang.Throwable#readObject(Ljava/io/ObjectInputStream;)VM
-<init>(Ljava/lang/String;)/java.lang.Throwable#<init>(Ljava/lang/String;)VT
-getLocalizedMessage();java.lang.Throwable#getLocalizedMessage()Ljava/lang/String;e
-&printStackTrace(Ljava/io/PrintWriter;);java.lang.Throwable#printStackTrace(Ljava/io/PrintWriter;)VA
-getStackTraceDepth())java.lang.Throwable#getStackTraceDepth()IZ
-getOurStackTrace()Djava.lang.Throwable#getOurStackTrace()[Ljava/lang/StackTraceElement;>
-
-toString()0java.lang.Throwable#toString()Ljava/lang/String;Q
-fillInStackTrace();java.lang.Throwable#fillInStackTrace()Ljava/lang/Throwable;s
--setStackTrace([Ljava/lang/StackTraceElement;)Bjava.lang.Throwable#setStackTrace([Ljava/lang/StackTraceElement;)Va
-$addSuppressed(Ljava/lang/Throwable;)9java.lang.Throwable#addSuppressed(Ljava/lang/Throwable;)Vç
-:printStackTrace(Ljava/lang/Throwable$PrintStreamOrWriter;)Ojava.lang.Throwable#printStackTrace(Ljava/lang/Throwable$PrintStreamOrWriter;)Vm
- initCause(Ljava/lang/Throwable;)Ijava.lang.Throwable#initCause(Ljava/lang/Throwable;)Ljava/lang/Throwable;T
-getStackTrace()Ajava.lang.Throwable#getStackTrace()[Ljava/lang/StackTraceElement;A
-
-getCause()3java.lang.Throwable#getCause()Ljava/lang/Throwable;e
-&printStackTrace(Ljava/io/PrintStream;);java.lang.Throwable#printStackTrace(Ljava/io/PrintStream;)V{
-1<init>(Ljava/lang/String;Ljava/lang/Throwable;ZZ)Fjava.lang.Throwable#<init>(Ljava/lang/String;Ljava/lang/Throwable;ZZ)VS
-fillInStackTrace(I)<java.lang.Throwable#fillInStackTrace(I)Ljava/lang/Throwable;S
-<init>(Ljava/lang/Throwable;)2java.lang.Throwable#<init>(Ljava/lang/Throwable;)Vk
-)writeObject(Ljava/io/ObjectOutputStream;)>java.lang.Throwable#writeObject(Ljava/io/ObjectOutputStream;)VL
-getSuppressed()9java.lang.Throwable#getSuppressed()[Ljava/lang/Throwable;Ô
-java.lang.Exceptionjava.lang.Throwable)
-<init>()java.lang.Exception#<init>()VM
-<init>(Ljava/lang/String;)/java.lang.Exception#<init>(Ljava/lang/String;)Vw
-/<init>(Ljava/lang/String;Ljava/lang/Throwable;)Djava.lang.Exception#<init>(Ljava/lang/String;Ljava/lang/Throwable;)V{
-1<init>(Ljava/lang/String;Ljava/lang/Throwable;ZZ)Fjava.lang.Exception#<init>(Ljava/lang/String;Ljava/lang/Throwable;ZZ)VS
-<init>(Ljava/lang/Throwable;)2java.lang.Exception#<init>(Ljava/lang/Throwable;)Vë
+insert(IF);java.lang.StringBuilder#insert(IF)Ljava/lang/StringBuilder;ë
 com.jcraft.jroar.JRoarExceptionjava.lang.ExceptionY
 <init>(Ljava/lang/String;);com.jcraft.jroar.JRoarException#<init>(Ljava/lang/String;)V+
 java.util.EventListenerjava.lang.ObjectJ
@@ -2156,11 +2210,7 @@ getLabel(),java.awt.Button#getLabel()Ljava/lang/String;c
 )writeObject(Ljava/io/ObjectOutputStream;):java.awt.Button#writeObject(Ljava/io/ObjectOutputStream;)Võ
 com.jcraft.jroar.JRoar$WatchDogjava.lang.Thread/
 run()&com.jcraft.jroar.JRoar$WatchDog#run()V5
-<init>())com.jcraft.jroar.JRoar$WatchDog#<init>()Vö
-com.jcraft.jroar.ShoutClientcom.jcraft.jroar.Clienth
-#write(Ljava/util/Vector;[B[BII[BII)Acom.jcraft.jroar.ShoutClient#write(Ljava/util/Vector;[B[BII[BII)Vƒ
-Q<init>(Ljava/lang/String;Ljava/lang/String;ILjava/lang/String;Ljava/lang/String;)ocom.jcraft.jroar.ShoutClient#<init>(Ljava/lang/String;Ljava/lang/String;ILjava/lang/String;Ljava/lang/String;)V0
-close()%com.jcraft.jroar.ShoutClient#close()V˙
+<init>())com.jcraft.jroar.JRoar$WatchDog#<init>()V˙
 com.jcraft.jroar.Storecom.jcraft.jroar.Page¨
 Hkick(Lcom/jcraft/jroar/MySocket;Ljava/util/Hashtable;Ljava/util/Vector;)`com.jcraft.jroar.Store#kick(Lcom/jcraft/jroar/MySocket;Ljava/util/Hashtable;Ljava/util/Vector;)Vr
 +store(Ljava/lang/String;Ljava/lang/String;)Ccom.jcraft.jroar.Store#store(Ljava/lang/String;Ljava/lang/String;)Vt
@@ -2171,10 +2221,7 @@ register()"com.jcraft.jroar.Store#register()Vó
 !setLookupHost(Ljava/lang/String;)<com.jcraft.jroar.PeerCast#setLookupHost(Ljava/lang/String;)V/
 <init>()#com.jcraft.jroar.PeerCast#<init>()Vd
 getURL(Ljava/lang/String;)Fcom.jcraft.jroar.PeerCast#getURL(Ljava/lang/String;)Ljava/lang/String;n
-readline(Ljava/io/InputStream;)Kcom.jcraft.jroar.PeerCast#readline(Ljava/io/InputStream;)Ljava/lang/String;¯
-misc.BlankPagecom.jcraft.jroar.UserPage$
-<init>()misc.BlankPage#<init>()V§
-Hkick(Lcom/jcraft/jroar/MySocket;Ljava/util/Hashtable;Ljava/util/Vector;)Xmisc.BlankPage#kick(Lcom/jcraft/jroar/MySocket;Ljava/util/Hashtable;Ljava/util/Vector;)VÇ
+readline(Ljava/io/InputStream;)Kcom.jcraft.jroar.PeerCast#readline(Ljava/io/InputStream;)Ljava/lang/String;Ç
 com.jcraft.jroar.Ctrlcom.jcraft.jroar.Page+
 <init>()com.jcraft.jroar.Ctrl#<init>()V´
 Hkick(Lcom/jcraft/jroar/MySocket;Ljava/util/Hashtable;Ljava/util/Vector;)_com.jcraft.jroar.Ctrl#kick(Lcom/jcraft/jroar/MySocket;Ljava/util/Hashtable;Ljava/util/Vector;)Vb
@@ -2246,7 +2293,75 @@ toString()6com.jcraft.jorbis.Comment#toString()Ljava/lang/String;_
 !wrap(Ljava/lang/StringBuffer;[CI)9com.jcraft.jroar.Stats#wrap(Ljava/lang/StringBuffer;[CI)V¨
 Hkick(Lcom/jcraft/jroar/MySocket;Ljava/util/Hashtable;Ljava/util/Vector;)`com.jcraft.jroar.Stats#kick(Lcom/jcraft/jroar/MySocket;Ljava/util/Hashtable;Ljava/util/Vector;)V0
 
-register()"com.jcraft.jroar.Stats#register()VX
+register()"com.jcraft.jroar.Stats#register()V”$
+java.lang.StringBufferjava.lang.CharSequencejava.lang.AbstractStringBuilderjava.io.Serializable6
+setCharAt(IC)%java.lang.StringBuffer#setCharAt(IC)V.
+	<init>(I)!java.lang.StringBuffer#<init>(I)V,
+length() java.lang.StringBuffer#length()IE
+	append(I)8java.lang.StringBuffer#append(I)Ljava/lang/StringBuffer;E
+substring(I)5java.lang.StringBuffer#substring(I)Ljava/lang/String;M
+insert(I[CII)<java.lang.StringBuffer#insert(I[CII)Ljava/lang/StringBuffer;,
+<init>() java.lang.StringBuffer#<init>()VG
+
+delete(II)9java.lang.StringBuffer#delete(II)Ljava/lang/StringBuffer;j
+'readObject(Ljava/io/ObjectInputStream;)?java.lang.StringBuffer#readObject(Ljava/io/ObjectInputStream;)VG
+
+insert(II)9java.lang.StringBuffer#insert(II)Ljava/lang/StringBuffer;@
+codePointCount(II)*java.lang.StringBuffer#codePointCount(II)IE
+	append(Z)8java.lang.StringBuffer#append(Z)Ljava/lang/StringBuffer;g
+append(Ljava/lang/Object;)Ijava.lang.StringBuffer#append(Ljava/lang/Object;)Ljava/lang/StringBuffer;R
+indexOf(Ljava/lang/String;)3java.lang.StringBuffer#indexOf(Ljava/lang/String;)IT
+indexOf(Ljava/lang/String;I)4java.lang.StringBuffer#indexOf(Ljava/lang/String;I)I.
+	charAt(I)!java.lang.StringBuffer#charAt(I)CK
+append([CII);java.lang.StringBuffer#append([CII)Ljava/lang/StringBuffer;A
+
+toString()3java.lang.StringBuffer#toString()Ljava/lang/String;E
+	reverse()8java.lang.StringBuffer#reverse()Ljava/lang/StringBuffer;g
+append(Ljava/lang/String;)Ijava.lang.StringBuffer#append(Ljava/lang/String;)Ljava/lang/StringBuffer;G
+
+insert(IZ)9java.lang.StringBuffer#insert(IZ)Ljava/lang/StringBuffer;E
+	append(J)8java.lang.StringBuffer#append(J)Ljava/lang/StringBuffer;4
+trimToSize()$java.lang.StringBuffer#trimToSize()VE
+	append(F)8java.lang.StringBuffer#append(F)Ljava/lang/StringBuffer;W
+appendCodePoint(I)Ajava.lang.StringBuffer#appendCodePoint(I)Ljava/lang/StringBuffer;s
+ append(Ljava/lang/CharSequence;)Ojava.lang.StringBuffer#append(Ljava/lang/CharSequence;)Ljava/lang/StringBuffer;Z
+lastIndexOf(Ljava/lang/String;)7java.lang.StringBuffer#lastIndexOf(Ljava/lang/String;)IG
+
+append([C)9java.lang.StringBuffer#append([C)Ljava/lang/StringBuffer;:
+getChars(II[CI)'java.lang.StringBuffer#getChars(II[CI)Vw
+"append(Ljava/lang/CharSequence;II)Qjava.lang.StringBuffer#append(Ljava/lang/CharSequence;II)Ljava/lang/StringBuffer;I
+insert(I[C):java.lang.StringBuffer#insert(I[C)Ljava/lang/StringBuffer;0
+
+capacity()"java.lang.StringBuffer#capacity()IG
+
+insert(IJ)9java.lang.StringBuffer#insert(IJ)Ljava/lang/StringBuffer;G
+
+insert(IF)9java.lang.StringBuffer#insert(IF)Ljava/lang/StringBuffer;>
+ensureCapacity(I))java.lang.StringBuffer#ensureCapacity(I)Vs
+ append(Ljava/lang/StringBuffer;)Ojava.lang.StringBuffer#append(Ljava/lang/StringBuffer;)Ljava/lang/StringBuffer;E
+	append(C)8java.lang.StringBuffer#append(C)Ljava/lang/StringBuffer;u
+!insert(ILjava/lang/CharSequence;)Pjava.lang.StringBuffer#insert(ILjava/lang/CharSequence;)Ljava/lang/StringBuffer;P
+<init>(Ljava/lang/String;)2java.lang.StringBuffer#<init>(Ljava/lang/String;)V@
+codePointBefore(I)*java.lang.StringBuffer#codePointBefore(I)Im
+replace(IILjava/lang/String;)Ljava.lang.StringBuffer#replace(IILjava/lang/String;)Ljava/lang/StringBuffer;G
+
+insert(IC)9java.lang.StringBuffer#insert(IC)Ljava/lang/StringBuffer;\
+ lastIndexOf(Ljava/lang/String;I)8java.lang.StringBuffer#lastIndexOf(Ljava/lang/String;I)I8
+codePointAt(I)&java.lang.StringBuffer#codePointAt(I)Ii
+insert(ILjava/lang/Object;)Jjava.lang.StringBuffer#insert(ILjava/lang/Object;)Ljava/lang/StringBuffer;i
+insert(ILjava/lang/String;)Jjava.lang.StringBuffer#insert(ILjava/lang/String;)Ljava/lang/StringBuffer;Q
+deleteCharAt(I)>java.lang.StringBuffer#deleteCharAt(I)Ljava/lang/StringBuffer;E
+	append(D)8java.lang.StringBuffer#append(D)Ljava/lang/StringBuffer;G
+substring(II)6java.lang.StringBuffer#substring(II)Ljava/lang/String;Q
+subSequence(II)>java.lang.StringBuffer#subSequence(II)Ljava/lang/CharSequence;Ö
+)append(Ljava/lang/AbstractStringBuilder;)Xjava.lang.StringBuffer#append(Ljava/lang/AbstractStringBuilder;)Ljava/lang/StringBuffer;4
+setLength(I)$java.lang.StringBuffer#setLength(I)Vy
+#insert(ILjava/lang/CharSequence;II)Rjava.lang.StringBuffer#insert(ILjava/lang/CharSequence;II)Ljava/lang/StringBuffer;H
+offsetByCodePoints(II).java.lang.StringBuffer#offsetByCodePoints(II)I\
+ <init>(Ljava/lang/CharSequence;)8java.lang.StringBuffer#<init>(Ljava/lang/CharSequence;)VG
+
+insert(ID)9java.lang.StringBuffer#insert(ID)Ljava/lang/StringBuffer;n
+)writeObject(Ljava/io/ObjectOutputStream;)Ajava.lang.StringBuffer#writeObject(Ljava/io/ObjectOutputStream;)VX
 com.jcraft.jogg.Packetjava.lang.Object,
 <init>() com.jcraft.jogg.Packet#<init>()Vö
 com.jcraft.jogg.StreamStatejava.lang.ObjectA
@@ -2271,7 +2386,11 @@ read([BII)(java.io.ByteArrayInputStream#read([BII)I6
 
 <init>([B)(java.io.ByteArrayInputStream#<init>([B)V0
 mark(I)%java.io.ByteArrayInputStream#mark(I)V0
-close()%java.io.ByteArrayInputStream#close()Vå
+close()%java.io.ByteArrayInputStream#close()Vö
+com.jcraft.jroar.ShoutClientcom.jcraft.jroar.Clienth
+#write(Ljava/util/Vector;[B[BII[BII)Acom.jcraft.jroar.ShoutClient#write(Ljava/util/Vector;[B[BII[BII)Vƒ
+Q<init>(Ljava/lang/String;Ljava/lang/String;ILjava/lang/String;Ljava/lang/String;)ocom.jcraft.jroar.ShoutClient#<init>(Ljava/lang/String;Ljava/lang/String;ILjava/lang/String;Ljava/lang/String;)V0
+close()%com.jcraft.jroar.ShoutClient#close()Vå
 java.lang.Mathjava.lang.Object$
 round(F)java.lang.Math#round(F)I 
 sin(D)java.lang.Math#sin(D)D.
@@ -2611,65 +2730,7 @@ sort([BII)java.util.Arrays#sort([BII)Va
 com.jcraft.jorbis.Time0com.jcraft.jorbis.FuncTimeû
 8unpack(Lcom/jcraft/jorbis/Info;Lcom/jcraft/jogg/Buffer;)bcom.jcraft.jorbis.Time0#unpack(Lcom/jcraft/jorbis/Info;Lcom/jcraft/jogg/Buffer;)Ljava/lang/Object;-
 <init>()!com.jcraft.jorbis.Time0#<init>()VW
-free_info(Ljava/lang/Object;)6com.jcraft.jorbis.Time0#free_info(Ljava/lang/Object;)Vı
-misc.PlayListcom.jcraft.jroar.UserPage#
-<init>()misc.PlayList#<init>()V£
-Hkick(Lcom/jcraft/jroar/MySocket;Ljava/util/Hashtable;Ljava/util/Vector;)Wmisc.PlayList#kick(Lcom/jcraft/jroar/MySocket;Ljava/util/Hashtable;Ljava/util/Vector;)V¯
-java.lang.StringBuilderjava.lang.CharSequencejava.lang.AbstractStringBuilderjava.io.Serializable/
-	<init>(I)"java.lang.StringBuilder#<init>(I)VG
-	append(I):java.lang.StringBuilder#append(I)Ljava/lang/StringBuilder;u
- append(Ljava/lang/StringBuffer;)Qjava.lang.StringBuilder#append(Ljava/lang/StringBuffer;)Ljava/lang/StringBuilder;O
-insert(I[CII)>java.lang.StringBuilder#insert(I[CII)Ljava/lang/StringBuilder;-
-<init>()!java.lang.StringBuilder#<init>()VI
-
-delete(II);java.lang.StringBuilder#delete(II)Ljava/lang/StringBuilder;G
-	append(C):java.lang.StringBuilder#append(C)Ljava/lang/StringBuilder;w
-!insert(ILjava/lang/CharSequence;)Rjava.lang.StringBuilder#insert(ILjava/lang/CharSequence;)Ljava/lang/StringBuilder;k
-'readObject(Ljava/io/ObjectInputStream;)@java.lang.StringBuilder#readObject(Ljava/io/ObjectInputStream;)VI
-
-insert(II);java.lang.StringBuilder#insert(II)Ljava/lang/StringBuilder;Q
-<init>(Ljava/lang/String;)3java.lang.StringBuilder#<init>(Ljava/lang/String;)VG
-	append(Z):java.lang.StringBuilder#append(Z)Ljava/lang/StringBuilder;i
-append(Ljava/lang/Object;)Kjava.lang.StringBuilder#append(Ljava/lang/Object;)Ljava/lang/StringBuilder;o
-replace(IILjava/lang/String;)Njava.lang.StringBuilder#replace(IILjava/lang/String;)Ljava/lang/StringBuilder;S
-indexOf(Ljava/lang/String;)4java.lang.StringBuilder#indexOf(Ljava/lang/String;)IU
-indexOf(Ljava/lang/String;I)5java.lang.StringBuilder#indexOf(Ljava/lang/String;I)IM
-append([CII)=java.lang.StringBuilder#append([CII)Ljava/lang/StringBuilder;I
-
-insert(IC);java.lang.StringBuilder#insert(IC)Ljava/lang/StringBuilder;]
- lastIndexOf(Ljava/lang/String;I)9java.lang.StringBuilder#lastIndexOf(Ljava/lang/String;I)IB
-
-toString()4java.lang.StringBuilder#toString()Ljava/lang/String;G
-	reverse():java.lang.StringBuilder#reverse()Ljava/lang/StringBuilder;k
-insert(ILjava/lang/Object;)Ljava.lang.StringBuilder#insert(ILjava/lang/Object;)Ljava/lang/StringBuilder;i
-append(Ljava/lang/String;)Kjava.lang.StringBuilder#append(Ljava/lang/String;)Ljava/lang/StringBuilder;I
-
-insert(IZ);java.lang.StringBuilder#insert(IZ)Ljava/lang/StringBuilder;k
-insert(ILjava/lang/String;)Ljava.lang.StringBuilder#insert(ILjava/lang/String;)Ljava/lang/StringBuilder;S
-deleteCharAt(I)@java.lang.StringBuilder#deleteCharAt(I)Ljava/lang/StringBuilder;G
-	append(J):java.lang.StringBuilder#append(J)Ljava/lang/StringBuilder;G
-	append(F):java.lang.StringBuilder#append(F)Ljava/lang/StringBuilder;Y
-appendCodePoint(I)Cjava.lang.StringBuilder#appendCodePoint(I)Ljava/lang/StringBuilder;u
- append(Ljava/lang/CharSequence;)Qjava.lang.StringBuilder#append(Ljava/lang/CharSequence;)Ljava/lang/StringBuilder;[
-lastIndexOf(Ljava/lang/String;)8java.lang.StringBuilder#lastIndexOf(Ljava/lang/String;)IG
-	append(D):java.lang.StringBuilder#append(D)Ljava/lang/StringBuilder;I
-
-append([C);java.lang.StringBuilder#append([C)Ljava/lang/StringBuilder;y
-"append(Ljava/lang/CharSequence;II)Sjava.lang.StringBuilder#append(Ljava/lang/CharSequence;II)Ljava/lang/StringBuilder;K
-insert(I[C)<java.lang.StringBuilder#insert(I[C)Ljava/lang/StringBuilder;{
-#insert(ILjava/lang/CharSequence;II)Tjava.lang.StringBuilder#insert(ILjava/lang/CharSequence;II)Ljava/lang/StringBuilder;I
-
-insert(IJ);java.lang.StringBuilder#insert(IJ)Ljava/lang/StringBuilder;]
- <init>(Ljava/lang/CharSequence;)9java.lang.StringBuilder#<init>(Ljava/lang/CharSequence;)VI
-
-insert(ID);java.lang.StringBuilder#insert(ID)Ljava/lang/StringBuilder;o
-)writeObject(Ljava/io/ObjectOutputStream;)Bjava.lang.StringBuilder#writeObject(Ljava/io/ObjectOutputStream;)VI
-
-insert(IF);java.lang.StringBuilder#insert(IF)Ljava/lang/StringBuilder;Ö
-misc.mplistener#com.jcraft.jroar.MountPointListenerjava.lang.ObjectK
-unmount(Ljava/lang/String;),misc.mplistener#unmount(Ljava/lang/String;)V%
-<init>()misc.mplistener#<init>()VG
-mount(Ljava/lang/String;)*misc.mplistener#mount(Ljava/lang/String;)Væ
+free_info(Ljava/lang/Object;)6com.jcraft.jorbis.Time0#free_info(Ljava/lang/Object;)Væ
 com.jcraft.jroar.Mountcom.jcraft.jroar.Page,
 <init>() com.jcraft.jroar.Mount#<init>()V¨
 Hkick(Lcom/jcraft/jroar/MySocket;Ljava/util/Hashtable;Ljava/util/Vector;)`com.jcraft.jroar.Mount#kick(Lcom/jcraft/jroar/MySocket;Ljava/util/Hashtable;Ljava/util/Vector;)V0
@@ -2684,11 +2745,13 @@ register()"com.jcraft.jroar.Shout#register()Væ
 <init>() com.jcraft.jroar.Debug#<init>()V¨
 Hkick(Lcom/jcraft/jroar/MySocket;Ljava/util/Hashtable;Ljava/util/Vector;)`com.jcraft.jroar.Debug#kick(Lcom/jcraft/jroar/MySocket;Ljava/util/Hashtable;Ljava/util/Vector;)V0
 
-register()"com.jcraft.jroar.Debug#register()V›
-misc.RadioStudiocom.jcraft.jroar.UserPage&
-<init>()misc.RadioStudio#<init>()V¶
-Hkick(Lcom/jcraft/jroar/MySocket;Ljava/util/Hashtable;Ljava/util/Vector;)Zmisc.RadioStudio#kick(Lcom/jcraft/jroar/MySocket;Ljava/util/Hashtable;Ljava/util/Vector;)V]
-ogg2pls(Ljava/lang/String;)>misc.RadioStudio#ogg2pls(Ljava/lang/String;)Ljava/lang/String;∫
+register()"com.jcraft.jroar.Debug#register()V«
+com.jcraft.jroar.UserPagecom.jcraft.jroar.Page{
+.register(Ljava/lang/String;Ljava/lang/String;)Icom.jcraft.jroar.UserPage#register(Ljava/lang/String;Ljava/lang/String;)V/
+<init>()#com.jcraft.jroar.UserPage#<init>()VØ
+Hkick(Lcom/jcraft/jroar/MySocket;Ljava/util/Hashtable;Ljava/util/Vector;)ccom.jcraft.jroar.UserPage#kick(Lcom/jcraft/jroar/MySocket;Ljava/util/Hashtable;Ljava/util/Vector;)V3
+
+register()%com.jcraft.jroar.UserPage#register()V∫
 com.jcraft.jroar.Dropcom.jcraft.jroar.Page+
 <init>()com.jcraft.jroar.Drop#<init>()V´
 Hkick(Lcom/jcraft/jroar/MySocket;Ljava/util/Hashtable;Ljava/util/Vector;)_com.jcraft.jroar.Drop#kick(Lcom/jcraft/jroar/MySocket;Ljava/util/Hashtable;Ljava/util/Vector;)V/

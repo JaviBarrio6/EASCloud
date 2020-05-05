@@ -23,7 +23,6 @@
 package com.jcraft.jroar;
 import java.lang.*;
 import java.io.*;
-import java.net.*;
 import java.util.*;
 
 class UDPPage extends Page{
@@ -37,7 +36,7 @@ class UDPPage extends Page{
     String dstmpoint=(String)vars.get("dstmpoint");
     String passwd=(String)vars.get("passwd");
     if(passwd==null || !passwd.equals(JRoar.passwd)){
-      forward(ms, "/");
+      forward(ms);
       return;
     }
 
@@ -57,6 +56,6 @@ class UDPPage extends Page{
 				      port,
 				      dstmpoint);
     }
-    forward(ms, "/");
+    forward(ms);
   }
 }

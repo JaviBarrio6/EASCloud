@@ -63,7 +63,7 @@ class HttpServer extends Thread{
         myURL="http://"+myaddress+":"+port;
     }
     catch(Exception e){
-      System.out.println(e);
+      e.printStackTrace();
     }
   }
 
@@ -80,8 +80,8 @@ class HttpServer extends Thread{
     }
   }
 
-  class Spawn extends Thread{
-    private Socket socket=null;
+  static class Spawn extends Thread{
+    private final Socket socket;
     Spawn(Socket socket){
       super();
       this.socket=socket;
@@ -89,48 +89,44 @@ class HttpServer extends Thread{
     }
     public void run(){
       try{(new Dispatch(socket)).doit();}
-      catch(Exception e){}
+      catch(Exception ignored){}
     }
   }
 }
  
 class Dispatch{
-  private MySocket mySocket=null;
-  private String rootDirectory=".";
-  private String defaultFile="index.html";
+  private final MySocket mySocket;
 
   Dispatch(Socket s) throws IOException{
     super();
     mySocket=new MySocket(s);
   }
 
-  private Vector getHttpHeader(MySocket ms) throws IOException{
-    Vector v=new Vector();
-    String foo=null;
+  private Vector<?> getHttpHeader(MySocket ms){
+    Vector<String> v = new Vector<String>();
+    String foo;
     while(true){
       foo=ms.readLine();
       if(foo.length()==0){
 	break;
       }
-System.out.println(" "+foo);
+      System.out.println(" " + foo);
       v.addElement(foo);
     }
     return v;
   }
 
-  private void procPOST(String string, Vector httpheader) throws IOException{
+  private void procPOST(String string, Vector<?> httpheader) throws IOException{
     String foo;
     int	len=0;
-    int	c;
     String file=string.substring(string.indexOf(' ') + 1);
     if(file.indexOf(' ')!=-1)
       file=file.substring(0 , file.indexOf(' '));
 
     for(int i=0; i<httpheader.size(); i++){
       foo=(String)httpheader.elementAt(i);
-//System.out.println("foo: "+foo);
       if(foo.startsWith("Content-Length:") ||
-	 foo.startsWith("Content-length:")  // hmm... for Opera, lynx
+	 foo.startsWith("Content-length:")
 	 ){
 	foo=foo.substring(foo.indexOf(' ')+1);
 	foo=foo.trim();
@@ -141,11 +137,11 @@ System.out.println(" "+foo);
     try{
       Object o=Page.map(file);
       if(o!=null){
-        Page cgi=null;
+        Page cgi = null;
         if(o instanceof String){
           String className=(String)o;
-          Class classObject=Class.forName(className);
-          cgi=(Page)classObject.newInstance();
+          Class<?> classObject = Class.forName(className);
+          cgi=(Page)classObject.getDeclaredConstructor().newInstance();
         }
         else if(o instanceof Page){
           cgi=(Page)o;
@@ -158,12 +154,12 @@ System.out.println(" "+foo);
 	}
       }
     }
-    catch(Exception e){
+    catch(Exception ignored){
     }
     Page.unknown(mySocket, file);
   }
 
-  private void procGET(String string, Vector httpheader) throws IOException{
+  private void procGET(String string, Vector<?> httpheader) throws IOException{
 
     String file;
 
@@ -222,7 +218,7 @@ System.out.println(" "+foo);
         Page cgi=null;
         if(o instanceof String){
           String className=(String)o;
-          Class classObject=Class.forName(className);
+          Class<?> classObject=Class.forName(className);
           cgi=(Page)classObject.newInstance();
 	}
         else if(o instanceof Page){
@@ -235,7 +231,7 @@ System.out.println(" "+foo);
         }
       }
     }
-    catch(Exception e) {
+    catch(Exception ignored) {
     }
 
     if(_file.endsWith(".pls")){
@@ -294,7 +290,7 @@ System.out.println(" "+foo);
     }
   }
 
-  private void procSOURCE(String string, Vector httpheader) throws IOException{
+  private void procSOURCE(String string, Vector<?> httpheader){
 
 HttpServer.source_connections++;
 
@@ -312,7 +308,7 @@ HttpServer.source_connections++;
     }
 
     Source source=Source.getSource(file);
-    if(source !=null && (source instanceof Ice)){
+    if((source instanceof Ice)){
       Ice ice=(Ice)source;
       if(!ice.isAlive()){
         ice.stop();
@@ -328,7 +324,7 @@ HttpServer.source_connections++;
         mySocket.flush();
         mySocket.close( ) ;
       }
-      catch(Exception e){
+      catch(Exception ignored){
       }
     }
   }
@@ -345,11 +341,9 @@ System.out.println(mySocket.socket.getInetAddress()+": "+foo+" "+(new java.util.
       }
 
       String bar=foo.substring(0, foo.indexOf(' '));
-      //System.out.println(foo);
 
-      Vector v=getHttpHeader(mySocket);
+      Vector<?> v = getHttpHeader(mySocket);
 
-//System.out.println(v);
 
       if(bar.equalsIgnoreCase("POST")){
         procPOST(foo, v);
@@ -368,11 +362,10 @@ System.out.println(mySocket.socket.getInetAddress()+": "+foo+" "+(new java.util.
 
       if(bar.equalsIgnoreCase("SOURCE")){
         procSOURCE(foo, v);
-        return;
       }
 
     }
-    catch(Exception e){
+    catch(Exception ignored){
     }
   }
 }

@@ -31,7 +31,7 @@ class Store extends Page{
   }
 
   String source;
-  Vector<String> header= new Vector<>();
+  Vector<String> header= new Vector<String>();
   byte[] content=null;
 
   Store(String mountpoint, String source){
@@ -45,11 +45,11 @@ class Store extends Page{
       String source=(String)vars.get("source");
       String passwd=(String)vars.get("passwd");
       if(passwd==null || !passwd.equals(JRoar.passwd)){
-        forward(s, "/");
+        forward(s);
          return;
       }
       store(mountpoint, source);
-      forward(s, "/");
+      forward(s);
       return;
     }
 

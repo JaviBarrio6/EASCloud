@@ -21,6 +21,7 @@
  */
 
 package com.jcraft.jroar;
+
 import java.util.*;
 import java.net.*;
 import java.io.*;
@@ -40,7 +41,7 @@ public class JRoar extends Applet implements Runnable{
   static String icepasswd=null;
   static String comment=null;
 
-  static final java.util.Vector mplisteners=new java.util.Vector();
+  static final Vector<MountPointListener> mplisteners = new Vector<MountPointListener>();
 
   Button mount;
 
@@ -188,7 +189,7 @@ public class JRoar extends Applet implements Runnable{
       }
       else if(arg[i].equals("-mplistener") && arg.length>i+1){
         try{
-          Class c=Class.forName(arg[i+1]);
+          Class<?> c = Class.forName(arg[i+1]);
 	  System.out.println("c: "+c);
           addMountPointListener((MountPointListener)(c.getDeclaredConstructor().newInstance()));
         }
@@ -217,7 +218,7 @@ public class JRoar extends Applet implements Runnable{
     wd.start();
   }
 
-  static Vector fetch_m3u(String m3u){
+  static Vector<?> fetch_m3u(String m3u){
     InputStream pstream=null;
     if(m3u.startsWith("http://")){
       try{
@@ -242,12 +243,12 @@ public class JRoar extends Applet implements Runnable{
       }
     }
 
-    String line=null;
-    Vector foo=new Vector();
+    String line = null;
+    Vector<String> foo = new Vector<String>();
     while(true){
       try{line=readline(pstream);}catch(Exception ignored){}
       if(line==null)break;
-System.out.println("playFile ("+line+")");
+      System.out.println("playFile ("+line+")");
       if(line.startsWith("#")) continue;
       foo.addElement(line);
     }
@@ -255,7 +256,7 @@ System.out.println("playFile ("+line+")");
   }
 
   private static String readline(InputStream is) {
-    StringBuffer rtn=new StringBuffer();
+    StringBuilder rtn=new StringBuilder();
     int temp;
     do {
       try {temp=is.read();}
@@ -266,37 +267,12 @@ System.out.println("playFile ("+line+")");
     return(rtn.toString());
   }
 
-  public static Hashtable getSources(){
-    return Source.sources;
-  }
-
-  public static int getListeners(String mpoint) throws JRoarException{
-    Source source=Source.getSource(mpoint);
-    if(source!=null){
-      return source.getListeners();
-    }
-    throw new JRoarException("invalid mountpoint: "+mpoint);
-  }
-  public static int getConnections(String mpoint) throws JRoarException{
-    Source source=Source.getSource(mpoint);
-    if(source!=null){
-      return source.getConnections();
-    }
-    throw new JRoarException("invalid mountpoint: "+mpoint);
-  }
-
-  public static String getMyURL(){
-    return HttpServer.myURL;
-  }
-  public static void store(String foo, String bar){
-    new Store(foo, bar);
-  }
-
   private static final int WATCHDOGSLEEP=3000;
   static class WatchDog extends Thread{
     public void run(){
       Source source;
-      Enumeration sources;
+      Enumeration<?> sources;
+      //noinspection InfiniteLoopStatement
       while(true){
         try{
           sources=Source.sources.elements();
@@ -306,20 +282,16 @@ System.out.println("playFile ("+line+")");
             Client c;
             for(int i=0; i<size; i++){
               try{
-                c=(Client)(source.listeners.elementAt(i));
+                c = (source.listeners.elementAt(i));
                 if(c.ready && System.currentTimeMillis()-c.lasttime>1000){
-
                   ((HttpClient)c).ms.close();
+	            }
+	          } catch(Exception ignored){}
 	        }
-	      }
-              catch(Exception ignored){}
-	    }
-  	  }
+  	      }
+        } catch(Exception e){
+          System.out.println("WatchDog: "+e);
         }
-        catch(Exception e){
-        System.out.println("WatchDog: "+e);
-        }
-
         try{Thread.sleep(WATCHDOGSLEEP);}
         catch(Exception ignored){}
       }

@@ -27,7 +27,7 @@ import java.net.*;
 import java.util.*;
 
 class Pls extends Page {
-	String pls = null;
+	String pls;
 
 	Pls(String pls) {
 		super();
@@ -72,7 +72,7 @@ class Pls extends Page {
 				URLConnection urlc = url.openConnection();
 				pstream = urlc.getInputStream();
 			} catch (Exception ee) {
-				System.err.println(ee);
+				ee.printStackTrace();
 				return null;
 			}
 		}
@@ -82,7 +82,7 @@ class Pls extends Page {
 		while (true) {
 			try {
 				line = readline(pstream);
-			} catch (Exception e) {
+			} catch (Exception ignored) {
 			}
 			if (line == null)
 				break;
@@ -99,13 +99,13 @@ class Pls extends Page {
 		}
 		try {
 			pstream.close();
-		} catch (Exception e) {
+		} catch (Exception ignored) {
 		}
 		return line;
 	}
 
 	static private String readline(InputStream is) {
-		StringBuffer rtn = new StringBuffer();
+		StringBuilder rtn = new StringBuilder();
 		int temp;
 		do {
 			try {
