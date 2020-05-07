@@ -42,13 +42,13 @@ class Debug extends Page{
 
     Source source;
     Enumeration<?> sources= Source.sources.elements();
-    for(; sources.hasMoreElements();){
+    while (sources.hasMoreElements()) {
       source=((Source)sources.nextElement());
       s.println("Source: "+source);
       s.println("         "+source.listeners);
     }
 
-s.println("<p>");
+    s.println("<p>");
 
     if(JRoar.wd!=null){  
       s.println("JRoar.wd.isAlive() " +JRoar.wd.isAlive());

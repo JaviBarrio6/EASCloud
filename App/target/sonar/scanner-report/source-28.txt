@@ -54,7 +54,7 @@ class HomePage extends Page{
     else{ s.pn("There is no mount point.<br>"); }
 
     s.pn("<table cellpadding=3 cellspacing=0 border=0>");
-    for(; keys.hasMoreElements();){
+    while (keys.hasMoreElements()) {
       String mountpoint=((String)(keys.nextElement()));
       Source source=Source.getSource(mountpoint); if(source==null) continue;
       String source_name=source.source;
@@ -63,10 +63,7 @@ class HomePage extends Page{
 
       s.pn("<td align=left nowrap>");
       s.p("<a href="); s.p(ogg2m3u(mountpoint)); s.p(">"); s.p(mountpoint);
-      if(source instanceof UDPSource){
-         UDPSource foo=(UDPSource)source;
-         s.p("(UDP:"); s.p(foo.b.port); s.p(")");
-      }
+
       s.p("</a>");
       s.p("&nbsp;"); s.p("("); s.p(source.getListeners()); s.p(",");
                                s.p(source.getConnections()); s.p(")");
@@ -80,12 +77,7 @@ class HomePage extends Page{
         s.p(source_name); s.p("</a>");
         s.pn("</td>");
       }
-      else if(source instanceof UDPSource){
-        UDPSource foo=(UDPSource)source;
-        s.pn("<td align=left>");
-        s.p(foo.b.srcmpoint);
-        s.pn("</td>");
-      }
+
       else{
         s.p("<td align=left>"); s.p(source_name); s.pn("</td>");
       }

@@ -31,7 +31,7 @@ class Store extends Page{
   }
 
   String source;
-  Vector<String> header= new Vector<String>();
+  Vector<String> header= new Vector<>();
   byte[] content=null;
 
   Store(String mountpoint, String source){

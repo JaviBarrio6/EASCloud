@@ -23,7 +23,7 @@ SonarCloud plugins:
   - SonarRuby 1.7.0.883 (ruby)
   - Vulnerability Rules for C# 8.3.0.1825 (securitycsharpfrontend)
   - Vulnerability Rules for Java 8.3.0.1825 (securityjavafrontend)
-  - License for SonarLint 8.0.0.7525 (license)
+  - License for SonarLint 8.0.0.7697 (license)
   - SonarCOBOL 4.4.0.3403 (cobol)
   - Vulnerability Rules for Python 8.3.0.1825 (securitypythonfrontend)
   - Git 1.11.1.2008 (scmgit)
@@ -38,7 +38,7 @@ Global server settings:
   - sonar.auth.microsoft.enabled=true
   - sonar.core.id=1BD809FA-AWHW8ct9-T_TB3XqouNu
   - sonar.core.serverBaseURL=https://sonarcloud.io
-  - sonar.core.startTime=2020-05-05T09:42:12+0200
+  - sonar.core.startTime=2020-05-07T16:08:19+0200
   - sonar.dbcleaner.weeksBeforeDeletingAllSnapshots=480
   - sonar.dbcleaner.weeksBeforeKeepingOnlyOneSnapshotByMonth=4
   - sonar.dbcleaner.weeksBeforeKeepingOnlyOneSnapshotByWeek=1
@@ -57,8 +57,8 @@ Project scanner properties:
   - sonar.groovy.binaries=C:\Users\user\Desktop\EasCloud\EASCloud\App\target\classes
   - sonar.host.url=https://sonarcloud.io
   - sonar.java.binaries=C:\Users\user\Desktop\EasCloud\EASCloud\App\target\classes
-  - sonar.java.source=1.5
-  - sonar.java.target=1.5
+  - sonar.java.source=7
+  - sonar.java.target=7
   - sonar.java.test.libraries=C:\Users\user\Desktop\EasCloud\EASCloud\App\target\classes
   - sonar.links.ci=
   - sonar.links.homepage=

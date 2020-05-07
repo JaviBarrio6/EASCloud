@@ -26,7 +26,7 @@ import java.util.*;
 import java.io.*;
 
 public abstract class Page {
-	static final Hashtable<String, Object> map = new Hashtable<String, Object>();
+	static final Hashtable<String, Object> map = new Hashtable<>();
 
 	static void register(String src, Object dst) {
 		synchronized (map) {
@@ -109,7 +109,7 @@ public abstract class Page {
 
 	Hashtable<String, String> getVars(String arg) {
 
-		Hashtable<String, String> vars = new Hashtable<String, String>();
+		Hashtable<String, String> vars = new Hashtable<>();
 		vars.put("jroar-method", "GET");
 		if (arg == null)
 			return vars;
@@ -144,7 +144,7 @@ public abstract class Page {
 	}
 
 	Hashtable<String, String> getVars(MySocket mysocket, int len) {
-		Hashtable<String, String> vars = new Hashtable<String, String>();
+		Hashtable<String, String> vars = new Hashtable<>();
 		vars.put("jroar-method", "POST");
 		if (len == 0)
 			return vars;

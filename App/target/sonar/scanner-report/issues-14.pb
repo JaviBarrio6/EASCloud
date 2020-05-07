@@ -1,7 +1,4 @@
-J
-javaS1444/Make this "public static mapping_P" field final 2 &p
-javaS1104UMake mapping_P a static final constant or non-public and provide accessors if needed. 2 &?
-javaS2390$Remove this reference to "Mapping0". 2/ 7o
-javaS3008TRename this field "mapping_P" to match the regular expression '^[a-z][a-zA-Z0-9]*$'. 2 &8
-javaS2386Make this member "protected". 2 &h
+?
+javaS2390$Remove this reference to "Mapping0". 28 @`
+javaS1124EReorder the modifiers to comply with the Java Language Specification. 2 h
 javaS100NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'. 2## 

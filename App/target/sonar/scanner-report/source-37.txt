@@ -27,8 +27,8 @@ import java.net.*;
 
 public class MySocket {
 	Socket socket;
-	private DataInputStream dataInputStream;
-	private OutputStream os;
+	private final DataInputStream dataInputStream;
+	private final OutputStream os;
 
 	MySocket(Socket s) throws IOException {
 

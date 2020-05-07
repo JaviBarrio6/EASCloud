@@ -1,45 +1,9 @@
 
-7com.jcraft.jroar.Source#getProxies()[Ljava/lang/Object;V
-LC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jroar/Source.javac c("4*Ã
-2V
-LC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jroar/Source.javaf f(£
- 
-V
-LC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jroar/Source.javaf f(
-%2java.util.Vector"__id*(*&
-com.jcraft.jroar.Source"	
-proxiesÉÆ
-V
-LC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jroar/Source.javaf f( 
-%3java.lang.Object[]"-java.util.Vector#toArray()[Ljava/lang/Object;*
-
-%2java.util.Vector2	toArray()"t
-V
-LC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jroar/Source.javaf f(!
-
-%3java.lang.Object[]*ˆ
-3V
-LC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jroar/Source.javae e(¥
-¢
-V
-LC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jroar/Source.javae e(
-%1java.util.Vector"__id***(
-com.jcraft.jroar.Source"
-	listeners*
-2*‰
-4V
-LC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jroar/Source.javad d(£
- 
-V
-LC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jroar/Source.javad d(
-%0java.util.Vector"__id*(*&
-com.jcraft.jroar.Source"	
-proxies*
-3
-1*½
-1V
-LC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jroar/Source.javai i("`
-V
-LC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jroar/Source.javai i(
+#com.jcraft.jroar.Source#getLimit()IX
+LC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jroar/Source.javaœ œ("1*Á
+1X
+LC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jroar/Source.javaœ œ("b
+X
+LC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jroar/Source.javaœ œ(
 ""B
 com.jcraft.jroar.Source

@@ -25,7 +25,7 @@ import java.io.*;
 import java.util.*;
 
 abstract class Client{
-  static final Vector<Client> clients = new Vector<Client>();
+  static final Vector<Client> clients = new Vector<>();
   String proxy = null;
   long lasttime;
   boolean ready = false;
