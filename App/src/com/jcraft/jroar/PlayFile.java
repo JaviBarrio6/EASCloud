@@ -104,7 +104,6 @@ class PlayFile extends Source implements Runnable {
 				System.out.println("playFile (" + s + ")");
 				v.addElement(s);
 			}
-			d.close();
 		} catch (Exception ignored) {
 		}
 		this.files = new String[v.size()];
@@ -335,9 +334,6 @@ class PlayFile extends Source implements Runnable {
 						}
 
 						status = "status13";
-
-//	    if(og.eos()!=0)eos=true;
-
 					}
 					status = "status14";
 				}

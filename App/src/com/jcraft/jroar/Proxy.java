@@ -77,7 +77,7 @@ HttpServer.source_connections++;
 
     lasttime=System.currentTimeMillis();
 
-    Vector<String> http_header = new Vector<String>();
+    Vector<String> http_header = new Vector<>();
     com.jcraft.jogg.Page[] pages=new com.jcraft.jogg.Page[10];
     int page_count=0;
 

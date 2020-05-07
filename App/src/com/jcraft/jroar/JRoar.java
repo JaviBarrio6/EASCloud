@@ -25,9 +25,7 @@ package com.jcraft.jroar;
 import java.util.*;
 import java.net.*;
 import java.io.*;
-import java.awt.*;
-import java.awt.event.*;
-import java.applet.*;
+
 
 
 public class JRoar   implements Runnable{
@@ -41,7 +39,7 @@ public class JRoar   implements Runnable{
   static String icepasswd=null;
   static String comment=null;
 
-  static final Vector<MountPointListener> mplisteners = new Vector<MountPointListener>();
+  static final Vector<MountPointListener> mplisteners = new Vector<>();
 
 
   public JRoar(){
@@ -205,7 +203,7 @@ public class JRoar   implements Runnable{
     }
 
     String line = null;
-    Vector<String> foo = new Vector<String>();
+    Vector<String> foo = new Vector<>();
     while(true){
       try{line=readline(pstream);}catch(Exception ignored){}
       if(line==null)break;

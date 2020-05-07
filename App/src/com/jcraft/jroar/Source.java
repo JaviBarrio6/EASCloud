@@ -29,8 +29,8 @@ import com.jcraft.jorbis.*;
 import com.jcraft.jogg.*;
 
 class Source{
-  static final Hashtable<String, Source> sources= new Hashtable<String, Source>();
-  final Vector<Client> listeners= new Vector<Client>();
+  static final Hashtable<String, Source> sources= new Hashtable<>();
+  final Vector<Client> listeners= new Vector<>();
   String mountpoint;
   String source=null;
 
@@ -50,7 +50,7 @@ class Source{
     synchronized(listeners){
       listeners.addElement(c);
       if(c.proxy!=null){
-        if(proxies==null)proxies= new Vector<String>();
+        if(proxies==null)proxies= new Vector<>();
          proxies.addElement(c.proxy);
       }
     }
@@ -109,9 +109,9 @@ class Source{
 
   void parseHeader(Page[] pages, int count){
     current_info.rate=0;
-    Hashtable<Integer, StreamState> oss = new Hashtable<Integer, StreamState>();
-    Hashtable<Integer, Info> vis = new Hashtable<Integer, Info>();
-    Hashtable<Integer, Comment> vcs = new Hashtable<Integer, Comment>();
+    Hashtable<Integer, StreamState> oss = new Hashtable<>();
+    Hashtable<Integer, Info> vis = new Hashtable<>();
+    Hashtable<Integer, Comment> vcs = new Hashtable<>();
     Packet op=new Packet();
     for(int i=0; i<count; i++){
       com.jcraft.jogg.Page page=pages[i];

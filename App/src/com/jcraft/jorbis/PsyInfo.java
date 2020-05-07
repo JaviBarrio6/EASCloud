@@ -25,7 +25,7 @@
 
 package com.jcraft.jorbis;
 
-// psychoacoustic setup
+
 class PsyInfo {
   void free(){}
 }

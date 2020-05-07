@@ -43,7 +43,7 @@ class Ice extends Source{
 
   private long lasttime=0;
 
-  Vector<String> http_header = new Vector<String>();
+  Vector<String> http_header = new Vector<>();
 
   private static final String _icepasswd="ice-password: ";
   private static final String _ice="ice-";

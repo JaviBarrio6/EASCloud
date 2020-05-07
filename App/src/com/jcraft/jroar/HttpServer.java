@@ -35,7 +35,6 @@ class HttpServer extends Thread{
     Mount.register();
     Drop.register();
     Shout.register();
-    UDPPage.register();
     Store.register();
 
     Debug.register();
@@ -93,7 +92,7 @@ class HttpServer extends Thread{
     }
   }
 }
- 
+
 class Dispatch{
   private final MySocket mySocket;
 
@@ -103,7 +102,7 @@ class Dispatch{
   }
 
   private Vector<?> getHttpHeader(MySocket ms){
-    Vector<String> v = new Vector<String>();
+    Vector<String> v = new Vector<>();
     String foo;
     while(true){
       foo=ms.readLine();
@@ -219,7 +218,7 @@ class Dispatch{
         if(o instanceof String){
           String className=(String)o;
           Class<?> classObject=Class.forName(className);
-          cgi=(Page)classObject.newInstance();
+          cgi=(Page)classObject.getDeclaredConstructor().newInstance();
 	}
         else if(o instanceof Page){
           cgi=(Page)o;
