@@ -28,7 +28,7 @@ package com.jcraft.jorbis;
 import com.jcraft.jogg.*;
 
 abstract class FuncMapping {
-	public static FuncMapping[] mapping_P = { new Mapping0() };
+	protected final static FuncMapping[] mapping_P = { new Mapping0() };
 
 	abstract Object unpack(Info info, Buffer buffer);
 

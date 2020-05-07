@@ -28,7 +28,7 @@ package com.jcraft.jorbis;
 import com.jcraft.jogg.*;
 
 abstract class FuncFloor {
-	public static FuncFloor[] floor_P = {};
+	protected final static FuncFloor[] floor_P = {};
 
 	abstract Object unpack(Info vi, Buffer opb);
 

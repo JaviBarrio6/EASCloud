@@ -28,7 +28,7 @@ package com.jcraft.jorbis;
 import com.jcraft.jogg.*;
 
 abstract class FuncResidue {
-	public static FuncResidue[] residue_P = { new Residue0()};
+	protected final static FuncResidue[] residue_P = { new Residue0()};
 
 	abstract Object unpack(Info vi, Buffer opb);
 
