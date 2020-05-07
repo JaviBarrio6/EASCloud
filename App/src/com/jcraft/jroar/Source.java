@@ -23,7 +23,7 @@
 package com.jcraft.jroar;
 import java.util.*;
 import java.io.*;
-
+import org.apache.commons.logging.Log;
 import com.jcraft.jogg.Page;
 import com.jcraft.jorbis.*;
 import com.jcraft.jogg.*;
@@ -33,6 +33,8 @@ class Source{
   final Vector<Client> listeners= new Vector<>();
   String mountpoint;
   String source=null;
+
+  Log log;
 
   boolean for_relay_only=false;
 
@@ -184,7 +186,7 @@ class Source{
     byte[] buffer=oy.data;
     try{ bytes=is.read(buffer, index, BUFSIZE); }
     catch(Exception e){
-      e.printStackTrace();
+      log.error(e);
       return;
     }
     oy.wrote(bytes);
@@ -232,7 +234,7 @@ class Source{
         buffer=oy.data; 
         try{ bytes=is.read(buffer, index, BUFSIZE); }
         catch(Exception e){
-          e.printStackTrace();
+          log.error(e);
           return;
         }
         if(bytes==0 && i<2){

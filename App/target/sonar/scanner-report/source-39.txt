@@ -22,11 +22,16 @@
 
 package com.jcraft.jroar;
 
+import org.apache.commons.logging.Log;
+
 import java.io.*;
 import java.net.*;
 
+
 class PeerCast {
 	static String lookupHost = "localhost:7144";
+
+	Log log;
 
 	static void setLookupHost(String arg) {
 		if (arg == null)
@@ -46,8 +51,7 @@ class PeerCast {
 			URL url = new URL(peercast);
 			URLConnection urlc = url.openConnection();
 			pstream = urlc.getInputStream();
-		} catch (Exception ee) {
-			ee.printStackTrace();
+		} catch (Exception ignored) {
 			return null;
 		}
 		if (pstream == null)

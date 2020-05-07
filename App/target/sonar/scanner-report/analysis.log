@@ -57,9 +57,11 @@ Project scanner properties:
   - sonar.groovy.binaries=C:\Users\user\Desktop\EasCloud\EASCloud\App\target\classes
   - sonar.host.url=https://sonarcloud.io
   - sonar.java.binaries=C:\Users\user\Desktop\EasCloud\EASCloud\App\target\classes
+  - sonar.java.libraries=C:\Users\user\.m2\repository\org\apache\commons\commons-lang3\3.10\commons-lang3-3.10.jar,C:\Users\user\.m2\repository\commons-logging\commons-logging\1.2\commons-logging-1.2.jar
   - sonar.java.source=7
   - sonar.java.target=7
-  - sonar.java.test.libraries=C:\Users\user\Desktop\EasCloud\EASCloud\App\target\classes
+  - sonar.java.test.libraries=C:\Users\user\Desktop\EasCloud\EASCloud\App\target\classes,C:\Users\user\.m2\repository\org\apache\commons\commons-lang3\3.10\commons-lang3-3.10.jar,C:\Users\user\.m2\repository\commons-logging\commons-logging\1.2\commons-logging-1.2.jar
+  - sonar.libraries=C:\Users\user\.m2\repository\org\apache\commons\commons-lang3\3.10\commons-lang3-3.10.jar,C:\Users\user\.m2\repository\commons-logging\commons-logging\1.2\commons-logging-1.2.jar
   - sonar.links.ci=
   - sonar.links.homepage=
   - sonar.links.issue=

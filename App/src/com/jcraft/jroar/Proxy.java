@@ -24,13 +24,15 @@ package com.jcraft.jroar;
 import java.io.*;
 import java.net.*;
 import java.util.*;
-
+import org.apache.commons.logging.Log;
 import com.jcraft.jogg.*;
 
 class Proxy extends Source implements Runnable{
   static final int BUFSIZE=4096*2;
 
   private InputStream bitStream=null;
+
+  Log log;
 
   private SyncState oy;
   private com.jcraft.jogg.Page og;
@@ -126,7 +128,7 @@ HttpServer.source_connections++;
       bitStream=urlc.getInputStream();
     }
     catch(Exception ee){
-      ee.printStackTrace();
+      log.error(ee);
       me=null;
       stop();
       return;
@@ -148,7 +150,7 @@ HttpServer.source_connections++;
               try {
                   bytes = bitStream.read(buffer, index, BUFSIZE);
               } catch (Exception e) {
-                  e.printStackTrace();
+                  log.error(e);
                   bytes = -1;
                   break;
               }
@@ -233,7 +235,7 @@ HttpServer.source_connections++;
                   try {
                       if (bitStream != null) bitStream.close();
                   } catch (Exception e) {
-                      e.printStackTrace();
+                      log.error(e);
                   }
 
                   try {

@@ -1,1 +1,1 @@
- 2xmlX*hrpom.xml
+ 2xmlX6hrpom.xml

@@ -27,9 +27,12 @@ import java.net.*;
 import java.util.*;
 
 import com.jcraft.jogg.*;
+import org.apache.commons.logging.Log;
 
 class PlayFile extends Source implements Runnable {
 	static final int BUFSIZE = 4096 * 2;
+
+	Log log;
 
 	private InputStream bitStream = null;
 
@@ -77,7 +80,7 @@ class PlayFile extends Source implements Runnable {
 			try {
 				updateFiles(file);
 			} catch (Exception e) {
-				e.printStackTrace();
+				log.error(e);
 				drop();
 				HttpServer.source_connections--;
 			}
@@ -162,10 +165,14 @@ class PlayFile extends Source implements Runnable {
 
 					bitStream = urlc.getInputStream();
 				} catch (Exception e) {
-					e.printStackTrace();
+					log.error(e);
 				}
 			} else if (files[ii].equals("-")) {
-				bitStream = System.in;
+				try {
+					System.in.close();
+				} catch (IOException e) {
+					log.error(e);
+				}
 			}
 
 //System.out.println("bitStream: "+bitStream);
@@ -174,7 +181,7 @@ class PlayFile extends Source implements Runnable {
 				try {
 					bitStream = new FileInputStream(files[ii]);
 				} catch (Exception e) {
-					e.printStackTrace();
+					log.error(e);
 				}
 			}
 
@@ -227,7 +234,7 @@ class PlayFile extends Source implements Runnable {
 				try {
 					bytes = bitStream.read(buffer, index, BUFSIZE);
 				} catch (Exception e) {
-					e.printStackTrace();
+					log.error(e);
 					eos = true;
 					continue;
 				}

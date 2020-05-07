@@ -28,7 +28,19 @@
         </plugin>
     </plugins>
   </build>
-  <properties>
+    <dependencies>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.10</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-logging</groupId>
+            <artifactId>commons-logging</artifactId>
+            <version>1.2</version>
+        </dependency>
+    </dependencies>
+    <properties>
     <sonar.host.url>localhost:4950</sonar.host.url>
     <sonar.log.level>DEBUG</sonar.log.level>
     <sonar.verbose>true</sonar.verbose>

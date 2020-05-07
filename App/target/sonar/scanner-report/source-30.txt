@@ -25,8 +25,11 @@ import java.lang.*;
 import java.io.*;
 import java.net.*;
 import java.util.*;
+import org.apache.commons.logging.Log;
 
 class HttpServer extends Thread{
+
+  Log logger;
 
   static{
     HomePage.register();
@@ -62,7 +65,7 @@ class HttpServer extends Thread{
         myURL="http://"+myaddress+":"+port;
     }
     catch(Exception e){
-      e.printStackTrace();
+      logger.error(e);
     }
   }
 

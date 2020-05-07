@@ -26,8 +26,6 @@ import java.util.*;
 import java.net.*;
 import java.io.*;
 
-
-
 public class JRoar   implements Runnable{
   static final String version="0.0.9";
 
@@ -46,7 +44,6 @@ public class JRoar   implements Runnable{
   }
 
 
-
   static WatchDog wd=null;
 
   public void run(){
@@ -57,7 +54,7 @@ public class JRoar   implements Runnable{
     wd.start();
   }
 
-  public static void main(String[] arg){
+  public static void main(String[] argv){
     String[] usage={
 	"  acceptable options",
 	"  -port     port-number (default: 8000)",
@@ -79,90 +76,90 @@ public class JRoar   implements Runnable{
     System.out.println("Funcionando");
 
     HttpServer.myaddress=null;
-    for(int i=0; i<arg.length; i++){
-      if(arg[i].equals("-port") && arg.length>i+1){
-        try{ HttpServer.port=Integer.parseInt(arg[i+1]);}
+    for(int i=0; i<argv.length; i++){
+      if(argv[i].equals("-port") && argv.length>i+1){
+        try{ HttpServer.port=Integer.parseInt(argv[i+1]);}
 	catch(Exception ignored){}
 	i++;
       }
-      else if(arg[i].equals("-myaddress") && arg.length>i+1){
-        HttpServer.myaddress=arg[i+1];
+      else if(argv[i].equals("-myaddress") && argv.length>i+1){
+        HttpServer.myaddress=argv[i+1];
         i++;
       }
-      else if(arg[i].equals("-passwd") && arg.length>i+1){
-        JRoar.passwd=arg[i+1];
+      else if(argv[i].equals("-passwd") && argv.length>i+1){
+        JRoar.passwd=argv[i+1];
         i++;
       }
-      else if(arg[i].equals("-icepasswd") && arg.length>i+1){
-        JRoar.icepasswd=arg[i+1];
+      else if(argv[i].equals("-icepasswd") && argv.length>i+1){
+        JRoar.icepasswd=argv[i+1];
         i++;
       }
-      else if(arg[i].equals("-comment") && arg.length>i+1){
-        JRoar.comment=arg[i+1];
+      else if(argv[i].equals("-comment") && argv.length>i+1){
+        JRoar.comment=argv[i+1];
         i++;
       }
-      else if((arg[i].equals("-relay") || arg[i].equals("-proxy")) &&
-	      arg.length>i+2){
-        Proxy proxy=new Proxy(arg[i+1], arg[i+2]);
+      else if((argv[i].equals("-relay") || argv[i].equals("-proxy")) &&
+	      argv.length>i+2){
+        Proxy proxy=new Proxy(argv[i+1], argv[i+2]);
         i+=2;
-        if(arg.length>i+1 && !(arg[i+1].startsWith("-"))){
-          try{ proxy.setLimit(Integer.parseInt(arg[i+1])); }
+        if(argv.length>i+1 && !(argv[i+1].startsWith("-"))){
+          try{ proxy.setLimit(Integer.parseInt(argv[i+1])); }
           catch(Exception ignored){
 	  }
           i++;
 	}
       }
-      else if(arg[i].equals("-playlist") && arg.length>i+2){
-        PlayFile p=new PlayFile(arg[i+1], arg[i+2]);
+      else if(argv[i].equals("-playlist") && argv.length>i+2){
+        PlayFile p=new PlayFile(argv[i+1], argv[i+2]);
         i+=2;
-        if(arg.length>i+1 && !(arg[i+1].startsWith("-"))){
-          try{ p.setLimit(Integer.parseInt(arg[i+1])); }
+        if(argv.length>i+1 && !(argv[i+1].startsWith("-"))){
+          try{ p.setLimit(Integer.parseInt(argv[i+1])); }
           catch(Exception ignored){
 	  }
           i++;
 	}
         p.kick();
       }
-      else if(arg[i].equals("-udp") && arg.length>i+4){
+      else if(argv[i].equals("-udp") && argv.length>i+4){
         break;
       }
-      else if(arg[i].equals("-shout") && arg.length>i+5){
+      else if(argv[i].equals("-shout") && argv.length>i+5){
         break;
       }
-      else if(arg[i].equals("-page") && arg.length>i+2){
+      else if(argv[i].equals("-page") && argv.length>i+2){
         try{
-          Page.register(arg[i+1], arg[i+2]);
+          Page.register(argv[i+1], argv[i+2]);
         }
         catch(Exception e){
-          System.err.println("Unknown class: "+arg[i+2]);
+          System.err.println("Unknown class: "+argv[i+2]);
         }
         i+=2;
       }
-      else if(arg[i].equals("-store") && arg.length>i+2){
+      else if(argv[i].equals("-store") && argv.length>i+2){
         try{
-          new Store(arg[i+1], arg[i+2]);
+          new Store(argv[i+1], argv[i+2]);
         }
         catch(Exception ignored){
         }
         i+=2;
       }
-      else if(arg[i].equals("-mplistener") && arg.length>i+1){
+      else if(argv[i].equals("-mplistener") && argv.length>i+1){
         try{
-          Class<?> c = Class.forName(arg[i+1]);
+          Class<?> c = Class.forName(argv[i+1]);
 	  System.out.println("c: "+c);
           addMountPointListener((MountPointListener)(c.getDeclaredConstructor().newInstance()));
         }
         catch(Exception e){
-          System.err.println("Unknown listener class: "+arg[i+1]);
+          System.err.println("Unknown listener class: "+argv[i+1]);
         }
         i++;
       }
-      else if(arg[i].equals("-peercast-host") && arg.length>i+1){
-        PeerCast.setLookupHost(arg[i+1]);
+      else if(argv[i].equals("-peercast-host") && argv.length>i+1){
+        PeerCast.setLookupHost(argv[i+1]);
         i++;
       }
       else {
-        System.err.println("invalid option: "+arg[i]);
+        System.err.println("invalid option: "+argv[i]);
         for (String s : usage) {
           System.err.println(s);
         }
@@ -187,18 +184,16 @@ public class JRoar   implements Runnable{
         URLConnection urlc=url.openConnection();
         pstream=urlc.getInputStream();
       }
-      catch(Exception ee){
-        ee.printStackTrace();
-        return null;
+      catch(Exception ignored){
+
       }
     }
     if(pstream==null && !running_as_applet){
       try{
         pstream=new FileInputStream(System.getProperty("user.dir")+"/"+m3u);
       }
-      catch(Exception ee){
-        ee.printStackTrace();
-        return null;
+      catch(Exception ignored){
+
       }
     }
 

@@ -29,6 +29,7 @@ import java.util.*;
 class Pls extends Page {
 	String pls;
 
+
 	Pls(String pls) {
 		super();
 		this.pls = pls;
@@ -71,9 +72,8 @@ class Pls extends Page {
 				URL url = new URL(pls);
 				URLConnection urlc = url.openConnection();
 				pstream = urlc.getInputStream();
-			} catch (Exception ee) {
-				ee.printStackTrace();
-				return null;
+			} catch (Exception ignored) {
+
 			}
 		}
 		if (pstream == null)
