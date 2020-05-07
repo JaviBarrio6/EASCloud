@@ -86,13 +86,13 @@ class PlayFile extends Source implements Runnable {
 
 	long file_lastm = 0;
 
-	private void updateFiles(String file) throws java.io.FileNotFoundException {
+	private void updateFiles(String file) {
 		System.out.println("loadPlaylist: " + file);
 		File _file = new File(file);
 		file_lastm = _file.lastModified();
-		BufferedReader d = new BufferedReader(new InputStreamReader(new FileInputStream(_file)));
-		Vector<String> v = new Vector<String>();
-		try {
+		Vector<String> v = new Vector<>();
+		try (BufferedReader d = new BufferedReader(new InputStreamReader(new FileInputStream(_file))))
+		{
 			while (true) {
 				String s = d.readLine();
 				if (s == null)
@@ -133,7 +133,7 @@ class PlayFile extends Source implements Runnable {
 	static String status = "status0";
 
 	public void run() {
-		Vector<String> http_header = new Vector<String>();
+		Vector<String> http_header = new Vector<>();
 		http_header.addElement("HTTP/1.0 200 OK");
 		http_header.addElement("Content-Type: application/x-ogg");
 
@@ -152,7 +152,6 @@ class PlayFile extends Source implements Runnable {
 
 			status = "status1";
 
-//System.out.println("status: "+status+" files.length="+files.length);
 
 			bitStream = null;
 			if (files[ii].startsWith("http://")) {
@@ -382,7 +381,7 @@ class PlayFile extends Source implements Runnable {
 			try {
 				if (bitStream != null)
 					bitStream.close();
-			} catch (Exception e) {
+			} catch (Exception ignored) {
 			}
 			bitStream = null;
 			me = null;

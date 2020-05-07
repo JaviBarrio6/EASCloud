@@ -30,7 +30,7 @@ import java.awt.event.*;
 import java.applet.*;
 
 
-public class JRoar extends Applet implements Runnable{
+public class JRoar   implements Runnable{
   static final String version="0.0.9";
 
   static boolean running_as_applet=true;
@@ -43,50 +43,11 @@ public class JRoar extends Applet implements Runnable{
 
   static final Vector<MountPointListener> mplisteners = new Vector<MountPointListener>();
 
-  Button mount;
 
   public JRoar(){
   }
 
-  public void init(){
-    String s;
 
-    codebase=getCodeBase();
-
-    s=getParameter("jroar.port");
-    if(s!=null){
-      try{ HttpServer.port=Integer.parseInt(s); }
-      catch(Exception ignored){}
-    }
-
-
-    s=getParameter("jroar.myaddress");
-    HttpServer.myaddress=s;
-
-    s=getParameter("jroar.passwd");
-    if(s!=null) JRoar.passwd=s;
-
-    s=getParameter("jroar.icepasswd");
-    if(s!=null) JRoar.icepasswd=s;
-
-    s=getParameter("jroar.comment");
-    if(s!=null) JRoar.comment=s;
-
-    add(mount = new Button("Control"));
-
-    mount.addActionListener(new ActionListener() {
-      public void actionPerformed(ActionEvent e) {
-        try{
-          getAppletContext().showStatus("Opening "+HttpServer.myURL+"/ctrl.html");
-          URL url=new URL(HttpServer.myURL+"/ctrl.html");
-          getAppletContext().showDocument(url, "_blank");
-	}
-	catch(Exception ee){ee.printStackTrace();}
-      }
-    });
-    setBackground(Color.white);
-    (new Thread(this)).start();
-  }
 
   static WatchDog wd=null;
 
