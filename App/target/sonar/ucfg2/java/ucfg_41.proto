@@ -1,35 +1,9 @@
 
-?com.jcraft.jroar.Page#map(Ljava/lang/String;)Ljava/lang/Object;T
-JC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jroar/Page.java% %("2*‚
-2T
-JC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jroar/Page.java& &(Å
-
-T
-JC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jroar/Page.java& &(
-%0java.util.Hashtable"__id*
-""*
-1*Ö
-1T
-JC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jroar/Page.java'
- '(Å
-
-T
-JC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jroar/Page.java'
- '(
-%1java.util.Hashtable"__id*
-""≥
-∞
-T
-JC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jroar/Page.java'
- '(
-%2java.lang.Object"__mapGet*
-
-%1java.util.Hashtable*
-
-foojava.lang.String"p
-T
-JC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jroar/Page.java' '(
-
-%2java.lang.Object:
-foojava.lang.StringB"
-com.jcraft.jroar.Page
+#com.jcraft.jroar.Source#getLimit()Ib
+VC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Source.javaú ú("1*’
+1b
+VC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Source.javaú ú("l
+b
+VC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Source.javaú ú(
+""B
+com.jcraft.jroar.Source

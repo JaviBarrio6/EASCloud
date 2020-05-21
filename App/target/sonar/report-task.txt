@@ -1,7 +1,7 @@
 organization=javibarrio6
-projectKey=JaviBarrio6_EASCloud
+projectKey=JaviBarrio6_Prueba
 serverUrl=https://sonarcloud.io
-serverVersion=8.0.0.7697
-dashboardUrl=https://sonarcloud.io/dashboard?id=JaviBarrio6_EASCloud
-ceTaskId=AXHwNe4Hg3tCb1ZZ-UQu
-ceTaskUrl=https://sonarcloud.io/api/ce/task?id=AXHwNe4Hg3tCb1ZZ-UQu
+serverVersion=8.0.0.8217
+dashboardUrl=https://sonarcloud.io/dashboard?id=JaviBarrio6_Prueba
+ceTaskId=AXI3_AxE6_QSi0vJtAIw
+ceTaskUrl=https://sonarcloud.io/api/ce/task?id=AXI3_AxE6_QSi0vJtAIw

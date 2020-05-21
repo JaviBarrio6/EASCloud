@@ -1,25 +1,1052 @@
 
-%com.jcraft.jroar.MySocket#readByte()IX
-NC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jroar/MySocket.java@ @("3*¡
-2X
-NC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jroar/MySocket.javaB B(&"b
-X
-NC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jroar/MySocket.javaC C(
-""*Ÿ
-3X
-NC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jroar/MySocket.javaB B(∂
-≥
-X
-NC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jroar/MySocket.javaB B(
-%0java.io.DataInputStream"__id*2*0
-com.jcraft.jroar.MySocket"
-dataInputStreamª∏
-X
-NC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jroar/MySocket.javaB B(%
+com.jcraft.jroar.Proxy#run()V_
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.javaL L("101*‡
+68_
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.java~ ~(ÚÔ
+_
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.java~ ~(%
+%29java.io.InputStream"<java.net.URLConnection#getInputStream()Ljava/io/InputStream;* 
+
+urlcjava.net.URLConnection2getInputStream()*
+64*›
+69_
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.java| |(´
+®
+_
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.java|! |('
+%26java.lang.String"__id*&*$
+com.jcraft.jroar.Proxy"
+sourceΩ
+∫
+_
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.java| |('
+%27java.lang.String"__concat*
+
+foojava.lang.String*
+
+%26java.lang.StringÅ˛
+_
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.java| |((
+%28void"0java.util.Vector#addElement(Ljava/lang/Object;)V*!
+
+http_headerjava.util.Vector*
+
+%27java.lang.String2addElement(Ljava/lang/Object;)*
+68*å
+26a
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.java– –(8¨
+©
+a
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.java– –(8
+ccom.jcraft.jroar.Client"__id* 
+
+%72com.jcraft.jroar.Client≠
+™
+a
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.java“& “((
+%73com.jcraft.jogg.Page"__id*"* 
+com.jcraft.jroar.Proxy"
+og´
+®
+a
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.java“& “(4
+%74byte[]"__id*.*,
+
+%73com.jcraft.jogg.Page"
+header_base≠
+™
+a
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.java“6 “(8
+%75com.jcraft.jogg.Page"__id*"* 
+com.jcraft.jroar.Proxy"
+og≠
+™
+a
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.java“A “(C
+%76com.jcraft.jogg.Page"__id*"* 
+com.jcraft.jroar.Proxy"
+og≠
+™
+a
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.java”& ”((
+%77com.jcraft.jogg.Page"__id*"* 
+com.jcraft.jroar.Proxy"
+og©
+¶
+a
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.java”& ”(2
+%78byte[]"__id*,**
+
+%77com.jcraft.jogg.Page"
+	body_base≠
+™
+a
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.java”4 ”(6
+%79com.jcraft.jogg.Page"__id*"* 
+com.jcraft.jroar.Proxy"
+og≠
+™
+a
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.java”= ”(?
+%80com.jcraft.jogg.Page"__id*"* 
+com.jcraft.jroar.Proxy"
+ogÔÏ
+a
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.java— ”(I
+%81void"<com.jcraft.jroar.Client#write(Ljava/util/Vector;[B[BII[BII)V*
+
+ccom.jcraft.jroar.Client*!
+
+http_headerjava.util.Vector*
+
+headerbyte[]*
 
-%1byte"#java.io.DataInputStream#readByte()B*
+%74byte[]*
+""*
+""*
+
+%78byte[]*
+""*
+""2#write(Ljava/util/Vector;[B[BII[BII)*
+27
+21*ã
+27a
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.java–" –(+∞
+≠
+a
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.java–" –(+
+%71java.util.Vector"__id*)*'
+com.jcraft.jroar.Proxy"
+	listenersËÂ
+a
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.java–" –(8
+%72com.jcraft.jroar.Client"/java.util.Vector#elementAt(I)Ljava/lang/Object;*
+
+%71java.util.Vector*
+""2elementAt(I)*
+26*ﬁ
+72_
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.javau u(¢
+ü
+_
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.javav v($
+%24java.lang.String"__concat*
+jroar-source.*
+""™
+ß
+_
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.javav v()
+%25java.lang.String"__concat*
+
+%24java.lang.String*
+: û
+õ
+_
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.javav v()
+foojava.lang.String"__id*
+
+%25java.lang.String*
+77*™
+74_
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.javas s(#ú
+ô
+_
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.javas s(#
+sjava.lang.String"__id*
+
+%22java.lang.Stringú
+ô
+_
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.javat t(
+%15java.lang.String"__id*
+
+sjava.lang.String˙˜
+_
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.javat t(
+%23boolean"0java.lang.String#startsWith(Ljava/lang/String;)Z*
+
+sjava.lang.String*
+
+foojava.lang.String2startsWith(Ljava/lang/String;)*
+69
+72*Ü
+30a
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.javaÕ! Õ(%í
+è
+a
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.javaÕ Õ(&
+ccom.jcraft.jroar.Client"__id*
+""*
+27
+21*’
+75_
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.javas s(Á‰
+_
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.javas s(#
+%22java.lang.String"/java.util.Vector#elementAt(I)Ljava/lang/Object;*!
+
+http_headerjava.util.Vector*
+""2elementAt(I)*
+74*≤
+31a
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.java∆  ∆($∑¥
+a
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.java» »( 
+%70void"com.jcraft.jroar.Proxy#stop()V*
+com.jcraft.jroar.Proxy2stop()*
+3
+59
+17
+62*÷
+32a
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.java√! √(*∞
+≠
+a
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.java√! √(*
+%68java.util.Vector"__id*)*'
+com.jcraft.jroar.Proxy"
+	listenersØ¨
+a
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.java√! √(1
+
+%69int"java.util.Vector#size()I*
+
+%68java.util.Vector2size()*
+30
+31*ß
+77_
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.javar r(µ≤
+_
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.javar r(
+
+%21int"java.util.Vector#size()I*!
+
+http_headerjava.util.Vector2size()*
+69
+75*¥
+33a
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.javaæ' æ(.ﬂ‹
+a
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.javaæ' æ(<
+%66byte[]"-java.io.ByteArrayOutputStream#toByteArray()[B**
+(
+_headerjava.io.ByteArrayOutputStream2toByteArray()è
+å
+a
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.javaæ æ(<
+headerbyte[]"__id*
+
+%66byte[]–Õ
+a
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.javaø ø(-
+%67void"&java.io.ByteArrayOutputStream#reset()V**
+(
+_headerjava.io.ByteArrayOutputStream2reset()*
+32*ﬁ
+78_
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.javao o(¢
+ü
+_
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.javap
+ p(
+%19java.lang.String"__concat*
+jroar-source.*
+""™
+ß
+_
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.javap
+ p($
+%20java.lang.String"__concat*
+
+%19java.lang.String*
+: û
+õ
+_
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.javap p($
+foojava.lang.String"__id*
+
+%20java.lang.String*
+77*´
+
+35a
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.java∫( ∫(-∫
+∑
+a
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.java∫( ∫(0
+%61com.jcraft.jogg.Page"
+__arrayGet*!
+
+pagescom.jcraft.jogg.Page[]*
+""®
+•
+a
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.java∫" ∫(0
+foocom.jcraft.jogg.Page"__id*
+
+%61com.jcraft.jogg.Page´
+®
+a
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.javaª0 ª(?
+%62byte[]"__id*.*,
+
+foocom.jcraft.jogg.Page"
+header_base˘ˆ
+a
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.javaª" ª(\
+%63void"*java.io.ByteArrayOutputStream#write([BII)V**
+(
+_headerjava.io.ByteArrayOutputStream*
+
+%62byte[]*
+""*
+""2write([BII)©
+¶
+a
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.javaº0 º(=
+%64byte[]"__id*,**
+
+foocom.jcraft.jogg.Page"
+	body_base˘ˆ
+a
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.javaº" º(V
+%65void"*java.io.ByteArrayOutputStream#write([BII)V**
+(
+_headerjava.io.ByteArrayOutputStream*
+
+%64byte[]*
+""*
+""2write([BII)*
+35
+33*Ö
+37a
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.java∏ ∏(7ë
+é
+a
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.java∏ ∏(7
+foocom.jcraft.jogg.Page"__id*
+""*
+35
+33*√
+39a
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.javaµ µ(≠
+™
+a
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.javaµ0 µ(2
+%58com.jcraft.jogg.Page"__id*"* 
+com.jcraft.jroar.Proxy"
+og›⁄
+a
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.javaµ0 µ(9
+%59com.jcraft.jogg.Page"1com.jcraft.jogg.Page#copy()Lcom/jcraft/jogg/Page;*
+
+%58com.jcraft.jogg.Page2copy()√
+¿
+a
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.javaµ µ(9
+%60"
+__arraySet*!
+
+pagescom.jcraft.jogg.Page[]*
+""*
+
+%59com.jcraft.jogg.Page*
+32*Ë
+100_
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.javaV	 V(ıÚ
+_
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.javaV	 V(*
+%5boolean"0java.lang.String#startsWith(Ljava/lang/String;)Z*
+
+_sourcejava.lang.String*
+peercast://2startsWith(Ljava/lang/String;)*
+96
+98*ï
+101_
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.javaN N(≠
+™
+_
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.javaN N('
+
+%0long"%java.lang.System#currentTimeMillis()J*"
+java.lang.Systeméã
+_
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.javaP% P(3
+%1java.util.Vector"java.util.Vector†
+ù
+_
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.javaP! P(5
+%2"java.util.Vector#<init>()V*
+
+%1java.util.Vector•
+¢
+_
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.javaP P(6
+http_headerjava.util.Vector"__id*
+
+%1java.util.Vectoröó
+_
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.javaQ! Q(=
+%3com.jcraft.jogg.Page[]"com.jcraft.jogg.Page[]´
+®
+_
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.javaQ Q(>
+pagescom.jcraft.jogg.Page[]"__id*
+
+%3com.jcraft.jogg.Page[]™
+ß
+_
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.javaT T(
+%4java.lang.String"__id*&*$
+com.jcraft.jroar.Proxy"
+source°
+û
+_
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.javaT T(
+_sourcejava.lang.String"__id*
+
+%4java.lang.String*
+100*Û
+80_
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.javak k(/Å˛
+_
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.javak k(/
+%18void"0java.util.Vector#addElement(Ljava/lang/Object;)V*!
+
+http_headerjava.util.Vector*
+
+%15java.lang.String2addElement(Ljava/lang/Object;)*
+87
+78*î
+81_
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.javak$ k(%®
+•
+_
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.javak$ k(*
+%17java.lang.String"__concat*
+
+tjava.lang.String*
+: ú
+ô
+_
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.javak+ k(,
+%15java.lang.String"__id*
+
+sjava.lang.Stringª
+∏
+_
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.javak$ k(,
+%16java.lang.String"__concat*
+
+%17java.lang.String*
+
+sjava.lang.Stringû
+õ
+_
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.javak$ k(,
+%15java.lang.String"__id*
+
+%16java.lang.String*
+80*ä
+82_
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.javak! k("ú
+ô
+_
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.javak! k("
+%15java.lang.String"__id*
+
+sjava.lang.String*
+80*ì
+40a
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.java±T ±(Yùö
+a
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.java±; ±(e
+%56com.jcraft.jogg.Page[]"com.jcraft.jogg.Page[]¨
+©
+a
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.java± ±(f
+foocom.jcraft.jogg.Page[]"__id*
 
-%0java.io.DataInputStream2
-readByte()*
-2B
-com.jcraft.jroar.MySocket
+%56com.jcraft.jogg.Page[]£
+†
+a
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.java≤ ≤(N
+%57void"Djava.lang.System#arraycopy(Ljava/lang/Object;ILjava/lang/Object;II)V*"
+java.lang.System*!
+
+pagescom.jcraft.jogg.Page[]*2 *
+
+foocom.jcraft.jogg.Page[]*2 *
+""Æ
+´
+a
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.java≥ ≥()
+pagescom.jcraft.jogg.Page[]"__id*
+
+foocom.jcraft.jogg.Page[]*
+39*í
+85_
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.javai i(ú
+ô
+_
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.javai i(
+tjava.lang.String"__id*
+
+%14java.lang.String*
+81
+82
+78*â
+86_
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.javah h( ú
+ô
+_
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.javah h( 
+sjava.lang.String"__id*
+
+%13java.lang.String¸˘
+_
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.javai i(
+%14java.lang.String"=java.net.URLConnection#getHeaderFieldKey(I)Ljava/lang/String;* 
+
+urlcjava.net.URLConnection*
+""2getHeaderFieldKey(I)*
+85*˙
+42a
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.javaÆ' Æ(+Ü
+É
+a
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.javaÆ Æ(+
+headerbyte[]"__id*
+""*
+39
+40*‰
+87_
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.javah
+ h(ˆÛ
+_
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.javah
+ h( 
+%13java.lang.String":java.net.URLConnection#getHeaderField(I)Ljava/lang/String;* 
+
+urlcjava.net.URLConnection*
+""2getHeaderField(I)*
+86*Ù
+44a
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.java´" ´($≠
+™
+a
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.java´" ´($
+%54com.jcraft.jogg.Page"__id*"* 
+com.jcraft.jroar.Proxy"
+ogƒ¡
+a
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.java´" ´(1
+%55long""com.jcraft.jogg.Page#granulepos()J*
+
+%54com.jcraft.jogg.Page2granulepos()*
+37
+39
+40
+42
+32*ï
+89_
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.javab b(ã
+à
+_
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.javab b(
+foojava.lang.String"__id*
+""â
+Ü
+_
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.javae e(
+sjava.lang.String"__id*
+""â
+Ü
+_
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.javaf f(
+tjava.lang.String"__id*
+""*
+87
+78*
+45a
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.java® ®(#≠
+™
+a
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.java™ ™(
+%52com.jcraft.jogg.Page"__id*"* 
+com.jcraft.jroar.Proxy"
+ogƒ¡
+a
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.java™ ™(*
+%53long""com.jcraft.jogg.Page#granulepos()J*
+
+%52com.jcraft.jogg.Page2granulepos()*
+39
+40
+42
+44*˙
+48a
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.java£ £(!≤
+Ø
+a
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.java£ £(! 
+%49com.jcraft.jogg.SyncState"__id*"* 
+com.jcraft.jroar.Proxy"
+oy≠
+™
+a
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.java£* £(,
+%50com.jcraft.jogg.Page"__id*"* 
+com.jcraft.jroar.Proxy"
+ogíè
+a
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.java£ £(-
+
+%51int":com.jcraft.jogg.SyncState#pageout(Lcom/jcraft/jogg/Page;)I*"
+ 
+%49com.jcraft.jogg.SyncState*
+
+%50com.jcraft.jogg.Page2pageout(Lcom/jcraft/jogg/Page;)*
+3
+48
+59
+17
+62
+45*è
+90_
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.java^ ^(.´
+®
+_
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.java^ ^(.
+urlcjava.net.URLConnection"__id*
+
+%11java.net.URLConnectionÛ
+
+_
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.java` `(
+%12void"Bcom.jcraft.jroar.Proxy#setURLProperties(Ljava/net/URLConnection;)V*
+com.jcraft.jroar.Proxy* 
+
+urlcjava.net.URLConnection*
+89*È
+91_
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.java] ](!ï
+í
+_
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.java] ](!
+urljava.net.URL"__id*
+
+%9java.net.URL„‡
+_
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.java^ ^(-
+%11java.net.URLConnection"5java.net.URL#openConnection()Ljava/net/URLConnection;*
+
+urljava.net.URL2openConnection()*
+90*¡
+92_
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.java\ \(ÜÉ
+_
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.java] ](
+%9java.net.URL"java.net.URL 
+«
+_
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.java] ]( 
+%10"(java.net.URL#<init>(Ljava/lang/String;)V*
+
+%9java.net.URL*
+
+_sourcejava.lang.String*
+91*è
+93_
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.javaZ Z(#°
+û
+_
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.javaZ Z(#
+_sourcejava.lang.String"__id*
+
+%8java.lang.String*
+92*Ê
+94_
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.javaZ Z(¯
+ı
+_
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.javaZ Z(#
+%8java.lang.String"Acom.jcraft.jroar.Pls#getURL(Ljava/lang/String;)Ljava/lang/String;*"
+com.jcraft.jroar.Pls*
+
+_sourcejava.lang.String*
+93*µ
+50a
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.javaû û(≤
+Ø
+a
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.javaû û( 
+%46com.jcraft.jogg.SyncState"__id*"* 
+com.jcraft.jroar.Proxy"
+oyŒÀ
+a
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.javaû û(
+%47void"#com.jcraft.jogg.SyncState#wrote(I)V*"
+ 
+%46com.jcraft.jogg.SyncState*
+""2wrote(I)∞
+≠
+a
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.java† †(3
+%48long"%java.lang.System#currentTimeMillis()J*"
+java.lang.System*
+3
+48
+59
+17
+62*‹
+96_
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.javaY Y(ÍÁ
+_
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.javaY Y(&
+%7boolean".java.lang.String#endsWith(Ljava/lang/String;)Z*
+
+_sourcejava.lang.String*
+.pls2endsWith(Ljava/lang/String;)*
+92
+94*è
+97_
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.javaW W((°
+û
+_
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.javaW W((
+_sourcejava.lang.String"__id*
+
+%6java.lang.String*
+92*
+98_
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.javaW W(Ç
+ˇ
+_
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.javaW W((
+%6java.lang.String"Fcom.jcraft.jroar.PeerCast#getURL(Ljava/lang/String;)Ljava/lang/String;*"
+com.jcraft.jroar.PeerCast*
+
+_sourcejava.lang.String*
+97*õ
+12a
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.java (¨
+©
+a
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.java ((
+%97void"java.lang.Thread#sleep(J)V*"
+java.lang.Thread*2Ë*
+9*º
+58a
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.javaï ï(#≥
+∞
+a
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.javaï ï(#
+%41java.io.InputStream"__id*)*'
+com.jcraft.jroar.Proxy"
+	bitStream£
+†
+a
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.javaï) ï(/
+%42byte[]"__id*&*$
+com.jcraft.jroar.Proxy"
+buffer
+}
+a
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.javaï8 ï(?
+
+%43int"__id*
+""‰·
+a
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.javaï ï(@
+
+%44int"java.io.InputStream#read([BII)I*
+
+%41java.io.InputStream*
+
+%42byte[]*
+""*
+
+
+%43int2
+read([BII)*
+3
+17
+50
+62*Ç	
+59a
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.javaí í(≤
+Ø
+a
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.javaí í( 
+%36com.jcraft.jogg.SyncState"__id*"* 
+com.jcraft.jroar.Proxy"
+oy
+}
+a
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.javaí$ í(+
+
+%37int"__id*
+""’“
+a
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.javaí í(,
+
+%38int"$com.jcraft.jogg.SyncState#buffer(I)I*"
+ 
+%36com.jcraft.jogg.SyncState*
+
+
+%37int2	buffer(I)≤
+Ø
+a
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.javaì ì( 
+%39com.jcraft.jogg.SyncState"__id*"* 
+com.jcraft.jroar.Proxy"
+oy©
+¶
+a
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.javaì ì(
+%40byte[]"__id*,**
+ 
+%39com.jcraft.jogg.SyncState"
+data£
+†
+a
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.javaì ì($
+com.jcraft.jroar.Proxy"
+buffer"__id*
+
+%40byte[]*
+58*ﬁ
+15a
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.javaÍ- Í(6≥
+∞
+a
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.javaÍ- Í(6
+%94java.io.InputStream"__id*)*'
+com.jcraft.jroar.Proxy"
+	bitStream∏µ
+a
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.javaÍ- Í(>
+%95void"java.io.InputStream#close()V*
+
+%94java.io.InputStream2close()*
+12*ß
+16a
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.javaÍ Í(#≥
+∞
+a
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.javaÍ Í(#
+%93java.io.InputStream"__id*)*'
+com.jcraft.jroar.Proxy"
+	bitStream*
+15
+12*ú
+17a
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.javaÊ Ê(ê
+ç
+a
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.javaÊ Ê(
+%86java.io.PrintStream"__id*
+""º
+π
+a
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.javaÊ% Ê(?
+%87java.lang.String"__concat*
+Connection to *
+
+_sourcejava.lang.StringΩ
+∫
+a
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.javaÊ% Ê(W
+%88java.lang.String"__concat*
+
+%87java.lang.String*
+ is dropped. Retry(¨
+©
+a
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.javaÊ% Ê(_
+%89java.lang.String"__concat*
+
+%88java.lang.String*
+""´
+®
+a
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.javaÊ% Ê(e
+%90java.lang.String"__concat*
+
+%89java.lang.String*
+)˚¯
+a
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.javaÊ Ê(f
+%91void"0java.io.PrintStream#println(Ljava/lang/String;)V*
+
+%86java.io.PrintStream*
+
+%90java.lang.String2println(Ljava/lang/String;)øº
+a
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.javaË Ë(
+%92void""com.jcraft.jroar.Proxy#init_ogg()V*
+com.jcraft.jroar.Proxy2
+init_ogg()*
+16*
+0 "x
+a
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.javaÜ Ü(
+implicit return*¶
+1a
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.javaÖ Ö(∏µ
+a
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.javaÖ Ö(
+
+%104void"com.jcraft.jroar.Proxy#stop()V*
+com.jcraft.jroar.Proxy2stop()*
+0*¶
+3a
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.javaÄ Ä(∏µ
+a
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.javaÄ Ä(
+%103void"com.jcraft.jroar.Proxy#stop()V*
+com.jcraft.jroar.Proxy2stop()*
+1*£
+5a
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.java˙ ˙(7¥
+±
+a
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.java˙ ˙(7'
+com.jcraft.jroar.Proxy"
+	bitStream"__id*
+
+%102java.io.InputStream*
+62*„
+6a
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.java˙" ˙(&ıÚ
+a
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.java˙" ˙(7
+%102java.io.InputStream"<java.net.URLConnection#getInputStream()Ljava/io/InputStream;* 
+
+urlcjava.net.URLConnection2getInputStream()*
+5*ï
+7a
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.javaˆ ˆ(@Æ
+´
+a
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.javaˆ ˆ(@
+urlcjava.net.URLConnection"__id* 
+
+%100java.net.URLConnectionˆ
+Û
+a
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.java¯ ¯(,
+%101void"Bcom.jcraft.jroar.Proxy#setURLProperties(Ljava/net/URLConnection;)V*
+com.jcraft.jroar.Proxy* 
+
+urlcjava.net.URLConnection*
+6*Ô
+8a
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.javaı ı(1ò
+ï
+a
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.javaı ı(1
+urljava.net.URL"__id*
+
+%98java.net.URLÊ„
+a
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.javaˆ+ ˆ(?
+%100java.net.URLConnection"5java.net.URL#openConnection()Ljava/net/URLConnection;*
+
+urljava.net.URL2openConnection()*
+7*«
+9a
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.javaı( ı(/âÜ
+a
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.javaı$ ı('
+%98java.net.URL"java.net.URLÕ
+ 
+a
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.javaı  ı(0
+%99"(java.net.URL#<init>(Ljava/lang/String;)V*
+
+%98java.net.URL*
+
+_sourcejava.lang.String*
+8*Å
+61a
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.javaè è(Ü
+É
+a
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.javaê
+ ê(
+headerbyte[]"__id*
+""*
+3
+59
+17
+62*ú
+62a
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.javaé é(©
+¶
+a
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.javaé é(
+%35java.lang.Thread"__id*"* 
+com.jcraft.jroar.Proxy"
+me*
+61
+1*Ë
+63a
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.javaá á(øº
+a
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.javaá á(
+%32void""com.jcraft.jroar.Proxy#init_ogg()V*
+com.jcraft.jroar.Proxy2
+init_ogg()´®
+a
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.javaâ& â(;$
+%33java.io.ByteArrayOutputStream"java.io.ByteArrayOutputStreamæ
+ª
+a
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.javaâ" â(=
+%34"'java.io.ByteArrayOutputStream#<init>()V*&
+$
+%33java.io.ByteArrayOutputStreamæ
+ª
+a
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.javaâ â(>(
+_headerjava.io.ByteArrayOutputStream"__id*&
+$
+%33java.io.ByteArrayOutputStreamÜ
+É
+a
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.javaä ä(
+headerbyte[]"__id*
+""*
+62*ü
+64_
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.java~ ~(%±
+Æ
+_
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.java~ ~(%'
+com.jcraft.jroar.Proxy"
+	bitStream"__id*
+
+%29java.io.InputStream*
+63*‰
+21a
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.javaﬁ ﬁ(≠
+™
+a
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.javaﬁ ﬁ(
+%84com.jcraft.jogg.Page"__id*"* 
+com.jcraft.jroar.Proxy"
+ogµ≤
+a
+UC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Proxy.javaﬁ ﬁ("
+
+%85int"com.jcraft.jogg.Page#eos()I*
+
+%84com.jcraft.jogg.Page2eos()*
+3
+48
+59
+17
+62B
+com.jcraft.jroar.Proxy

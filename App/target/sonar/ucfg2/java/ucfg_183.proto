@@ -1,15 +1,60 @@
 
-!com.jcraft.jogg.Page#continued()IS
-IC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jogg/Page.java= =("1*—
-1S
-IC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jogg/Page.java> >(ó
-î
-S
-IC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jogg/Page.java> >(
-%0byte[]"__id*)*'
-com.jcraft.jogg.Page"
-header_base"]
-S
-IC:/Users/user/Desktop/EasCloud/EASCloud/App/src/com/jcraft/jogg/Page.java> >(,
-""B
-com.jcraft.jogg.Page
+Ccom.jcraft.jroar.Ctrl#ogg2m3u(Ljava/lang/String;)Ljava/lang/String;`
+TC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Ctrl.java† †("4*‰
+2`
+TC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Ctrl.java°> °(A"}
+`
+TC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Ctrl.java°7 °(B
+
+oggjava.lang.String*◊
+3`
+TC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Ctrl.java°! °($Á‰
+`
+TC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Ctrl.java°! °(5
+%1boolean".java.lang.String#endsWith(Ljava/lang/String;)Z*
+
+oggjava.lang.String*
+.spx2endsWith(Ljava/lang/String;)*
+2
+1*◊
+4`
+TC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Ctrl.java° °(Á‰
+`
+TC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Ctrl.java° °(
+%0boolean".java.lang.String#endsWith(Ljava/lang/String;)Z*
+
+oggjava.lang.String*
+.ogg2endsWith(Ljava/lang/String;)*
+3
+1*ı
+1`
+TC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Ctrl.java¢ ¢(π∂
+`
+TC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Ctrl.java¢ ¢(
+%2byte[]"java.lang.String#getBytes()[B*
+
+oggjava.lang.String2
+getBytes()ä
+á
+`
+TC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Ctrl.java¢ ¢(
+foobyte[]"__id*
+
+%2byte[]èå
+`
+TC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Ctrl.java§ §(
+%3java.lang.String"java.lang.String¥
+±
+`
+TC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Ctrl.java§ §(
+%4"java.lang.String#<init>([B)V*
+
+%3java.lang.String*
+
+foobyte[]"|
+`
+TC:/Users/user/Desktop/EasCloud/EASCloud/App/src/main/java/com/jcraft/jroar/Ctrl.java§ §(
+
+%3java.lang.String:
+oggjava.lang.StringB
+com.jcraft.jroar.Ctrl
