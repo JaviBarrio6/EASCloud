@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Built-By: aagui
+Build-Jdk: 13.0.2
+Implementation-Title: JRoar
+Implementation-Version: 1.0-SNAPSHOT
+Implementation-Vendor-Id: org.example
+Implementation-Vendor: Pivotal Software, Inc.
+Implementation-URL: http://projects.spring.io/spring-boot/JRoar/
+Created-By: Maven Integration for Eclipse
+

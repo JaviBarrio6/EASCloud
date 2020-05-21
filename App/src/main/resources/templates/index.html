@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang = "es">
+	<head>
+		<meta charset = "utf-8"/>
+		<meta http-equiv = "X-UA-Compatible" content = "IE=edge"/>
+		<meta name = "viewport" content = "width=device-width, initial-scale=1"/>
+
+        <!-- App Web Name -->
+		<title>JRoar Web</title>
+		<!-- Google font -->
+		<link href = "https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel = "stylesheet"/>
+
+		<!-- Bootstrap -->
+		<link type = "text/css" rel = "stylesheet" href = "../css/bootstrap.min.css"/>
+
+		<!-- Slick -->
+		<link type="text/css" rel = "stylesheet" href = "../css/slick.css"/>
+		<link type="text/css" rel = "stylesheet" href = "../css/slick-theme.css"/>
+
+		<!-- Nouislider -->
+		<link type = "text/css" rel = "stylesheet" href = "../css/nouislider.min.css"/>
+
+		<!-- Font Awesome Icon -->
+		<link rel = "stylesheet" href = "../css/font-awesome.min.css"/>
+        <script src = "https://kit.fontawesome.com/639c797cd5.js" crossorigin = "anonymous"></script>
+
+		<!-- Custom stlylesheet -->
+		<link type = "text/css" rel = "stylesheet" href = "../css/style.css"/>
+		<link type = "text/css" rel = "stylesheet" href = "../css/web.css"/>
+		<link rel="icon" type="image/png" href="../img/Logo.png" />
+	</head>
+	<body>
+		<!-- HEADER -->
+		<header>
+			<!-- MAIN HEADER -->
+			<div id="top-header">
+				<!-- container -->
+				<div class="container">
+					<!-- row -->
+					<div class="row">
+						<!-- LOGO -->
+							<div class="header-logo">
+								<a href="/index" class="logo">
+									<img src="../img/Logo.png" alt=""/>
+								</a>
+							</div>
+
+						<!-- /LOGO -->
+					</div>
+					<!-- row -->
+				</div>
+				<!-- container -->
+			</div>
+			<!-- /MAIN HEADER -->
+
+			<!-- SEARCH BAR -->
+			<div class="col-md-12">
+				<div class="header-search">
+					<form class="text-center block-center">
+						<i class = "search-btn fa fa-user-circle"></i>
+					</form>
+				</div>
+			</div>
+			<div class="col-md-12">
+				<div class="header-search" style ="margin-top: -30px">
+					<form class="text-center block-center">
+						<a href = "/login">LOGIN</a>
+					</form>
+				</div>
+			</div>
+			<!-- /SEARCH BAR -->
+
+			<!-- SECTION -->
+			<div class="section">
+				<!-- container -->
+				<div class="container">
+					<!-- row -->
+					<div class="row">
+						<div class="col-md-12">
+							<!-- Profile Details -->
+							<div class="billing-details text-center">
+								<div class="section-title text-center">
+									<h3 class="title">Web Player - Choose And Enjoy</h3>
+								</div>
+
+								<select id = "selectTrack" multiple onchange="cambiarTrack(this.options[this.selectedIndex]);">
+									<option class = "optionTrack" value="../OGG/INeedAHero.ogg">Bonnie Tyler - I Need A Hero</option>
+									<option class = "optionTrack" value="../OGG/GirlsJustWantToHaveFun.ogg">Cyndi Lauper - Girls Just Want To Have Fun</option>
+									<option class = "optionTrack" value="../OGG/TakeOnMe.ogg">A-Ha - Take On Me</option>
+									<option class = "optionTrack" value="../OGG/Funkytown.ogg">Lipps Inc - Funky Town</option>
+									<option class = "optionTrack" value="../OGG/MentAtWork.ogg">Down Under - Ment At Work</option>
+									<option class = "optionTrack" value="../OGG/BillyJean.ogg">Michael Jackson - Billy Jean</option>
+									<option class = "optionTrack" value="../OGG/YoSoyAquel.ogg">Raphael - Yo soy Aquel </option>
+									<option class = "optionTrack" value="../OGG/TakeOnMe.ogg">Ah Ah - Take on me</option>
+									<option class = "optionTrack" value="../OGG/Jueves.ogg">La Oreja de Van Goth - Jueves</option>
+									<option class = "optionTrack" value="../OGG/Funkytown.ogg">Lipps Inc - Funky Town</option>
+									<option class = "optionTrack" value="../OGG/BillyJean.ogg">Michael Jackson - Billy Jean</option>
+									<option class = "optionTrack" value="../OGG/FisicaOQuimica.ogg">Despistaos - Fisica o Química </option>
+									<option class = "optionTrack" value="../OGG/Kamikaze.ogg">Amaral - Kamikaze</option>
+									<option class = "optionTrack" value="../OGG/Jueves.ogg">La Oreja de Van Goth - Jueves</option>
+									<option class = "optionTrack" value="../OGG/DivaVirtual.ogg">Don Omar - Diva Virtual </option>
+									<option class = "optionTrack" value="../OGG/Obsesion.ogg">Aventura - Obsesion</option>
+									<option class = "optionTrack" value="../OGG/PobreDiabla.ogg">Don Omar - Pobre Diabla</option>
+									<option class = "optionTrack" value="../OGG/PropuestaIndecente.ogg">Romeo Santos - Propuesta Indecente</option>
+									<option class = "optionTrack" value="../OGG/SoloPorUnBeso.ogg">Aventura - Solo Por Un Beso</option>
+									<option class = "optionTrack" value="../OGG/Diavla.ogg">Chris Viz - Diavla </option>
+									<option class = "optionTrack" value="../OGG/Favorito.ogg">Camilo - Favorito</option>
+									<option class = "optionTrack" value="../OGG/GanasSobran.ogg">Bryant Myers - Ganas Sobran</option>
+									<option class = "optionTrack" value="../OGG/Loca.ogg">Khea - Loca</option>
+									<option class = "optionTrack" value="../OGG/OtroTrago.ogg">Sech - Otro Trago</option>
+								</select>
+
+								<div id = "reproductorBox" style = "margin-top: 25px"></div>
+								<div>
+									<button class ="aleatorio" onclick="anteriorTrack()"><i class="fa fa-arrow-left"></i></button>
+									<button class ="aleatorio" onclick="cambiarTrack('aleatorio')"><i class="fa fa-random"></i></button>
+									<button class ="aleatorio" onclick="siguienteTrack()"><i class="fa fa-arrow-right"></i></button>
+								</div>
+							</div>
+							<!-- /Profile Details -->
+						</div>
+					</div>
+					<!-- /row -->
+				</div>
+				<!-- /container -->
+			</div>
+			<!-- /SECTION -->
+
+
+		</header>
+		<!-- /HEADER -->
+
+
+		<script>
+			let  canciones = [
+				['../OGG/INeedAHero.ogg'],
+				['../OGG/GirlsJustWantToHaveFun.ogg'],
+				['../OGG/TakeOnMe.ogg'],
+				['../OGG/Funkytown.ogg'],
+				['../OGG/MenAtWork.ogg'],
+				['../OGG/BillyJean.ogg'],
+				['../OGG/FisicaOQuimica.ogg'],
+				['../OGG/Kamikaze.ogg'],
+				['../OGG/Jueves.ogg'],
+				['../OGG/YoSoyAquel.ogg'],
+				['../OGG/DivaVirtual.ogg'],
+				['../OGG/Obsesion.ogg'],
+				['../OGG/PobreDiabla.ogg'],
+				['../OGG/PropuestaIndecente.ogg'],
+				['../OGG/SoloPorUnBeso.ogg'],
+				['../OGG/Diavla.ogg'],
+				['../OGG/Favorito.ogg'],
+				['../OGG/GanasSobran.ogg'],
+				['../OGG/Loca.ogg'],
+				['../OGG/OtroTrago.ogg'],
+			];
+
+			function cambioReproductor (path) {
+				viejo_audio = document.getElementById("reproductor");
+				audio_padre = viejo_audio.parentNode;
+				audio_padre.removeChild(viejo_audio);
+				nuevo_audio = document.createElement("audio");
+				nuevo_audio.setAttribute("id","reproductor");
+				nuevo_audio.setAttribute("controls", "controls");
+				nuevo_audio.setAttribute("autoplay", "autoplay");
+				source = document.createElement("source");
+				source.setAttribute("src", path);
+				source.setAttribute("type", "audio/ogg");
+				source.setAttribute("id", "reproductorSource");
+				nuevo_audio.appendChild(source);
+				audio_padre.appendChild(nuevo_audio);
+			}
+
+			function cambiarTrack(track) {
+				var path;
+
+				if (track === "aleatorio"){
+					var random = Math.round(Math.random()*(canciones.length-1));
+					var select = document.getElementById("selectTrack");
+					path = select[random].getAttribute("value");
+				} else {
+					path =  track.getAttribute("value");
+				}
+					cambioReproductor(path);
+				}
+
+			function cargarReproductor() {
+				var random = Math.round(Math.random()*(canciones.length-1));
+				var select = document.getElementById("selectTrack");
+				var path = select[random].getAttribute("value");
+				nombre = document.createElement("h3");
+				nombre.setAttribute('value', "Hola");
+				nuevo_audio = document.createElement("audio");
+				nuevo_audio.setAttribute("id","reproductor");
+				nuevo_audio.setAttribute("controls", "controls");
+				nuevo_audio.setAttribute("preload", "auto");
+				nuevo_audio.setAttribute("autoplay", "true");
+				source = document.createElement("source");
+				source.setAttribute("src", path);
+				source.setAttribute("type", "audio/ogg");
+				source.setAttribute("id", "reproductorSource");
+				nuevo_audio.appendChild(source);
+				padre = document.getElementById("reproductorBox");
+				padre.appendChild(nuevo_audio);
+			}
+
+			function siguienteTrack() {
+				var reproductor = document.getElementById("reproductorSource");
+				var track = reproductor.getAttribute("src");
+				var nextTrack;
+				for (i = 0; i < canciones.length; i++){
+					if (track === canciones[i][0]){
+						if (i === (canciones.length - 1)){
+							nextTrack = canciones[0][0];
+						} else {
+							nextTrack = canciones[i+1][0];
+						}
+					} else {
+						console.log("Track = " + track);
+					}
+				}
+
+				cambioReproductor(nextTrack);
+			}
+
+			function anteriorTrack() {
+				var reproductor = document.getElementById("reproductorSource");
+				var track = reproductor.getAttribute("src");
+				var nextTrack;
+				for (i = 0; i < canciones.length; i++){
+					if (track === canciones[i][0]){
+						if (i === (0)){
+							nextTrack = canciones[canciones.length - 1][0];
+						} else {
+							nextTrack = canciones[i-1][0];
+						}
+					} else {
+						console.log("Track = " + track);
+					}
+				}
+
+				cambioReproductor(nextTrack);
+			}
+
+			window.onload = cargarReproductor();
+		</script>
+	</body>
+</html>

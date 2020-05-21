@@ -159,7 +159,7 @@ public class JRoar   implements Runnable{
         i++;
       }
       else {
-        System.err.println("invalid option: "+argv[i]);
+        System.err.println("invalid option: " + argv[i]);
         for (String s : usage) {
           System.err.println(s);
         }

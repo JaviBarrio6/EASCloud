@@ -7,10 +7,12 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="App" />
+        <module name="IrregularVerbs" />
+        <module name="IrregularVerbsApp(Codigo)" />
+        <module name="AppSpring" />
+        <module name="IrregularVerbsApp" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel target="8">
-      <module name="App" target="7" />
-    </bytecodeTargetLevel>
+    <bytecodeTargetLevel target="7" />
   </component>
 </project>
